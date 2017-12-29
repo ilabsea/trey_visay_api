@@ -1,0 +1,14 @@
+AllCops:
+  Exclude:
+    - db/schema.rb
+    - db/seeds.rb
+    - db/migrate/*.rb
+    - config/**/*.rb
+    - test/**/*.rb
+    - bin/**
+    - lib/**
+    - lib/tasks/capistrano.rake
+    - Gemfile
+    - Rakefile
+Documentation:
+  Enabled: false
