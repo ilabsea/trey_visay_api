@@ -1,2 +1,24 @@
-# trey_visay_api
-Trey Visay is a mobile application that allow grade 9-12 students to be able to understand yourself, improve soft skill and hard skill and user can find the link of careers
+# README
+
+This README would normally document whatever steps are necessary to get the
+application up and running.
+
+Things you may want to cover:
+
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
