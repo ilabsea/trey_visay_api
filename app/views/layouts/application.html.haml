@@ -7,6 +7,8 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
   %body{id: css_id_name}
-    %p.notice.center= notice
-    %p.alert.center= alert
+    - if notice.present?
+      %p.notice.center= notice
+    - if alert.present?
+      %p.alert.center= alert
     = yield
