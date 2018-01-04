@@ -1,19 +1,18 @@
 .container
-  %h2 Log in
+  .center
+    = image_tag 'logo.png', class: 'logo'
+    %h2 ត្រីវិស័យ
 
-  = form_for resource, as: resource_name, url: session_path(resource_name) do |f|
-    .form-group
-      = f.label :email
-      = f.email_field :email, { autofocus: true, class: 'form-control' }
-    .form-group
-      = f.label :password
-      = f.password_field :password, { autocomplete: "off", class: 'form-control' }
+  = simple_form_for resource, as: resource_name, url: session_path(resource_name) do |f|
+    .control-wrapper
+      %h3.center បញ្ចូលគណនី
 
-    - if devise_mapping.rememberable?
-      .checkbox
-        %label
-          = f.check_box :remember_me
-          Remember me
-    = f.submit "Log in", class: 'btn btn-default'
+      = f.input :email, type: :email
+      = f.input :password, type: :password
+      - if devise_mapping.rememberable?
+        = f.input :remember_me, as: :boolean
 
-  = render "devise/shared/links"
+      = f.submit 'ចូលគណនី', class: 'btn btn-primary'
+
+      .link-wrapper
+        = render "devise/shared/links"

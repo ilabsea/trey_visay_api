@@ -1,0 +1,30 @@
+#devise-sessions-new {
+  background-image: image-url("background.png");
+  background-color: #1976d2;
+
+  h2 {
+    color: #fff;
+    margin: 30px;
+  }
+
+  .logo {
+    width: 140px;
+    height: 140px;
+  }
+
+  .control-wrapper {
+    background-color: #fff;
+    width: 360px;
+    padding: 30px;
+    margin: 0 auto;
+    border-radius: 3px;
+  }
+
+  .link-wrapper {
+    margin-top: 20px;
+  }
+
+  .notice, .alert {
+    color: #fff;
+  }
+}
