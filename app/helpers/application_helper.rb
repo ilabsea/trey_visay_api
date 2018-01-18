@@ -5,6 +5,6 @@ module ApplicationHelper
     prefix = params['controller'].downcase.split('/').join('-')
     subfix = params['action']
 
-    return "#{prefix}-#{subfix}"
+    "#{prefix}-#{subfix}"
   end
 end

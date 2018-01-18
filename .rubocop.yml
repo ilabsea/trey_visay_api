@@ -1,5 +1,6 @@
 AllCops:
   Exclude:
+    - app/uploaders/*.rb
     - db/schema.rb
     - db/seeds.rb
     - db/migrate/*.rb
