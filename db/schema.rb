@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180118042221) do
+ActiveRecord::Schema.define(version: 20180118055955) do
 
   create_table "accounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
@@ -27,6 +27,50 @@ ActiveRecord::Schema.define(version: 20180118042221) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_accounts_on_email", unique: true
     t.index ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true
+  end
+
+  create_table "departments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "majors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name", null: false
+    t.integer "department_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "personal_understandings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "user_id"
+    t.string "are_you_going_to_study_till_grade12"
+    t.string "are_your_parents_allow_you_to_study_till_grade12"
+    t.string "have_you_ever_thought_of_career"
+    t.string "career_name"
+    t.string "how_to_reach_career_goal"
+    t.string "does_parents_agree_with"
+    t.string "ever_talked_with_anyone_about_career"
+    t.string "how_to_reach_job_vacancy"
+    t.string "who_to_reach_job_vacancy"
+    t.string "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "schools", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name", null: false
+    t.string "logo"
+    t.string "address"
+    t.string "province"
+    t.string "phoneNumbers"
+    t.string "faxes"
+    t.string "emails"
+    t.string "websiteOrFacebook"
+    t.string "mailbox"
+    t.string "category"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
