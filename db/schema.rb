@@ -96,32 +96,31 @@ ActiveRecord::Schema.define(version: 20180118075411) do
     t.string "password", null: false
     t.string "username", null: false
     t.string "sex", null: false
-    t.date "dateOfBirth", null: false
-    t.string "phoneNumber", null: false
+    t.date "date_of_birth", null: false
+    t.string "phone_number", null: false
     t.string "nationality", null: false
-    t.string "schoolName", null: false
+    t.string "school_name", null: false
     t.string "grade", null: false
     t.string "address", null: false
-    t.string "fatherName"
-    t.string "fatherOccupation"
-    t.string "motherName"
-    t.string "motherOccupation"
+    t.string "father_name"
+    t.string "father_occupation"
+    t.string "mother_name"
+    t.string "mother_occupation"
     t.string "guidance"
-    t.string "parentContactNumber"
-    t.integer "numberOfFamilyMember"
-    t.integer "numberOfSisters"
-    t.integer "numberOfBrothers"
-    t.boolean "isDivorce"
-    t.boolean "isDisable"
-    t.boolean "isDomesticViolence"
-    t.boolean "isSmoking"
-    t.boolean "isAlcoholic"
-    t.boolean "isDrug"
-    t.string "houseType"
-    t.string "collectiveIncome"
+    t.string "parent_contact_number"
+    t.integer "number_of_family_member"
+    t.integer "number_of_sisters"
+    t.integer "number_of_brothers"
+    t.boolean "is_divorce"
+    t.boolean "is_disable"
+    t.boolean "is_domestic_violence"
+    t.boolean "is_smoking"
+    t.boolean "is_alcoholic"
+    t.boolean "is_drug"
+    t.string "house_type"
+    t.string "collective_income"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "photo"
   end
 
 end
