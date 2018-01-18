@@ -8,7 +8,11 @@
 
   %body{id: css_id_name}
     - if notice.present?
-      %p.notice.center= notice
+      %p.alert.alert-success
+        %button.close{type: 'button', 'data-dismiss' => 'alert', 'aria-label' => 'Close'}
+        = notice
     - if alert.present?
-      %p.alert.center= alert
+      %p.alert.alert-danger
+        %button.close{type: 'button', 'data-dismiss' => 'alert', 'aria-label' => 'Close'}
+        = alert
     = yield
