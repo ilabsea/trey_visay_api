@@ -130,6 +130,7 @@ ActiveRecord::Schema.define(version: 20180119030617) do
     t.string "collective_income"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "photo"
   end
 
 end
