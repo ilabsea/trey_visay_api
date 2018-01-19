@@ -56,7 +56,6 @@ ActiveRecord::Schema.define(version: 20180119030617) do
     t.integer "user_id", null: false
     t.string "reason"
     t.string "record"
-    t.integer "personal_understanding_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -70,6 +69,7 @@ ActiveRecord::Schema.define(version: 20180119030617) do
 
   create_table "personal_understandings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id"
+    t.integer "game_id"
     t.string "are_you_going_to_study_till_grade12"
     t.string "are_your_parents_allow_you_to_study_till_grade12"
     t.string "have_you_ever_thought_of_career"
