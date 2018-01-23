@@ -22,8 +22,10 @@
 class School < ApplicationRecord
   mount_uploader :logo, PhotoUploader
 
-  # CATEGORIES = %(សាលារដ្ឋ សាលាឯកជន អង្គការ)
+  CATEGORIES = %w(សាលារដ្ឋ សាលាឯកជន អង្គការ)
 
-  # validates :category, inclusion: { in: CATEGORIES }
+  has_and_belongs_to_many :careers
+
+  validates :category, inclusion: { in: CATEGORIES }
   validates :name, presence: true
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180119030617) do
+ActiveRecord::Schema.define(version: 20180123025525) do
 
   create_table "accounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
@@ -36,6 +36,13 @@ ActiveRecord::Schema.define(version: 20180119030617) do
     t.integer "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "careers_schools", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "career_id"
+    t.bigint "school_id"
+    t.index ["career_id"], name: "index_careers_schools_on_career_id"
+    t.index ["school_id"], name: "index_careers_schools_on_school_id"
   end
 
   create_table "characteristics", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -130,7 +137,6 @@ ActiveRecord::Schema.define(version: 20180119030617) do
     t.string "collective_income"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "photo"
   end
 
 end
