@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: games
@@ -16,4 +15,5 @@ class Game < ApplicationRecord
   belongs_to :user
   has_many :personal_understandings
   has_and_belongs_to_many :careers
+  has_and_belongs_to_many :entries
 end
