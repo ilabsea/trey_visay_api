@@ -33,9 +33,11 @@ ActiveRecord::Schema.define(version: 20180123075415) do
     t.string "name", null: false
     t.string "description"
     t.string "places_for_work"
-    t.integer "category_id"
+    t.string "categorizable_type"
+    t.bigint "categorizable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["categorizable_type", "categorizable_id"], name: "index_careers_on_categorizable_type_and_categorizable_id"
   end
 
   create_table "careers_games", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

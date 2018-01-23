@@ -1,7 +1,6 @@
-# frozen_string_literal: true
 # == Schema Information
 #
-# Table name: characteristics
+# Table name: vocationals
 #
 #  id          :integer          not null, primary key
 #  title       :string(255)      not null
@@ -10,8 +9,8 @@
 #  updated_at  :datetime         not null
 #
 
+require 'rails_helper'
 
-class Characteristic < ApplicationRecord
-  has_and_belongs_to_many :entries
-  has_many :careers, as: :categorizable
+RSpec.describe Vocational, type: :model do
+
 end

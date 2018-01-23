@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 # == Schema Information
 #
-# Table name: characteristics
+# Table name: vocationals
 #
 #  id          :integer          not null, primary key
 #  title       :string(255)      not null
@@ -11,7 +11,6 @@
 #
 
 
-class Characteristic < ApplicationRecord
-  has_and_belongs_to_many :entries
+class Vocational < ApplicationRecord
   has_many :careers, as: :categorizable
 end
