@@ -1,4 +1,4 @@
-class CreateGamesCareers < ActiveRecord::Migration[5.1]
+class CreateCareersGames < ActiveRecord::Migration[5.1]
   def change
     create_table :careers_games, id: false  do |t|
       t.belongs_to :career, index: true
