@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180123075415) do
+ActiveRecord::Schema.define(version: 20180123085658) do
 
   create_table "accounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
@@ -133,6 +133,25 @@ ActiveRecord::Schema.define(version: 20180123075415) do
     t.string "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "subjects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "game_id", null: false
+    t.string "khmerReading"
+    t.string "khmerWriting"
+    t.string "english"
+    t.string "math"
+    t.string "socialStudyEthicsAndCitizenship"
+    t.string "socialStudyGeography"
+    t.string "socialStudyHistory"
+    t.string "sciencePhysics"
+    t.string "scienceChemistry"
+    t.string "scienceBiology"
+    t.string "softSkillCommunication"
+    t.string "softSkillBrave"
+    t.string "softSkillTeamwork"
+    t.string "softSkillProblemSolving"
+    t.string "softSkillPublicSpeaking"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

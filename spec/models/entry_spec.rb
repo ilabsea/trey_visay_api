@@ -1,3 +1,11 @@
+# == Schema Information
+#
+# Table name: entries
+#
+#  id   :integer          not null, primary key
+#  name :string(255)      not null
+#
+
 require 'rails_helper'
 
 RSpec.describe Entry, type: :model do

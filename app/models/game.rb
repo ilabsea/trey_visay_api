@@ -17,4 +17,5 @@ class Game < ApplicationRecord
   has_many :personal_understandings
   has_and_belongs_to_many :careers
   has_and_belongs_to_many :entries
+  has_one :subject
 end
