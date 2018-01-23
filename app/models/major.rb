@@ -6,10 +6,14 @@
 #  id            :integer          not null, primary key
 #  name          :string(255)      not null
 #  department_id :integer
+#  school_id     :integer          not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
 
-
 class Major < ApplicationRecord
+  belongs_to :school
+  belongs_to :department
+
+  validates :name, presence: true
 end

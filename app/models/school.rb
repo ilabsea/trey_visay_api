@@ -25,6 +25,8 @@ class School < ApplicationRecord
   CATEGORIES = %w(សាលារដ្ឋ សាលាឯកជន អង្គការ)
 
   has_and_belongs_to_many :careers
+  has_many :departments
+  has_many :majors
 
   validates :category, inclusion: { in: CATEGORIES }
   validates :name, presence: true
