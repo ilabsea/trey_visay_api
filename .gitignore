@@ -44,3 +44,5 @@ bower.json
 .byebug_history
 
 sftp-config.json
+
+.rake_tasks~

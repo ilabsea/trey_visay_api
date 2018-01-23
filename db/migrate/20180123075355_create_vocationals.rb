@@ -1,6 +1,6 @@
-class CreateCharacteristics < ActiveRecord::Migration[5.1]
+class CreateVocationals < ActiveRecord::Migration[5.1]
   def change
-    create_table :characteristics do |t|
+    create_table :vocationals do |t|
       t.string :title, null: false
       t.string :description, null: false
 

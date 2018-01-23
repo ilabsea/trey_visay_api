@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180123042402) do
+ActiveRecord::Schema.define(version: 20180123075415) do
 
   create_table "accounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
@@ -55,10 +55,16 @@ ActiveRecord::Schema.define(version: 20180123042402) do
 
   create_table "characteristics", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title", null: false
-    t.string "entries", null: false
     t.string "description", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "characteristics_entries", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "characteristic_id"
+    t.bigint "entry_id"
+    t.index ["characteristic_id"], name: "index_characteristics_entries_on_characteristic_id"
+    t.index ["entry_id"], name: "index_characteristics_entries_on_entry_id"
   end
 
   create_table "departments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -66,6 +72,17 @@ ActiveRecord::Schema.define(version: 20180123042402) do
     t.integer "school_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "entries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name", null: false
+  end
+
+  create_table "entries_games", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "entry_id"
+    t.bigint "game_id"
+    t.index ["entry_id"], name: "index_entries_games_on_entry_id"
+    t.index ["game_id"], name: "index_entries_games_on_game_id"
   end
 
   create_table "games", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -148,6 +165,13 @@ ActiveRecord::Schema.define(version: 20180123042402) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "photo"
+  end
+
+  create_table "vocationals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "title", null: false
+    t.string "description", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
