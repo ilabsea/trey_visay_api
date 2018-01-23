@@ -3,7 +3,7 @@ class CreateGames < ActiveRecord::Migration[5.1]
     create_table :games do |t|
       t.integer :user_id, null: false
       t.string  :reason, null: true
-      t.string  :record, null: true
+      t.string  :audio, null: true
 
       t.timestamps null: false
     end

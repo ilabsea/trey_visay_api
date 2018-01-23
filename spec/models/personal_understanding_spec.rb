@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 # == Schema Information
 #
 # Table name: personal_understandings
@@ -20,6 +19,8 @@
 #  updated_at                                       :datetime         not null
 #
 
-class PersonalUnderstanding < ApplicationRecord
-  belongs_to :game
+require 'rails_helper'
+
+RSpec.describe PersonalUnderstanding, type: :model do
+  it { is_expected.to belong_to(:game) }
 end

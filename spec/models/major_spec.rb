@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: majors
+#
+#  id            :integer          not null, primary key
+#  name          :string(255)      not null
+#  department_id :integer
+#  school_id     :integer          not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
 require 'rails_helper'
 
 RSpec.describe Major, type: :model do

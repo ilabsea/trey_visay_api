@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 20180123025525) do
   create_table "games", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id", null: false
     t.string "reason"
-    t.string "record"
+    t.string "audio"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
