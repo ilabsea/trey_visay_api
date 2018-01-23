@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: accounts
@@ -22,7 +23,6 @@
 #  index_accounts_on_email                 (email) UNIQUE
 #  index_accounts_on_reset_password_token  (reset_password_token) UNIQUE
 #
-
 
 class Account < ApplicationRecord
   # Include default devise modules. Others available are:

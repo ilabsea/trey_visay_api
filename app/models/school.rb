@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: schools
@@ -18,11 +19,10 @@
 #  updated_at        :datetime         not null
 #
 
-
 class School < ApplicationRecord
   mount_uploader :logo, PhotoUploader
 
-  CATEGORIES = %w(សាលារដ្ឋ សាលាឯកជន អង្គការ)
+  CATEGORIES = %w[សាលារដ្ឋ សាលាឯកជន អង្គការ].freeze
 
   has_and_belongs_to_many :careers
   has_many :departments

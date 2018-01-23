@@ -8,8 +8,10 @@ AllCops:
     - test/**/*.rb
     - bin/**
     - lib/**
+    - lib/tasks/auto_annotate_models.rake
     - lib/tasks/capistrano.rake
     - Gemfile
     - Rakefile
+    - spec/**/*.rb
 Documentation:
   Enabled: false
