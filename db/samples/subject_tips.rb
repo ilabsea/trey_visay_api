@@ -291,6 +291,6 @@ tips.each do |tip|
   end
 
   tip[:poor_tips].each do |pt|
-    SubjectTip.create(subject_code: tip.code, tip: pt, tip_type: 'poor')
+    SubjectTip.create(subject_code: tip[:code], tip: pt, tip_type: 'poor')
   end
 end
