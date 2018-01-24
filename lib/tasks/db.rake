@@ -5,6 +5,6 @@ namespace :db do
   task prepare_for_test: :environment do
     sh 'rake db:drop RAILS_ENV=test'
     sh 'rake db:create RAILS_ENV=test'
-    sh 'rake db:migrate RAILS_ENV=test'
+    sh 'rake db:schema:load RAILS_ENV=test'
   end
 end
