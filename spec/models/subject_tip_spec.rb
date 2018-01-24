@@ -26,7 +26,6 @@ RSpec.describe SubjectTip, type: :model do
       tip[:poor_tips].each do |pt|
         SubjectTip.create(subject_code: tip[:code], tip: pt, tip_type: 'poor')
       end
-
     end
 
     it '.mediums' do

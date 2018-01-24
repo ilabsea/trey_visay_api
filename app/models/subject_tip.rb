@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SubjectTip < ApplicationRecord
-  scope :subject_by, -> (code) { where(subject_code: code) }
+  scope :subject_by, ->(code) { where(subject_code: code) }
   scope :mediums, -> { where(tip_type: 'medium') }
   scope :poors, -> { where(tip_type: 'poor') }
 

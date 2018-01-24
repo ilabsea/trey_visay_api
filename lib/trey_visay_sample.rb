@@ -7,5 +7,6 @@ class TreyVisaySample
 
     Sample.load('accounts', options)
     Sample.load('subject_tips', options)
+    Sample.load('vocational_jobs', options)
   end
 end

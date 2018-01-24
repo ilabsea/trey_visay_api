@@ -283,7 +283,7 @@ tips = [
       'និយាយត្រូវគ្រប់គ្រងពេលវេលាឲ្យបានល្អ។'
     ]
   }
-];
+]
 
 tips.each do |tip|
   tip[:medium_tips].each do |mt|
