@@ -40,7 +40,15 @@ ActiveRecord::Schema.define(version: 20180123095513) do
     t.index ["categorizable_type", "categorizable_id"], name: "index_careers_on_categorizable_type_and_categorizable_id"
   end
 
-  create_table "careers_schools", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "careers_games", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "career_id"
+    t.bigint "game_id"
+    t.boolean "is_goal", default: false
+    t.index ["career_id"], name: "index_careers_games_on_career_id"
+    t.index ["game_id"], name: "index_careers_games_on_game_id"
+  end
+
+  create_table "careers_schools", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "career_id"
     t.bigint "school_id"
     t.index ["career_id"], name: "index_careers_schools_on_career_id"
@@ -85,14 +93,6 @@ ActiveRecord::Schema.define(version: 20180123095513) do
     t.string "audio"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "games_careers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "game_id"
-    t.bigint "career_id"
-    t.boolean "is_goal", default: false
-    t.index ["career_id"], name: "index_games_careers_on_career_id"
-    t.index ["game_id"], name: "index_games_careers_on_game_id"
   end
 
   create_table "majors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -191,6 +191,7 @@ ActiveRecord::Schema.define(version: 20180123095513) do
     t.string "collective_income"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "photo"
   end
 
   create_table "vocationals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

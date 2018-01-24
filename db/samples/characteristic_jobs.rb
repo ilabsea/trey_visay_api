@@ -174,6 +174,9 @@ groups = [
 
 groups.each do |group|
   characteristic = Characteristic.create(title: group[:title], description: group[:recommendation])
+  group[:entries].each do |entry|
+    characteristic.entries.push(Entry.find_by(name: entry))
+  end
 
   group[:careers].each do |career|
     characteristic.careers.create(name: career[:name], description: career[:description])

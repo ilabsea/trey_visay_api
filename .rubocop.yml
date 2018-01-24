@@ -15,3 +15,5 @@ AllCops:
     - spec/**/*.rb
 Documentation:
   Enabled: false
+Metrics/LineLength:
+  Enabled: false
