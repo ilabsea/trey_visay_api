@@ -6,6 +6,6 @@ class TreyVisaySample
     options.reverse_merge!(verbose: true)
 
     Sample.load('accounts', options)
-    # Sample.load('subject_tips', options)
+    Sample.load('subject_tips', options)
   end
 end
