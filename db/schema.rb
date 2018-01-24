@@ -125,10 +125,10 @@ ActiveRecord::Schema.define(version: 20180123095513) do
     t.string "logo"
     t.string "address"
     t.string "province"
-    t.string "phoneNumbers"
+    t.string "phone_numbers"
     t.string "faxes"
     t.string "emails"
-    t.string "websiteOrFacebook"
+    t.string "website_or_facebook"
     t.string "mailbox"
     t.string "category"
     t.datetime "created_at", null: false

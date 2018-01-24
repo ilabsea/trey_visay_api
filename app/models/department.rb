@@ -13,6 +13,7 @@
 
 class Department < ApplicationRecord
   belongs_to :school
+  has_many :majors
 
   validates :name, presence: true
 end

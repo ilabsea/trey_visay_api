@@ -10,5 +10,6 @@ class TreyVisaySample
     Sample.load('entries', options)
     Sample.load('characteristic_jobs', options)
     Sample.load('vocational_jobs', options)
+    Sample.load('schools', options)
   end
 end

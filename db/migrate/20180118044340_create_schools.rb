@@ -5,10 +5,10 @@ class CreateSchools < ActiveRecord::Migration[5.1]
       t.string   :logo,                 null: true
       t.string   :address,              null: true
       t.string   :province,             null: true
-      t.string   :phoneNumbers,         null: true
+      t.string   :phone_numbers,         null: true
       t.string   :faxes,                null: true
       t.string   :emails,               null: true
-      t.string   :websiteOrFacebook,    null: true
+      t.string   :website_or_facebook,    null: true
       t.string   :mailbox,              null: true
       t.string   :category,             null: true
 
