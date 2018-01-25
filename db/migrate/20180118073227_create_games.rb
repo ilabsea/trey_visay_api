@@ -2,6 +2,7 @@ class CreateGames < ActiveRecord::Migration[5.1]
   def change
     create_table :games do |t|
       t.integer :user_id, null: false
+      t.integer :characteristic_id
       t.string  :reason, null: true
       t.string  :audio, null: true
 

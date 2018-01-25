@@ -53,5 +53,11 @@ class User < ApplicationRecord
 
   GRADES = %w[9 10 11 12 ផ្សេងៗ].freeze
 
+  HOUSE_TYPES = %w[ផ្ទះឈើ ផ្ទះឈើលើថ្មក្រោម ផ្ទះថ្ម ផ្ទះស័ង្កសី ផ្ទះស្លឹក].freeze
+
   has_many :games
+
+  validates :school_name, inclusion: { in: SCHOOLS }
+  validates :grade, inclusion: { in: GRADES }
+  validates :house_type, inclusion: { in: HOUSE_TYPES }
 end

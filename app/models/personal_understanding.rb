@@ -22,5 +22,7 @@
 #
 
 class PersonalUnderstanding < ApplicationRecord
+  YES_NO_ANSWERS = %w[Yes No Don_Know].freeze
+
   belongs_to :game
 end

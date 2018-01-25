@@ -24,5 +24,7 @@
 #
 
 class Subject < ApplicationRecord
+  ANSWERS = %w[ខ្លាំង មធ្យម ខ្សោយ].freeze
+
   belongs_to :game
 end

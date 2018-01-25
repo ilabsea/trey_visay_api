@@ -38,5 +38,19 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  let(:school_names) {
+    ['សាលាជំនាន់ថ្មីវិទ្យាល័យព្រះស៊ីសុវត្ថិ', 'វិទ្យាល័យជាស៊ីមព្រែកអញ្ចាញ',
+    'វិទ្យាល័យព្រែកលៀប', 'វិទ្យាល័យហ៊ុនសែនកំពង់ចាម',
+    'អនុវិទ្យាល័យគោកព្រីង', 'វិទ្យាល័យសម្តេចតេជោហ៊ុនសែនសណ្តែក',
+    'វិទ្យាល័យហោណាំហុងព្រៃញា', 'វិទ្យាល័យល្វា',
+    'វិទ្យាល័យហ.សពាមជីកង', 'អនុវិទ្យាល័យហ.សទួលសុភី',
+    'វិទ្យាល័យហ.សក្រូចឆ្មារ', 'វិទ្យាល័យសម្តេចហ៊ុនសែនប៉ើសពីរ',
+    'វិទ្យាល័យប៊ុនរ៉ានីហ៊ុនសែនអម្ពវ័នជំនីក', 'វិទ្យាល័យជីហែ',
+    'វិទ្យាល័យក្រុមព្រះមហាលាភ', 'ផ្សេងៗ']
+  }
+
   it { is_expected.to have_many(:games) }
+  it { is_expected.to validate_inclusion_of(:school_name).in_array(school_names) }
+  it { is_expected.to validate_inclusion_of(:grade).in_array(%w(9 10 11 12 ផ្សេងៗ)) }
+  it { is_expected.to validate_inclusion_of(:house_type).in_array(%w(ផ្ទះឈើ ផ្ទះឈើលើថ្មក្រោម ផ្ទះថ្ម ផ្ទះស័ង្កសី ផ្ទះស្លឹក)) }
 end
