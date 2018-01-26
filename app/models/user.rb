@@ -1,11 +1,10 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: users
 #
 #  id                      :integer          not null, primary key
-#  uuid                    :string(255)      not null
+#  uuid                    :string(255)
 #  full_name               :string(255)      not null
 #  password                :string(255)      not null
 #  username                :string(255)      not null
@@ -35,6 +34,7 @@
 #  collective_income       :string(255)
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
+#  photo                   :string(255)
 #
 
 class User < ApplicationRecord

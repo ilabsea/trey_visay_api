@@ -162,7 +162,7 @@ ActiveRecord::Schema.define(version: 20180123095513) do
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "uuid", null: false
+    t.string "uuid"
     t.string "full_name", null: false
     t.string "password", null: false
     t.string "username", null: false

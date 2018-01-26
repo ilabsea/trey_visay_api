@@ -21,7 +21,8 @@
 class Career < ApplicationRecord
   belongs_to :categorizable, polymorphic: true
   has_and_belongs_to_many :schools
-  has_and_belongs_to_many :games
+  has_many :career_games
+  has_many :games, through: :career_games
 
   validates :name, presence: true
 end

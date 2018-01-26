@@ -34,12 +34,15 @@ class UserGame
 
       # entries
       game_param[:characteristic_entries].each do |entry|
-        game.entries << Entry.find_or_create_by(name: entry)
+        game.entries << Entry.find_by(name: entry)
       end
 
       # careers
       game_param[:careers].each do |career|
-        game.careers.new(career_id: Career.find_by(name: career[:name]).id, is_goal: career[:is_goal])
+        game.career_games.new(
+          career_id: Career.find_by(name: career[:name], categorizable_id: game_param[:characteristic].to_i, categorizable_type: 'Characteristic').id,
+          is_goal: career[:is_goal]
+        )
       end
     end
   end

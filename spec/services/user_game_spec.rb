@@ -121,18 +121,25 @@ RSpec.describe UserGame do
       )
     }
 
+    before do
+      create(:characteristic, :science, :with_careers, :with_entries)
+      @data = UserGame.new(data_params)
+      @data.save!
+      @user = @data.user
+    end
+
     context 'new user' do
       it 'creates user' do
-        # data = UserGame.new(data_params)
-        # binding.pry
-
-        # data.save!
+        expect(User.count).to eq(1)
+        expect(@user.full_name).to eq('sokly')
       end
 
       it 'creates game' do
+        expect(@user.games.count).to eq(1)
       end
 
       it 'creates personal understandings' do
+        expect(@user.games.first.personal_understandings.count).to eq(1)
       end
     end
 
