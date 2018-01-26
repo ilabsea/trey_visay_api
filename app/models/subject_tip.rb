@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: subject_tips
@@ -8,7 +9,6 @@
 #  tip          :string(255)      not null
 #  tip_type     :string(255)      not null
 #
-
 
 class SubjectTip < ApplicationRecord
   scope :subject_by, ->(code) { where(subject_code: code) }

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: careers_games
@@ -12,7 +13,6 @@
 #  index_careers_games_on_career_id  (career_id)
 #  index_careers_games_on_game_id    (game_id)
 #
-
 
 class CareerGame < ApplicationRecord
   self.table_name = 'careers_games'

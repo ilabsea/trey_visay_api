@@ -126,6 +126,7 @@ RSpec.describe UserGame do
       @data = UserGame.new(data_params)
       @data.save!
       @user = @data.user
+      @game = @user.games.last
     end
 
     context 'new user' do
@@ -139,7 +140,20 @@ RSpec.describe UserGame do
       end
 
       it 'creates personal understandings' do
-        expect(@user.games.first.personal_understandings.count).to eq(1)
+        expect(@game.personal_understandings.count).to eq(1)
+      end
+
+      it 'creates game subject' do
+        expect(@game.subject).not_to be_nil
+      end
+
+      it 'creates game entries' do
+        expect(@game.entries.count).to eq(5)
+      end
+
+      it 'creates game careers' do
+        expect(@game.careers.count).to eq(3)
+        expect(@game.careers.pluck(:is_goal)).to eq [0, 0, 1]
       end
     end
 

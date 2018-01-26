@@ -3,12 +3,6 @@
 module Api
   module V1
     class UsersController < ::Api::V1::ApplicationController
-      # @Todo: remove index action
-      def index
-        @careers = Career.limit(5)
-        render json: @careers, status: :ok
-      end
-
       def create
         @data = UserGame.new(data_params)
         @data.save!

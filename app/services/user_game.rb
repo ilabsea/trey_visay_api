@@ -4,7 +4,7 @@ class UserGame
   attr_accessor :user
 
   def initialize(options = {})
-    setup_data(options)
+    setup(options)
   end
 
   def save!
@@ -13,7 +13,7 @@ class UserGame
 
   private
 
-  def setup_data(params)
+  def setup(params)
     game_params = params.delete(:games)
 
     # user
@@ -21,7 +21,6 @@ class UserGame
 
     # games
     game_params.each do |game_param|
-      # binding.pry
       game = @user.games.new(reason: game_param[:reason], characteristic_id: game_param[:characteristic].to_i)
 
       # personal understandings
