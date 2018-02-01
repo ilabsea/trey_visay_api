@@ -8,17 +8,9 @@ class SchoolSample
 
     csv.each do |csv_row|
       row = csv_row.to_hash
-
-      if row['name'].present?
-        assign_school(row, options)
-        assign_department(row)
-        assign_major(row)
-      elsif row['department_name'].present?
-        assign_department(row)
-        assign_major(row)
-      elsif row['major'].present?
-        assign_major(row)
-      end
+      assign_school(row, options)
+      assign_department(row)
+      assign_major(row)
     end
 
     puts "Loaded #{file.titleize} samples" if options[:verbose]
