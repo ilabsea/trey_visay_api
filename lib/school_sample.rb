@@ -6,46 +6,18 @@ class SchoolSample
     path = File.expand_path(csv_path + "#{file}.csv")
     csv = CSV.parse(File.read(path), headers: true)
 
-    previous_school = nil
-    previous_department = nil
-
     csv.each do |csv_row|
       row = csv_row.to_hash
 
       if row['name'].present?
-        school = assign_school(row, options)
-        school.save
-
-        previous_school = school
-        previous_department = nil
-
-        if department_name = row['department_name'].presence
-          department = school.departments.new(name: department_name)
-          department.save
-
-          previous_department = department
-        end
-
-        if row['major'].present?
-          major = Major.new(name: row['major'], school: school)
-          major.department = department if department.present?
-          major.save
-        end
+        assign_school(row, options)
+        assign_department(row)
+        assign_major(row)
       elsif row['department_name'].present?
-        department = previous_school.departments.new(name: row['department_name'])
-        department.save
-
-        previous_department = department
-
-        if row['major'].present?
-          major = Major.new(name: row['major'], school: previous_school)
-          major.department = department if department.present?
-          major.save
-        end
+        assign_department(row)
+        assign_major(row)
       elsif row['major'].present?
-        major = Major.new(name: row['major'], school: previous_school)
-        major.department = previous_department if previous_department.present?
-        major.save
+        assign_major(row)
       end
     end
 
@@ -54,18 +26,39 @@ class SchoolSample
 
   private_class_method
 
+  def self.assign_major(row)
+    return if row['major'].blank?
+
+    major = Major.new(name: row['major'], school: @previous_school)
+    major.department = @previous_department if @previous_department.present?
+    major.save
+  end
+
+  def self.assign_department(row)
+    return if row['department_name'].blank?
+
+    @previous_department = @previous_school.departments.create(name: row['department_name'])
+  end
+
   def self.assign_school(row, options)
-    School.new(
+    return if row['name'].blank?
+
+    @previous_department = nil
+    @previous_school = School.create(
       name: row['name'],
       address: row['address'],
       province: row['province'],
-      phone_numbers: row['phone_numbers'].to_s.split(';').each(&:strip!).join(';'),
-      faxes: row['faxes'].to_s.split(';').each(&:strip!).join(';'),
-      emails: row['emails'].to_s.split(';').each(&:strip!).join(';'),
-      website_or_facebook: row['website_or_facebook'].to_s.split(';').each(&:strip!).join(';'),
+      phone_numbers: strip_att(row['phone_numbers']),
+      faxes: strip_att(row['faxes']),
+      emails: strip_att(row['emails']),
+      website_or_facebook: strip_att(row['website_or_facebook']),
       mailbox: row['mailbox'],
       category: options[:category] || 'សាលារដ្ឋ'
     )
+  end
+
+  def self.strip_att(val)
+    val.to_s.split(';').each(&:strip!).join(';')
   end
 
   def self.csv_path
