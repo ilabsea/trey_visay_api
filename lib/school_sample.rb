@@ -26,14 +26,22 @@ class SchoolSample
           previous_department = department
         end
 
-        major = Major.new(name: row['major'], school: school)
-        major.department = department if department.present?
-        major.save
+        if row['major'].present?
+          major = Major.new(name: row['major'], school: school)
+          major.department = department if department.present?
+          major.save
+        end
       elsif row['department_name'].present?
         department = previous_school.departments.new(name: row['department_name'])
         department.save
 
         previous_department = department
+
+        if row['major'].present?
+          major = Major.new(name: row['major'], school: previous_school)
+          major.department = department if department.present?
+          major.save
+        end
       elsif row['major'].present?
         major = Major.new(name: row['major'], school: previous_school)
         major.department = previous_department if previous_department.present?

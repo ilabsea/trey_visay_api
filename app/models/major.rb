@@ -14,7 +14,7 @@
 
 class Major < ApplicationRecord
   belongs_to :school
-  belongs_to :department
+  belongs_to :department, optional: true
 
   validates :name, presence: true
 end
