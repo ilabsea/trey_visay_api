@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 require 'sample'
+require 'school_sample'
 
 class TreyVisaySample
   def self.load_samples(options = {})
@@ -10,6 +11,9 @@ class TreyVisaySample
     Sample.load('entries', options)
     Sample.load('characteristic_jobs', options)
     Sample.load('vocational_jobs', options)
-    Sample.load('schools', options)
+
+    SchoolSample.load('government_schools', options.merge({category: 'សាលារដ្ឋ'}))
+    # SchoolSample.load('ngo_schools', options.merge({category: 'សាលាឯកជន'}))
+    # SchoolSample.load('private_schools', options.merge({category: 'អង្គការ'}))
   end
 end
