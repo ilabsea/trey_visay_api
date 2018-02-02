@@ -16,27 +16,70 @@ class SchoolSample
     puts "Loaded #{file.titleize} samples" if options[:verbose]
   end
 
+  def self.export
+    schools = []
+    School.all.includes(:departments, :department_majors).each do |school|
+      skool = {
+        id: school.id,
+        universityName: school.name,
+        logoName: '',
+        address: school.address.to_s.gsub("<U+200B>", ''),
+        province: school.province,
+        phoneNumbers: school.phone_numbers.to_s.gsub("<U+200B>", '').split(';'),
+        faxes: school.faxes.to_s.gsub("<U+200B>", '').split(';'),
+        emails: school.emails.to_s.gsub("<U+200B>", '').split(';'),
+        websiteOrFacebook: school.website_or_facebook.to_s.gsub("<U+200B>", '').split(';'),
+        mailbox: school.mailbox,
+        category: school.category,
+        departments: school.departments.map { |department|
+          { name: department.name.gsub("<U+200B>", ''), majors: department.majors.collect(&:name) }
+        }
+      }
+
+      schools.push(skool)
+    end
+
+    ids = Major.where(department_id: nil).pluck(:school_id).uniq
+    School.where(id: ids).includes(:majors).each do |school|
+      sk = schools.find { |sk| sk[:id] == school.id }
+      sk[:departments].push({ name: '', majors: school.majors.pluck(:name)})
+    end
+
+    write_to_file(schools)
+  end
+
   private_class_method
+
+  def self.write_to_file(schools)
+    file_path = Rails.root.join('public', 'schools.json')
+    content = JSON.pretty_generate(schools);
+
+    File.open(file_path, 'w') do |f|
+      f.puts(content)
+    end
+  end
 
   def self.assign_major(row)
     return if row['major'].blank?
 
-    major = Major.new(name: row['major'], school: @previous_school)
-    major.department = @previous_department if @previous_department.present?
+    major = Major.new(name: row['major'], school: @school)
+    major.department = @department if @department.present?
     major.save
   end
 
   def self.assign_department(row)
     return if row['department_name'].blank?
 
-    @previous_department = @previous_school.departments.create(name: row['department_name'])
+    @department = @school.departments.create(
+      name: row['department_name'].split('.').last.strip
+    )
   end
 
   def self.assign_school(row, options)
     return if row['name'].blank?
 
-    @previous_department = nil
-    @previous_school = School.create(
+    @department = nil
+    @school = School.create(
       name: row['name'],
       address: row['address'],
       province: row['province'],

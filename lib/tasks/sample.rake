@@ -3,6 +3,7 @@
 require 'pathname'
 require 'sample'
 require 'trey_visay_sample'
+require 'school_sample'
 
 if Rails.env.development? || Rails.env.test?
   namespace :sample do
@@ -18,6 +19,11 @@ if Rails.env.development? || Rails.env.test?
     desc 'Loads sample data'
     task load: [:clean_db] do
       TreyVisaySample.load_samples
+    end
+
+    desc 'Export school to json'
+    task export_schools: :environment do
+      SchoolSample.export
     end
   end
 end

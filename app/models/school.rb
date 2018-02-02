@@ -26,6 +26,7 @@ class School < ApplicationRecord
 
   has_and_belongs_to_many :careers
   has_many :departments
+  has_many :department_majors, through: :departments, source: :majors
   has_many :majors
 
   validates :category, inclusion: { in: CATEGORIES }
