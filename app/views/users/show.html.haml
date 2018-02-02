@@ -1,0 +1,168 @@
+= render 'shared/side_nav'
+.container
+  .row
+    .col-md-10
+      .tab{:role => "tabpanel"}
+        / Nav tabs
+        %ul.nav.nav-tabs{:role => "tablist"}
+          %li.active{:role => "presentation"}
+            %a{"aria-controls" => "home", "data-toggle" => "tab", :href => "#Section1", :role => "tab"} ប្រវត្តិរូបសង្ខេប
+          %li{:role => "presentation"}
+            %a{"aria-controls" => "profile", "data-toggle" => "tab", :href => "#Section2", :role => "tab"} លទ្ធផលធ្វើតេស្ត
+        / Tab panes
+        .tab-content.tabs
+          #Section1.tab-pane.fade.in.active{:role => "tabpanel"}
+            .profile-photo.col-md-3
+              = image_tag @user.photo ,:class=> "img-circular"
+            .col-md-9
+              %br
+              .shadow-box
+                .content-box
+                  .title
+                    %b 
+                      ពត៍មានផ្ទាល់ខ្លួន 
+                  .content-display{:style => "margin-top:2rem;"}
+                    %form{:role => "form"}
+                      .form-group.meddium-margin-bottom
+                        %label.small-gray{:for => "full_name"} ឈ្មោះពេញ 
+                        .content-data
+                          %b
+                            = " : " + @user.full_name
+                      .form-group.meddium-margin-bottom
+                        %label.small-gray{:for => "address"} ភេទ 
+                        .content-data
+                          %b
+                            = " : " + @user.sex
+                      .form-group.meddium-margin-bottom
+                        %label.small-gray{:for => "email"} ថ្ងៃខែឆ្នាំកំណើត
+                        .content-data
+                          %b
+                            = " : " + @user.date_of_birth.to_s
+                      .form-group.meddium-margin-bottom
+                        %label.small-gray{:for => "pwd"} សញ្ជាតិ
+                        .content-data
+                          %b
+                            = " : " + @user.nationality
+                      .form-group.meddium-margin-bottom
+                        %label.small-gray{:for => "name"} លេខទូរស័ព្ទ
+                        .content-data
+                          %b
+                            = " : " + @user.phone_number
+                      .form-group.meddium-margin-bottom
+                        %label.small-gray{:for => "address"} ថ្នាក់ទី
+                        .content-data
+                          %b
+                            = " : " + @user.grade
+                      .form-group.meddium-margin-bottom
+                        %label.small-gray{:for => "email"} រៀននៅសាលា
+                        .content-data
+                          %b
+                            = " : " + @user.school_name
+                      .form-group.meddium-margin-bottom
+                        %label.small-gray{:for => "pwd"} អាស័យដ្ឋានបច្ចុប្បន្ន
+                        .content-data
+                          %b
+                            = " : " + @user.address
+              %br
+              .shadow-box
+                .content-box
+                  .title
+                    %b 
+                      ពត៍មានគ្រួសារ
+                  .content-display{:style => "margin-top:2rem;"}
+                    %form{:role => "form"}
+                      .form-group.meddium-margin-bottom
+                        %label.small-gray{:for => "full_name"} ឪពុកឈ្មោះ 
+                        .content-data
+                          %b
+                            = " : " + @user.father_name
+                      .form-group.meddium-margin-bottom
+                        %label.small-gray{:for => "address"} ម្តាយឈ្មោះ 
+                        .content-data
+                          %b
+                            = " : " + @user.mother_name
+                      .form-group.meddium-margin-bottom
+                        %label.small-gray{:for => "email"} អាណាព្យាបាល
+                        .content-data
+                          %b
+                            = " : " + @user.guidance.to_s
+                      .form-group.meddium-margin-bottom
+                        %label.small-gray{:for => "pwd"} លេខទូរស័ព្ទឪពុកម្តាយ
+                        .content-data
+                          %b
+                            = " : " + @user.parent_contact_number
+                      .form-group.meddium-margin-bottom
+                        %label.small-gray{:for => "name"} ចំនួនសមាជិកគ្រួសារ
+                        .content-data
+                          %b
+                            = " : " + @user.number_of_family_member.to_s
+              %br
+              .shadow-box
+                .content-box
+                  .title
+                    %b 
+                      ស្ថានភាពគ្រួសារ
+                  .content-display{:style => "margin-top:2rem;"}
+                    %form{:role => "form"}
+                      .form-group.meddium-margin-bottom
+                        %label.small-gray{:for => "full_name"} តើឪពុកម្តាយប្អូនមានលែងលះដែររឺទេ? 
+                        .big-content-data
+                          %b
+                            = " : " + @user.is_divorce.to_s
+                      .form-group.meddium-margin-bottom
+                        %label.small-gray{:for => "address"} តើមានសមាជិកណាម្នាក់មានពិការភាពដែររឺទេ? 
+                        .big-content-data
+                          %b
+                            = " : " + @user.is_disable.to_s
+                      .form-group.meddium-margin-bottom
+                        %label.small-gray{:for => "address"} តើក្នុងគ្រួសាររបស់សិស្សមានការប្រើប្រាស់នូវអពើហិង្សាដែរឬទេ?
+                        .big-content-data
+                          %b
+                            = " : " + @user.is_domestic_violence.to_s
+                      .form-group.meddium-margin-bottom
+                        %label.small-gray{:for => "email"} តើមានសមាជិកណាមួយក្នុងគ្រួសារសិស្សមានជក់បារី?
+                        .big-content-data
+                          %b
+                            = " : " + @user.is_smoking.to_s
+                      .form-group.meddium-margin-bottom
+                        %label.small-gray{:for => "pwd"} តើមានសមាជិកណាមួយក្នុងគ្រួសារសិស្សមានញៀនសុរាទេ?
+                        .big-content-data
+                          %b
+                            = " : " + @user.is_alcoholic.to_s
+                      .form-group.meddium-margin-bottom
+                        %label.small-gray{:for => "name"} តើមានសមាជិកណាមួយក្នុងគ្រួសារសិស្សមានជក់គ្រឿងញៀន?
+                        .big-content-data
+                          %b
+                            = " : " + @user.is_drug.to_s
+                      .form-group.meddium-margin-bottom
+                        %label.small-gray{:for => "pwd"} ប្រភេទផ្ទះរបស់សិស្ស:
+                        .big-content-data
+                          %b
+                            = " : " + @user.house_type.to_s
+                      .form-group.meddium-margin-bottom
+                        %label.small-gray{:for => "name"} ចំណូលប្រចាំខែគិតជាលុយរៀលដែលមានតម្លៃ
+                        .big-content-data
+                          %b
+                            = " : " + @user.collective_income.to_s
+              %br
+          #Section2.tab-pane.fade{:role => "tabpanel"}
+            %br
+            %table.table-bordered.table.central{style: "width:80%;", align: "center"}
+              %thead
+                %tr
+                  %th{width: 60} #
+                  %th តេស្ត
+                  %th កាលបរិច្ឆេទ
+                  %th ពិន្ទុ
+              %tbody
+                - @user.games.each do |game|
+                  %tr
+                    %td
+                      = game.id
+                    %td 
+                      = link_to "តេស្តលើកទី #{game.id.to_s}", user_game_path(:user_id =>  @user.id, :id => game.id)
+                    %td 
+                      = game.created_at
+                    %td
+                      = game.personal_understandings.first.score
+                

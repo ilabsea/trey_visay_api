@@ -1,0 +1,120 @@
+= render 'shared/side_nav'
+.container
+  .row
+    .col-md-10
+      .tab{:role => "tabpanel"}
+        / Nav tabs
+        %ul.nav.nav-tabs{:role => "tablist"}
+          %li{:role => "presentation"}
+            %a{"aria-controls" => "home", "data-toggle" => "tab", :href => "", :role => "tab"} ប្រវត្តិរូបសង្ខេប
+          %li.active{:role => "presentation"}
+            %a{"aria-controls" => "profile", "data-toggle" => "tab", :href => "#Section2", :role => "tab", :aria-expanded => true} លទ្ធផលធ្វើតេស្ត
+        / Tab panes
+        .tab-content.tabs
+          #Section1.tab-pane.fade.in.active{:role => "tabpanel"}
+            .col-md-12
+              %br
+                %b
+                  <- ធ្វើតេស្តលើកទី១
+              %br
+              ធ្វើតេស្តតំណាក់កាលទី១
+              %br
+              %br
+              .shadow-box
+                .content-box
+                  .title
+                  .content-display{:style => "margin-top:2rem;"}
+                    %form{:role => "form"}
+                      .form-group.meddium-margin-bottom
+                        %label.small-gray{:for => "full_name"}
+                          = image_tag "/images/book.png" ,:class=> "img-circular"
+                        .content-data-long
+                          %a{"aria-controls" => "profile", "data-toggle" => "modal", "data-target" => "#firstTest" } ការវាយតម្លៃមុខរបរ
+              %br
+              %br
+              ធ្វើតេស្តតំណាក់កាលទី២
+              %br
+              %br
+              .shadow-box-top
+                .content-box
+                  .title
+                  .content-display{:style => "margin-top:2rem;"}
+                    %form{:role => "form"}
+                      .form-group.meddium-margin-bottom
+                        %label.small-gray{:for => "full_name"}
+                          = image_tag "/images/book.png" ,:class=> "img-circular"
+                        .content-data-long
+                          %a{"aria-controls" => "profile", "data-toggle" => "modal", "data-target" => "#secondTestOne" } ការបំពេញមុខវិជ្ជា
+              .shadow-box-middle
+                .content-box
+                  .title
+                  .content-display{:style => "margin-top:2rem;"}
+                    %form{:role => "form"}
+                      .form-group.meddium-margin-bottom
+                        %label.small-gray{:for => "full_name"}
+                          = image_tag "/images/book.png" ,:class=> "img-circular"
+                        .content-data-long
+                          %a{"aria-controls" => "profile", "data-toggle" => "modal", "data-target" => "#secondTestTwo" } ការបំពេញបុគ្គលិកលក្ខណៈ
+              .shadow-box-middle
+                .content-box
+                  .title
+                  .content-display{:style => "margin-top:2rem;"}
+                    %form{:role => "form"}
+                      .form-group.meddium-margin-bottom
+                        %label.small-gray{:for => "full_name"}
+                          = image_tag "/images/book.png" ,:class=> "img-circular"
+                        .content-data-long
+                          %a{"aria-controls" => "profile", "data-toggle" => "modal", "data-target" => "#secondTestThree" } ការជ្រើសរើសមុខរបរផ្អែកលើបុគ្គលិលក្ខណៈ
+              .shadow-box
+                .content-box-bottom
+                  .title
+                  .content-display{:style => "margin-top:2rem;"}
+                    %form{:role => "form"}
+                      .form-group.meddium-margin-bottom
+                        %label.small-gray{:for => "full_name"}
+                          = image_tag "/images/book.png" ,:class=> "img-circular"
+                        .content-data-long
+                          %b
+                            = "ការផ្តល់អនុសាសន៍"
+              %br
+              %br
+              ដាក់គោលដៅ និងមូលហេតុ
+              %br
+              %br
+              .shadow-box-top
+                .content-box-long
+                  .title
+                    %h4{style: "font-weight:strong"}
+                      = @game.goal
+                  .content-display{:style => "margin-top:2rem;"}
+                    %form{:role => "form"}
+                      .form-group.meddium-margin-bottom
+                        = @game.reason
+              %br
+              %br
+              សាលាខាងក្រោមនេះមានមុខវិជ្ជាដែលអ្នកចង់រៀន
+              %br
+              %br
+              .shadow-box-top
+                .content-box
+                  .title
+                  .content-display{:style => "margin-top:2rem;"}
+                    %form{:role => "form"}
+                      - School.all.each do |school|
+                        .form-group.meddium-margin-bottom{:style => "margin-top:1rem;"}
+                          %span.fi-circle-check
+                            = image_tag school.logo ,:class=> "img-circular-small" 
+                          %b
+                            = school.name
+                          = image_tag school.logo ,:class=> "img-circular-icon"
+                          =school.category
+                          =school.address
+                          .clear
+                          %hr
+              
+              %br
+= render 'modal_first_test', :personal_understanding => @game.personal_understandings.first
+= render 'modal_second_test_one', :subject => @game.subject
+= render 'modal_second_test_two', :entries => @game.entries
+= render 'modal_second_test_three', :careers => @game.careers
+

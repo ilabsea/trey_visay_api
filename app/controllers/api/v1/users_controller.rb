@@ -3,11 +3,18 @@
 module Api
   module V1
     class UsersController < ::Api::V1::ApplicationController
-      def create
-        @data = UserGame.new(data_params)
-        @data.save!
+      def index
+        @careers = Career.all
 
-        render json: @data.user, serializer: serializer_klass, status: :created
+        render json: @careers.to_json
+      end
+
+      def create
+        # @data = UserGame.new(data_params)
+        # @data.save!
+
+        # render json: @data.user, serializer: serializer_klass, status: :created
+        render json: {}, status: :created
       end
 
       private

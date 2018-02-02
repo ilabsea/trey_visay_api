@@ -44,6 +44,7 @@ gem 'haml', '~>5.0.4'
 gem 'carrierwave', '~> 1.0'
 gem 'active_model_serializers', '~> 0.10.7'
 gem 'strip_attributes', '~> 1.8.0'
+gem 'decent_exposure'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

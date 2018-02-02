@@ -47,3 +47,30 @@
   padding: 0 16px;
   color: #fff;
 }
+
+.main {
+  padding: 10px;
+}
+
+.bootstrap-select {
+    width: 220px;
+}
+
+.btn-group, .btn-group-vertical {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}
+.bootstrap-select.btn-group:not(.input-group-btn), .bootstrap-select.btn-group[class*=col-] {
+  float: none;
+  display: inline-block;
+  margin-left: 0;
+}
+
+.btn-default{
+  border-color: white;
+}
+
+.filter{
+  float: right;
+}
