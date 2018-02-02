@@ -51,8 +51,9 @@ class SchoolSample
   private_class_method
 
   def self.write_to_file(schools)
-    file_path = Rails.root.join('public', 'schools.json')
-    content = JSON.pretty_generate(schools);
+    Dir.mkdir('public/db') unless File.exists?('public/db')
+    file_path = Rails.root.join('public', 'db', 'schools.json')
+    content = JSON.pretty_generate(schools)
 
     File.open(file_path, 'w') do |f|
       f.puts(content)
