@@ -48,6 +48,23 @@ class SchoolSample
     write_to_file(schools)
   end
 
+  # upload photo
+  # https://github.com/carrierwaveuploader/carrierwave/wiki/How-to:-%22Upload%22-from-a-local-file
+  def load_logo
+    extensions = ['jpg', 'jpeg', 'png', 'gif']
+    extensions.each do |extension|
+      images = Dir.glob(Rails.root.join('lib', 'assets', 'school_logos', "*.#{extension}"))
+      images.each do |image|
+        id = File.basename(image).gsub(".#{extension}", '');
+        school = School.where(id: id).first;
+        if school.present?
+          school.logo = Pathname.new(image).open;
+          school.save
+        end
+      end
+    end
+  end
+
   private_class_method
 
   def self.write_to_file(schools)
