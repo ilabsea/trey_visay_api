@@ -15,5 +15,6 @@ class TreyVisaySample
     SchoolSample.load('government_schools', options.merge({category: 'សាលារដ្ឋ'}))
     SchoolSample.load('ngo_schools', options.merge({category: 'អង្គការ'}))
     SchoolSample.load('private_schools', options.merge({category: 'សាលាឯកជន'}))
+    SchoolSample.load_logo
   end
 end

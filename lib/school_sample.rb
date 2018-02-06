@@ -22,7 +22,7 @@ class SchoolSample
       skool = {
         id: school.id,
         universityName: school.name,
-        logoName: '',
+        logoName: school.logo.file && school.logo.file.filename.split('.').first || '',
         address: school.address.to_s.gsub("<U+200B>", ''),
         province: school.province,
         phoneNumbers: school.phone_numbers.to_s.gsub("<U+200B>", '').split(';'),
@@ -50,7 +50,7 @@ class SchoolSample
 
   # upload photo
   # https://github.com/carrierwaveuploader/carrierwave/wiki/How-to:-%22Upload%22-from-a-local-file
-  def load_logo
+  def self.load_logo
     extensions = ['jpg', 'jpeg', 'png', 'gif']
     extensions.each do |extension|
       images = Dir.glob(Rails.root.join('lib', 'assets', 'school_logos', "*.#{extension}"))
