@@ -2,8 +2,6 @@
 
 class HomeController < ApplicationController
   def index
-  	@users = User.all
-  	@grades = User::GRADES
-  	@schools = User::SCHOOLS
+  	redirect_to  users_path
   end
 end

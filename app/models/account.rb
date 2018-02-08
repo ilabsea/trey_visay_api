@@ -31,4 +31,19 @@ class Account < ApplicationRecord
   #        :recoverable, :rememberable, :trackable, :validatable
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
+  serialize :schools, Array
+
+  ROLE = ["អ្នកគ្រប់គ្រង","អ្នកប្រឹក្សាយោបល់"]
+
+  def role
+  	return is_admin ? Account::ROLE[0] : Account::ROLE[1]
+  end
+
+  def users
+    if is_admin
+      User.all
+    else
+      User.where("school_name = ?", schools[0])
+    end
+  end
 end

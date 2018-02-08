@@ -5,9 +5,15 @@ Rails.application.routes.draw do
   resources :users do
   	resources :games
   end
+  resources :accounts
   namespace :api do
     namespace :v1 do
       resources :users, only: [:index, :create]
+      devise_scope :account do
+        post '/accounts/sign_in' => 'sessions#create'
+        post '/accounts/sign_out' => 'sessions#destroy'
+      end
     end
+
   end
 end
