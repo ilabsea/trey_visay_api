@@ -14,23 +14,23 @@ class Api::V1::SessionsController < Devise::SessionsController
   end
 
   def destroy
-    user = Account.find_by_authentication_token params[:auth_token]
-    sign_out current_user
-    return invalid_attempt :invalid_token, :not_found unless user
+    account = Account.find_by_authentication_token params[:auth_token]
+    sign_out current_account
+    return invalid_attempt :invalid_token, :not_found unless account
 
-    render json: { success: user.reset_authentication_token! }, status: :no_content
+    render json: { success: account.reset_authentication_token! }, status: :no_content
   end
 
   protected
     def login_attempt
-      self.resource = Account.find_for_database_authentication email: params[:user][:email]
+      self.resource = Account.find_for_database_authentication email: params[:account][:email]
       return invalid_attempt :invalid, :unauthorized unless resource
       return invalid_attempt :unconfirmed, :unauthorized unless resource.active_for_authentication?
-      return invalid_attempt :invalid, :unauthorized unless resource.valid_password? params[:user][:password]
+      return invalid_attempt :invalid, :unauthorized unless resource.valid_password? params[:account][:password]
     end
 
     def check_params
-      return invalid_attempt :invalid, :unauthorized unless params[:user]
+      return invalid_attempt :invalid, :unauthorized unless params[:account]
     end
 
     def invalid_attempt reason, status
