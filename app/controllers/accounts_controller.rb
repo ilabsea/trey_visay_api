@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class AccountsController < ApplicationController
+  before_action :authenticate_account!
   before_action :authenticate_admin_user!
   def index
     @accounts = Account.all

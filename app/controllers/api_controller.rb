@@ -1,9 +1,9 @@
 class ApiController < ApplicationController
 
-  skip_before_filter :verify_authenticity_token
-  before_filter :authenticate_api_user!, :except => [:show]
+  skip_before_action :verify_authenticity_token
+  before_action :authenticate_api_user!, :except => [:show]
 
-  around_filter :rescue_with_check_api_docs
+  around_action :rescue_with_check_api_docs
 
   def rescue_with_check_api_docs
     yield

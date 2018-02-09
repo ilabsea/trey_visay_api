@@ -27,13 +27,13 @@
         %label.col-md-4.control-label{:for => "Citta"} សាលា
         .col-md-4
           %select.col-md-4.form-control{:title => "សាលា", :name => "account[schools]"}
-            - User::SCHOOLS.each do |school|
+            - User.get_all_schools.each do |school|
               -if school == @account.schools[0]
                 %option{selected: "selected"}
-                  = school
+                  = school[:name]
               -else
                 %option
-                  = school
+                  = school[:name]
       / Button
       .form-group
         %label.col-md-4.control-label{:for => "Invio"}

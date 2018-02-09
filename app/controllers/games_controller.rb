@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class GamesController < ApplicationController
+  before_action :authenticate_account!
 	before_action :authenticate_game_owner!
 
 	expose(:game) { Game.find(params[:id])}

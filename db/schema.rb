@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180202034321) do
+ActiveRecord::Schema.define(version: 20180209041630) do
 
   create_table "accounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
@@ -28,6 +28,8 @@ ActiveRecord::Schema.define(version: 20180202034321) do
     t.boolean "is_admin", default: false
     t.boolean "is_counsellor", default: false
     t.text "schools"
+    t.string "authentication_token"
+    t.datetime "token_expired_date"
     t.index ["email"], name: "index_accounts_on_email", unique: true
     t.index ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true
   end

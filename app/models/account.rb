@@ -33,6 +33,10 @@ class Account < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   serialize :schools, Array
 
+  before_create :reset_authentication_token
+  before_save :ensure_authentication_token
+  before_create :ensure_authentication_token
+
   ROLE = ["អ្នកគ្រប់គ្រង","អ្នកប្រឹក្សាយោបល់"]
 
   def role
@@ -45,5 +49,22 @@ class Account < ApplicationRecord
     else
       User.where("school_name = ?", schools[0])
     end
+  end
+
+  private
+
+  def reset_authentication_token
+    self.authentication_token = nil
+    self.token_expired_date = DateTime.now()
+  end
+
+  def ensure_authentication_token
+    self.authentication_token = Devise.friendly_token
+    self.token_expired_date = DateTime.now() + 2.week
+  end
+
+  def refresh_authentication_token
+    ensure_authentication_token
+    self.save!
   end
 end

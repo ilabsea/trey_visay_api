@@ -38,19 +38,10 @@
 #  photo                   :string(255)
 #
 
+require 'csv'
+
 class User < ApplicationRecord
   mount_uploader :photo, ::PhotoUploader
-
-  SCHOOLS = [
-    'សាលាជំនាន់ថ្មីវិទ្យាល័យព្រះស៊ីសុវត្ថិ', 'វិទ្យាល័យជាស៊ីមព្រែកអញ្ចាញ',
-    'វិទ្យាល័យព្រែកលៀប', 'វិទ្យាល័យហ៊ុនសែនកំពង់ចាម',
-    'អនុវិទ្យាល័យគោកព្រីង', 'វិទ្យាល័យសម្តេចតេជោហ៊ុនសែនសណ្តែក',
-    'វិទ្យាល័យហោណាំហុងព្រៃញា', 'វិទ្យាល័យល្វា',
-    'វិទ្យាល័យហ.សពាមជីកង', 'អនុវិទ្យាល័យហ.សទួលសុភី',
-    'វិទ្យាល័យហ.សក្រូចឆ្មារ', 'វិទ្យាល័យសម្តេចហ៊ុនសែនប៉ើសពីរ',
-    'វិទ្យាល័យប៊ុនរ៉ានីហ៊ុនសែនអម្ពវ័នជំនីក', 'វិទ្យាល័យជីហែ',
-    'វិទ្យាល័យក្រុមព្រះមហាលាភ', 'ផ្សេងៗ'
-  ].freeze
 
   GRADES = %w[9 10 11 12 ផ្សេងៗ].freeze
 
@@ -58,7 +49,26 @@ class User < ApplicationRecord
 
   has_many :games
 
-  validates :school_name, inclusion: { in: SCHOOLS }
   validates :grade, inclusion: { in: GRADES }
   validates :house_type, inclusion: { in: HOUSE_TYPES }
+
+  def self.get_all_schools
+    file = File.join(Rails.root, 'public', 'school.csv')
+    csv_text = File.read(file)
+    csv = CSV.parse(csv_text, :headers => true)
+    schools = []
+    csv.each do |row|
+      schools.push({:id => row[0], :name => row[1]})
+    end
+    return schools
+  end
+
+  def self.get_all_schools_name
+    name = []
+    get_all_schools.each do |school|
+      name.push school.name
+    end
+    return name
+  end
+
 end

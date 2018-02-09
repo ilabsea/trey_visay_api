@@ -2,7 +2,6 @@
 
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_action :authenticate_account!
 
   expose(:user)
   expose(:games) { user.games}
@@ -28,7 +27,7 @@ class ApplicationController < ActionController::Base
   end
 
   def basic_authentication_check
-    account = Account.find_by_authentication_token(params.delete :auth_token) and sign_in user
+    account = Account.find_by_authentication_token(params.delete :auth_token) and sign_in account
     http_basic_authentication unless account
   end
 

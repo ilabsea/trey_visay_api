@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-
+  before_action :authenticate_account!
 	before_action :authenticate_user_owner!
 	expose(:user) { User.find(params[:id])}
 
@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
   def index
   	@grades = User::GRADES
-  	@schools = User::SCHOOLS
+  	@schools = User.get_all_schools
   end
 
   private 

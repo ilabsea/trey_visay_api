@@ -33,9 +33,9 @@
         %label.col-md-4.control-label{:for => "Citta"} សាលា
         .col-md-4
           %select.col-md-4.form-control{:title => "សាលា", :name => "account[schools]"}
-            - User::SCHOOLS.each do |school|
+            - User.get_all_schools.each do |school|
               %option
-                = school
+                = school[:name]
       / Button
       .form-group
         %label.col-md-4.control-label{:for => "Invio"}
@@ -43,4 +43,12 @@
           %button#Invio.btn.btn-primary{:name => "Invio"} រក្សាទុក
           %a.btn.btn{:href => "/accounts"}
             ចាកចេញ
+:javascript
+  function openNav() {
+    $("#main-row").show();
+  }
+
+  function closeNav() {
+    $("#main-row").hide();
+  }
       

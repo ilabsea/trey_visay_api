@@ -2,7 +2,7 @@ class Api::V1::SessionsController < Devise::SessionsController
   before_action :check_params, :login_attempt, only: :create
   skip_before_action :require_no_authentication
   skip_before_action :verify_authenticity_token
-
+  
   ERRORS = {
     invalid: 'Error with your login or password.',
     invalid_token: 'Invalid authentication token.',
@@ -19,6 +19,10 @@ class Api::V1::SessionsController < Devise::SessionsController
     return invalid_attempt :invalid_token, :not_found unless account
 
     render json: { success: account.reset_authentication_token! }, status: :no_content
+  end
+
+  def refresh_token
+    render json: { success: true, auth_token: self.resource.refresh_authentication_token }, status: :created
   end
 
   protected

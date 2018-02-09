@@ -1,4 +1,4 @@
-.row{style: "display:none;"}
+#main-row.row{style: "display:none;z-index:10000;"}
   / uncomment code for absolute positioning tweek see top comment in css
   / <div class="absolute-wrapper"> </div>
   / Menu
@@ -51,9 +51,9 @@
 
 :javascript
   function openNav() {
-    $(".row").show();
+    $("#main-row").show();
   }
 
   function closeNav() {
-    $(".row").hide();
+    $("#main-row").hide();
   }
