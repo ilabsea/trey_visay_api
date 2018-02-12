@@ -10,7 +10,7 @@ class Api::V1::SessionsController < Devise::SessionsController
   }
 
   def create
-    render json: { success: true, auth_token: self.resource.authenticatable_salt }, status: :created
+    render json: { success: true, auth_token: self.resource.authentication_token }, status: :created
   end
 
   def destroy

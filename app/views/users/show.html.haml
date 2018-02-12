@@ -164,5 +164,8 @@
                     %td 
                       = game.created_at
                     %td
-                      = game.personal_understandings.first.score
+                      - if game.personal_understandings.first 
+                        = game.personal_understandings.first.score
+                      - else
+                        = ""
                 

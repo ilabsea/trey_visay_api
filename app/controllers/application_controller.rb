@@ -27,7 +27,10 @@ class ApplicationController < ActionController::Base
   end
 
   def basic_authentication_check
-    account = Account.find_by_authentication_token(params.delete :auth_token) and sign_in account
+    account = Account.find_by_authentication_token(params[:auth_token])
+    params.delete :auth_token
+    
+    # sign_in account
     http_basic_authentication unless account
   end
 
