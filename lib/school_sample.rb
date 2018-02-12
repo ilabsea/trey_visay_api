@@ -48,23 +48,6 @@ class SchoolSample
     write_to_file(schools)
   end
 
-  # upload photo
-  # https://github.com/carrierwaveuploader/carrierwave/wiki/How-to:-%22Upload%22-from-a-local-file
-  def self.load_logo
-    extensions = ['jpg', 'jpeg', 'png', 'gif']
-    extensions.each do |extension|
-      images = Dir.glob(Rails.root.join('lib', 'assets', 'school_logos', "*.#{extension}"))
-      images.each do |image|
-        id = File.basename(image).gsub(".#{extension}", '');
-        school = School.where(id: id).first;
-        if school.present?
-          school.logo = Pathname.new(image).open;
-          school.save
-        end
-      end
-    end
-  end
-
   private_class_method
 
   def self.write_to_file(schools)
@@ -108,6 +91,25 @@ class SchoolSample
       mailbox: row['mailbox'],
       category: options[:category] || 'សាលារដ្ឋ'
     )
+
+    assign_logo(row)
+  end
+
+  # upload photo
+  # https://github.com/carrierwaveuploader/carrierwave/wiki/How-to:-%22Upload%22-from-a-local-file
+  def self.assign_logo(row)
+    return if row['logo_name'].blank?
+
+    logo_image = images.select {|image| image.split('/').last.split('.').first == row['logo_name']}.first
+
+    if logo_image.present?
+      @school.logo = Pathname.new(logo_image).open;
+      @school.save
+    end
+  end
+
+  def self.images
+    @images ||= Dir.glob(Rails.root.join('lib', 'assets', 'school_logos', "*"))
   end
 
   def self.strip_att(val)
