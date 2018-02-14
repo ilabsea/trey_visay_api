@@ -32,6 +32,6 @@ group = {
 
 vocational = Vocational.create(title: group[:title], description: group[:recommendation])
 
-group[:careers].each do |career|
-  vocational.careers.create(name: career[:name], description: career[:description])
-end
+# group[:careers].each do |career|
+#   vocational.careers.create(name: career[:name], description: career[:description])
+# end
