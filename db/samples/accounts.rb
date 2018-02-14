@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-account = Account.new(
-  :email => 'sokly@instedd.org',
 account = Account.create!(
   :email => 'sokly@instedd.org',
   :password => '123456',
