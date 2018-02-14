@@ -67,6 +67,16 @@
                       = "ជីវៈវិទ្យា "
                       %b  
                         = "(#{@game.subject.science_biology})"
+                  - if @game.characteristic.concern_subjects.include? "ភូមិវិទ្យា"
+                    %li 
+                      = "ភូមិវិទ្យា"
+                      %b  
+                        = "(#{@game.subject.social_study_geography})"
+                  - if @game.characteristic.concern_subjects.include? "ប្រវត្តិវិទ្យា"
+                    %li 
+                      = "ប្រវត្តិវិទ្យា"
+                      %b  
+                        = "(#{@game.subject.social_study_history})"
                   - if @game.characteristic.concern_subjects.include? "សីលធម៌ និង ពលរដ្ឋ"
                     %li 
                       = "សីលធម៌ និង ពលរដ្ឋ "
