@@ -4,6 +4,7 @@ require 'pathname'
 require 'sample'
 require 'trey_visay_sample'
 require 'school_sample'
+require 'career_sample'
 
 if Rails.env.development? || Rails.env.test?
   namespace :sample do
@@ -24,6 +25,11 @@ if Rails.env.development? || Rails.env.test?
     desc 'Export school to json'
     task export_schools: :environment do
       SchoolSample.export
+    end
+
+    desc 'Export careers to json'
+    task export_careers: :environment do
+      CareerSample.export
     end
   end
 end

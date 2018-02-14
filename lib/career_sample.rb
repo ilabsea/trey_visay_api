@@ -28,30 +28,34 @@ class CareerSample
     arr = []
     characteristics = [
       {
+        id: nil,
         title: "បុគ្គលិកលក្ខណៈបុគ្គលបែប វិទ្យាសាស្រ្ត",
         logoName: 'science',
         career_title: 'មុខរបរ ឬការងារ ក្នុងវិស័យវិទ្យាសាស្ត្រ',
-        concern_subject: %w[math sciencePhysics scienceChemistry scienceBiology english],
+        concern_subjects: %w[math sciencePhysics scienceChemistry scienceBiology english softSkillBrave softSkillProblemSolving softSkillPublicSpeaking],
         concern_entries: ['ស្រាវជ្រាវ', 'មានចម្ងល់ជារឿយ', 'គិតស៊ីជំរៅ  និងមានហេតុផល', 'ប្រាកដប្រជា', 'មហិច្ឆតា', 'មានទំនួលខុសត្រូវ', 'មានភាពជាអ្នកដឹកនាំ និងគ្រប់គ្រង'],
       },
       {
+        id: nil,
         title: "បុគ្គលិកលក្ខណៈបុគ្គលបែប បច្ចេកទេស",
         logoName: 'technical',
         career_title: 'មុខរបរ ឬការងារ ក្នុងវិស័យបច្ចេកទេស',
-        concern_subject: %w[math sciencePhysics english],
+        concern_subjects: %w[math sciencePhysics english softSkillBrave softSkillProblemSolving softSkillPublicSpeaking],
         concern_entries: ['មានគំនិតច្នៃប្រឌិត', 'មានទំនុកចិត្ត', 'ឆ្លាត', 'មានឆន្ទៈ', 'មានផែនការ និងគៅដៅច្បាស់លាស់'],
       },
       {
+        id: nil,
         title: "បុគ្គលិកលក្ខណៈបុគ្គល បែបសង្គម",
         logoName: 'social',
         career_title: 'មុខរបរ ឬការងារ ក្នុងវិស័យសង្គម',
-        concern_subject: %w[khmerReading khmerWriting socialStudyGeography socialStudyEthicsAndCitizenship english],
+        concern_subjects: %w[khmerReading khmerWriting socialStudyGeography socialStudyEthicsAndCitizenship english softSkillCommunication softSkillBrave softSkillTeamwork softSkillPublicSpeaking],
         concern_entries: %w[ចូលចិត្តធ្វើការជាមួយមនុស្ស អត់ធ្មត់ ពូកែសម្របសម្រួល មានទំនួលខុសត្រូវ មានទំនាក់ទំនងល្អជាមួយនឹងក្រុមការងារ],
       }
     ];
 
     characteristics.each do |char|
       characteristic = Characteristic.where(title: char[:title]).first
+      char[:id] = characteristic.id
       char[:entries] = characteristic.entries.pluck(:name)
       char[:recommendation] = characteristic.description
       char[:careers] = []
@@ -68,12 +72,14 @@ class CareerSample
   def self.assing_vocational
     vocational = Vocational.where(title: "វិជ្ជាជីវៈ").first
     obj = {
+      id: 4,
       title: 'វិជ្ជាជីវៈ',
       logoName: '',
       entries: [],
       career_title: 'មុខរបរ ឬការងារ ទៅនឹងវិជ្ជាជីវៈ',
       concern_subjects: [],
       concern_entries: [],
+      recommendation: vocational.description,
       careers: []
     }
 
@@ -97,8 +103,12 @@ class CareerSample
   def self.assign_career(row, options)
     return if row['name'].blank?
 
-    characteristic = Characteristic.where(title: options[:category]).first
-    @career = characteristic.careers.create(name: row['name'], description: row['description'])
+    group = Characteristic.where(title: options[:category]).first
+
+    if options[:group] == 'Vocational'
+      group = Vocational.where(title: options[:category]).first
+    end
+    @career = group.careers.create(name: row['name'], description: row['description'])
   end
 
   def self.assign_school(row)
@@ -107,6 +117,7 @@ class CareerSample
     school = School.where(id: id).first
 
     return if school.nil?
+
     @career.schools << school
   end
 

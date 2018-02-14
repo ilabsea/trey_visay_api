@@ -17,9 +17,9 @@ class TreyVisaySample
     SchoolSample.load('ngo_schools', options.merge({category: 'អង្គការ'}))
     SchoolSample.load('private_schools', options.merge({category: 'សាលាឯកជន'}))
 
-    # CareerSample.load('career_science', options.merge({category: "បុគ្គលិកលក្ខណៈបុគ្គលបែប វិទ្យាសាស្រ្ត"}))
+    CareerSample.load('career_science', options.merge({category: "បុគ្គលិកលក្ខណៈបុគ្គលបែប វិទ្យាសាស្រ្ត"}))
     CareerSample.load('career_technical', options.merge({category: "បុគ្គលិកលក្ខណៈបុគ្គលបែប បច្ចេកទេស"}))
-    # CareerSample.load('career_social', options.merge({category: "បុគ្គលិកលក្ខណៈបុគ្គល បែបសង្គម"}))
-    # CareerSample.load('career_vocational', options.merge({category: "វិជ្ជាជីវៈ"}))
+    CareerSample.load('career_social', options.merge({category: "បុគ្គលិកលក្ខណៈបុគ្គល បែបសង្គម"}))
+    CareerSample.load('career_vocational', options.merge({group: 'Vocational', category: "វិជ្ជាជីវៈ"}))
   end
 end
