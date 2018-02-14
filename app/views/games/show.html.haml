@@ -13,7 +13,9 @@
         .tab-content.tabs
           #Section1.tab-pane.fade.in{:role => "tabpanel"}
             .profile-photo.col-md-3
-              = image_tag @user.photo ,:class=> "img-circular"
+              %br
+              %center
+                = image_tag @user.photo ,:class=> "img-circular-profile"
             .col-md-9
               %br
               .shadow-box

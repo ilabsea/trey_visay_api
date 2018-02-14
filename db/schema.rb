@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20180212115357) do
 
   create_table "careers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", null: false
-    t.text "description"
+    t.string "description"
     t.string "places_for_work"
     t.string "categorizable_type"
     t.bigint "categorizable_id"

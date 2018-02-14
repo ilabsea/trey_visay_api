@@ -21,4 +21,6 @@ class Game < ApplicationRecord
   has_many :careers, through: :career_games
   has_and_belongs_to_many :entries
   has_one :subject
+
+  mount_uploader :audio, ::AudioUploader
 end

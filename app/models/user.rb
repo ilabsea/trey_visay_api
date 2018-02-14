@@ -63,6 +63,14 @@ class User < ApplicationRecord
     return schools
   end
 
+  def self.get_school_name id
+    get_all_schools.each do |school|
+      if school[:id].to_s == id.to_s
+        return school[:name]
+      end
+    end
+  end
+
   def self.get_all_schools_name
     name = []
     get_all_schools.each do |school|

@@ -13,6 +13,7 @@ class Api::V1::GamesController < ApiController
     end
     game_params[:user_id] = user.id
     @game = Game.new(game_params)
+    @game.audio = params[:audio]
     if @game.save!
 
       params["data"]["personal_understandings"].each do |personal_understandings|
