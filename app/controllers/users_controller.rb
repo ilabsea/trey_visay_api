@@ -8,6 +8,13 @@ class UsersController < ApplicationController
   end
 
   def index
+    @datas = users
+    if(params[:school] && params[:school].strip != "")
+      @datas = @datas.where("school_name = #{params[:school]}")
+    end
+    if(params[:grade] && params[:grade].strip != "")
+      @datas = @datas.where("grade = #{params[:grade]}")
+    end
   	@grades = User::GRADES
   	@schools = User.get_all_schools
   end

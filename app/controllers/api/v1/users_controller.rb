@@ -1,7 +1,6 @@
 class Api::V1::UsersController < ApiController
   def index
     @careers = Career.all
-
     render json: @careers.to_json
   end
 
@@ -11,6 +10,10 @@ class Api::V1::UsersController < ApiController
     @user = User.new(filter_params)
     @user.save!
     render json: @user, status: :created
+  end
+
+  def high_schools
+    render json: User.get_all_schools
   end
 
   private

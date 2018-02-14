@@ -7,7 +7,7 @@ class Api::V1::GamesController < ApiController
   def create
     params["data"] = JSON.parse(params["data"])
     game_params = filter_params
-    user = User.find_by_uuid(params["data"]["uuid"])
+    user = User.find_by_uuid(params["data"]["user_uuid"])
     unless user
       head :forbidden
     end
@@ -45,7 +45,7 @@ class Api::V1::GamesController < ApiController
 
   def filter_params
     params.require(:data).permit(
-      :reason, :audio, :characteristic_id
+      :reason, :audio, :characteristic_id, :goal
     )
   end
 

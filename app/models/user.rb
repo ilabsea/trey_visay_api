@@ -66,7 +66,7 @@ class User < ApplicationRecord
   def self.get_all_schools_name
     name = []
     get_all_schools.each do |school|
-      name.push school.name
+      name.push school[:name]
     end
     return name
   end
