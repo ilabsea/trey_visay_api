@@ -60,7 +60,14 @@ class CareerSample
       char[:recommendation] = characteristic.description
       char[:careers] = []
       characteristic.careers.each do |career|
-        char[:careers].push({id: career.id, name: career.name, description: career.description, schools: career.schools.pluck(:id)})
+        char[:careers].push(
+          {
+            id: career.id,
+            name: career.name,
+            description: career.description,
+            places_for_work: career.places_for_work,
+            schools: career.schools.pluck(:id)
+          })
       end
       arr.push(char)
     end;
@@ -84,7 +91,14 @@ class CareerSample
     }
 
     vocational.careers.each do |career|
-      obj[:careers].push({id: career.id, name: career.name, description: career.description, schools: career.schools.pluck(:id)})
+      obj[:careers].push(
+        {
+          id: career.id,
+          name: career.name,
+          description: career.description,
+          places_for_work: career.places_for_work,
+          schools: career.schools.pluck(:id)
+        })
     end
 
     obj
@@ -108,7 +122,11 @@ class CareerSample
     if options[:group] == 'Vocational'
       group = Vocational.where(title: options[:category]).first
     end
-    @career = group.careers.create(name: row['name'], description: row['description'])
+    @career = group.careers.create(
+      name: row['name'],
+      description: row['description'],
+      places_for_work: row['places_for_work']
+    )
   end
 
   def self.assign_school(row)
