@@ -5,14 +5,14 @@ class UsersController < ApplicationController
   before_action :authenticate_user_owner!
   expose(:user) { User.find(params[:id]) }
 
-  def show
-    @user = User.find(params[:id])
-  end
-
   def index
-    @datas = User.filter(school_name: params[:school], grade: params[:grade])
+    @datas = User.filter(school_id: params[:school], grade: params[:grade])
     @grades = User::GRADES
     @schools = User.all_schools
+  end
+
+  def show
+    @user = User.find(params[:id])
   end
 
   private

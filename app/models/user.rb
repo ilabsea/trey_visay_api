@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -53,7 +54,7 @@ class User < ApplicationRecord
 
   def self.filter(params)
     relation = all
-    relation = relation.where(school_name: params[:school_name]) if params[:school_name].present?
+    relation = relation.where(school_name: school_name(params[:school_id])) if params[:school_id].present?
     relation = relation.where(grade: params[:grade]) if params[:grade].present?
     relation
   end
@@ -69,7 +70,7 @@ class User < ApplicationRecord
     schools
   end
 
-  def self.get_school_name(id)
+  def self.school_name(id)
     all_schools.each do |school|
       return school[:name] if school[:id].to_s == id.to_s
     end
