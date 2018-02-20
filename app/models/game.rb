@@ -23,4 +23,12 @@ class Game < ApplicationRecord
   has_one :subject
 
   mount_uploader :audio, ::AudioUploader
+
+  def schools
+    @schools ||= goal_career.try(:schools) || []
+  end
+
+  def goal_career
+    @goal ||= career_games.find_by(is_goal: true).career
+  end
 end

@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: users
@@ -11,7 +10,7 @@
 #  username                :string(255)      not null
 #  sex                     :string(255)      not null
 #  date_of_birth           :date             not null
-#  phone_number            :string(255)      not null
+#  phone_number            :string(255)
 #  nationality             :string(255)      not null
 #  school_name             :string(255)      not null
 #  grade                   :string(255)      not null

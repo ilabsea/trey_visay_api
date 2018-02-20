@@ -8,7 +8,7 @@ class CreateUsers < ActiveRecord::Migration[5.1]
       t.string   :sex,                  null: false
 
       t.date     :date_of_birth,          null: false
-      t.string   :phone_number,          null: false
+      t.string   :phone_number,          null: true
       t.string   :nationality,          null: false
       t.string   :school_name,           null: false
       t.string   :grade,                null: false

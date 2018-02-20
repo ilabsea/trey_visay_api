@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: accounts
@@ -17,6 +16,11 @@
 #  last_sign_in_ip        :string(255)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  is_admin               :boolean          default(FALSE)
+#  is_counsellor          :boolean          default(FALSE)
+#  schools                :text(65535)
+#  authentication_token   :string(255)
+#  token_expired_date     :datetime
 #
 # Indexes
 #

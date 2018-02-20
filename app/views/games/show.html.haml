@@ -21,17 +21,17 @@
               .shadow-box
                 .content-box
                   .title
-                    %b 
-                      ពត៍មានផ្ទាល់ខ្លួន 
+                    %b
+                      ពត៍មានផ្ទាល់ខ្លួន
                   .content-display{:style => "margin-top:2rem;"}
                     %form{:role => "form"}
                       .form-group.meddium-margin-bottom
-                        %label.small-gray{:for => "full_name"} ឈ្មោះពេញ 
+                        %label.small-gray{:for => "full_name"} ឈ្មោះពេញ
                         .content-data
                           %b
                             = " : " + @user.full_name
                       .form-group.meddium-margin-bottom
-                        %label.small-gray{:for => "address"} ភេទ 
+                        %label.small-gray{:for => "address"} ភេទ
                         .content-data
                           %b
                             = " : " + @user.sex
@@ -45,11 +45,12 @@
                         .content-data
                           %b
                             = " : " + @user.nationality
-                      .form-group.meddium-margin-bottom
-                        %label.small-gray{:for => "name"} លេខទូរស័ព្ទ
-                        .content-data
-                          %b
-                            = " : " + @user.phone_number
+                      - if @user.phone_number.present?
+                        .form-group.meddium-margin-bottom
+                          %label.small-gray{:for => "name"} លេខទូរស័ព្ទ
+                          .content-data
+                            %b
+                              = " : " + @user.phone_number
                       .form-group.meddium-margin-bottom
                         %label.small-gray{:for => "address"} ថ្នាក់ទី
                         .content-data
@@ -69,17 +70,17 @@
               .shadow-box
                 .content-box
                   .title
-                    %b 
+                    %b
                       ពត៍មានគ្រួសារ
                   .content-display{:style => "margin-top:2rem;"}
                     %form{:role => "form"}
                       .form-group.meddium-margin-bottom
-                        %label.small-gray{:for => "full_name"} ឪពុកឈ្មោះ 
+                        %label.small-gray{:for => "full_name"} ឪពុកឈ្មោះ
                         .content-data
                           %b
                             = " : " + @user.father_name
                       .form-group.meddium-margin-bottom
-                        %label.small-gray{:for => "address"} ម្តាយឈ្មោះ 
+                        %label.small-gray{:for => "address"} ម្តាយឈ្មោះ
                         .content-data
                           %b
                             = " : " + @user.mother_name
@@ -88,11 +89,12 @@
                         .content-data
                           %b
                             = " : " + @user.guidance.to_s
-                      .form-group.meddium-margin-bottom
-                        %label.small-gray{:for => "pwd"} លេខទូរស័ព្ទឪពុកម្តាយ
-                        .content-data
-                          %b
-                            = " : " + @user.parent_contact_number
+                      - if @user.parent_contact_number.present?
+                        .form-group.meddium-margin-bottom
+                          %label.small-gray{:for => "pwd"} លេខទូរស័ព្ទឪពុកម្តាយ
+                          .content-data
+                            %b
+                              = " : " + @user.parent_contact_number
                       .form-group.meddium-margin-bottom
                         %label.small-gray{:for => "name"} ចំនួនសមាជិកគ្រួសារ
                         .content-data
@@ -102,17 +104,17 @@
               .shadow-box
                 .content-box
                   .title
-                    %b 
+                    %b
                       ស្ថានភាពគ្រួសារ
                   .content-display{:style => "margin-top:2rem;"}
                     %form{:role => "form"}
                       .form-group.meddium-margin-bottom
-                        %label.small-gray{:for => "full_name"} តើឪពុកម្តាយប្អូនមានលែងលះដែររឺទេ? 
+                        %label.small-gray{:for => "full_name"} តើឪពុកម្តាយប្អូនមានលែងលះដែររឺទេ?
                         .big-content-data
                           %b
                             = " : " + @user.is_divorce.to_s
                       .form-group.meddium-margin-bottom
-                        %label.small-gray{:for => "address"} តើមានសមាជិកណាម្នាក់មានពិការភាពដែររឺទេ? 
+                        %label.small-gray{:for => "address"} តើមានសមាជិកណាម្នាក់មានពិការភាពដែររឺទេ?
                         .big-content-data
                           %b
                             = " : " + @user.is_disable.to_s
@@ -156,7 +158,7 @@
                       %a.btn.icon-btn.btn-primary{:href => "#{user_path(@user.id)}"}
                         %span.glyphicon.btn-glyphicon.glyphicon-arrow-left.img-circle.text-primary>
                         = "ធ្វើតេស្តលើកទី #{@game.id}"
-                    
+
               %br
               ធ្វើតេស្តតំណាក់កាលទី១
               %br
@@ -225,35 +227,37 @@
                 .content-box-long
                   .title
                     %h4{style: "font-weight:strong"}
-                      = @game.goal
+                      = @game.goal_career.name
                   .content-display{:style => "margin-top:2rem;"}
                     %form{:role => "form"}
                       .form-group.meddium-margin-bottom
                         = @game.reason
               %br
               %br
-              សាលាខាងក្រោមនេះមានមុខវិជ្ជាដែលអ្នកចង់រៀន
-              %br
-              %br
-              .shadow-box-top
-                .content-box
-                  .content-display{:style => "margin-top:2rem;"}
-                    %form{:role => "form"}
-                      - School.all.each do |school|
-                        .form-group.meddium-margin-bottom
-                          %span.fi-circle-check
-                            = image_tag school.logo ,:class=> "img-circular-small" 
-                          %b
-                            %h4{style: "font-weight: bold;"}
-                              = school.name
-                          %span.glyphicon.glyphicon-equalizer.text-primary
-                          =school.category
-                          %br
-                          %span.glyphicon.glyphicon-map-marker.text-danger
-                          =school.address
-                          .clear
-                          %hr
-              
+
+              - if schools = @game.schools.presence
+                សាលាខាងក្រោមនេះមានបង្រៀនមុខវិជ្ជាដែលអ្នកចង់រៀន
+                %br
+                %br
+                .shadow-box-top
+                  .content-box
+                    .content-display{:style => "margin-top:2rem;"}
+                      %form{:role => "form"}
+                        - schools.each do |school|
+                          .form-group.meddium-margin-bottom
+                            %span.fi-circle-check
+                              = image_tag school.logo ,:class=> "img-circular-small"
+                            %b
+                              %h4{style: "font-weight: bold;"}
+                                = school.name
+                            %span.glyphicon.glyphicon-equalizer.text-primary
+                            =school.category
+                            %br
+                            %span.glyphicon.glyphicon-map-marker.text-danger
+                            =school.address
+                            .clear
+                            %hr
+
 = render 'modal_first_test', :personal_understanding => @game.personal_understandings.first
 = render 'modal_second_test_one', :subject => @game.subject
 = render 'modal_second_test_two', :entries => @game.entries

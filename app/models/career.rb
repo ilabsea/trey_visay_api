@@ -1,12 +1,11 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: careers
 #
 #  id                 :integer          not null, primary key
 #  name               :string(255)      not null
-#  description        :string(255)
+#  description        :text(65535)
 #  places_for_work    :string(255)
 #  categorizable_type :string(255)
 #  categorizable_id   :integer

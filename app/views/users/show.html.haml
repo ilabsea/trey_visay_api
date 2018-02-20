@@ -15,23 +15,23 @@
             .profile-photo.col-md-3
               %br
               %center
-                = image_tag @user.photo.url ,:class=> "img-circular-profile"
+                = image_tag @user.photo.url ,:class=> "img-circular-profile" if @user.photo.url.present?
             .col-md-9
               %br
               .shadow-box
                 .content-box
                   .title
-                    %b 
-                      ពត៍មានផ្ទាល់ខ្លួន 
+                    %b
+                      ពត៍មានផ្ទាល់ខ្លួន
                   .content-display{:style => "margin-top:2rem;"}
                     %form{:role => "form"}
                       .form-group.meddium-margin-bottom
-                        %label.small-gray{:for => "full_name"} ឈ្មោះពេញ 
+                        %label.small-gray{:for => "full_name"} ឈ្មោះពេញ
                         .content-data
                           %b
                             = " : " + @user.full_name
                       .form-group.meddium-margin-bottom
-                        %label.small-gray{:for => "address"} ភេទ 
+                        %label.small-gray{:for => "address"} ភេទ
                         .content-data
                           %b
                             = " : " + @user.sex
@@ -45,11 +45,12 @@
                         .content-data
                           %b
                             = " : " + @user.nationality
-                      .form-group.meddium-margin-bottom
-                        %label.small-gray{:for => "name"} លេខទូរស័ព្ទ
-                        .content-data
-                          %b
-                            = " : " + @user.phone_number
+                      - if @user.phone_number.present?
+                        .form-group.meddium-margin-bottom
+                          %label.small-gray{:for => "name"} លេខទូរស័ព្ទ
+                          .content-data
+                            %b
+                              = " : " + @user.phone_number
                       .form-group.meddium-margin-bottom
                         %label.small-gray{:for => "address"} ថ្នាក់ទី
                         .content-data
@@ -69,17 +70,17 @@
               .shadow-box
                 .content-box
                   .title
-                    %b 
+                    %b
                       ពត៍មានគ្រួសារ
                   .content-display{:style => "margin-top:2rem;"}
                     %form{:role => "form"}
                       .form-group.meddium-margin-bottom
-                        %label.small-gray{:for => "full_name"} ឪពុកឈ្មោះ 
+                        %label.small-gray{:for => "full_name"} ឪពុកឈ្មោះ
                         .content-data
                           %b
                             = " : " + @user.father_name
                       .form-group.meddium-margin-bottom
-                        %label.small-gray{:for => "address"} ម្តាយឈ្មោះ 
+                        %label.small-gray{:for => "address"} ម្តាយឈ្មោះ
                         .content-data
                           %b
                             = " : " + @user.mother_name
@@ -88,11 +89,12 @@
                         .content-data
                           %b
                             = " : " + @user.guidance.to_s
-                      .form-group.meddium-margin-bottom
-                        %label.small-gray{:for => "pwd"} លេខទូរស័ព្ទឪពុកម្តាយ
-                        .content-data
-                          %b
-                            = " : " + @user.parent_contact_number
+                      - if @user.parent_contact_number.present?
+                        .form-group.meddium-margin-bottom
+                          %label.small-gray{:for => "pwd"} លេខទូរស័ព្ទឪពុកម្តាយ
+                          .content-data
+                            %b
+                              = " : " + @user.parent_contact_number
                       .form-group.meddium-margin-bottom
                         %label.small-gray{:for => "name"} ចំនួនសមាជិកគ្រួសារ
                         .content-data
@@ -102,17 +104,17 @@
               .shadow-box
                 .content-box
                   .title
-                    %b 
+                    %b
                       ស្ថានភាពគ្រួសារ
                   .content-display{:style => "margin-top:2rem;"}
                     %form{:role => "form"}
                       .form-group.meddium-margin-bottom
-                        %label.small-gray{:for => "full_name"} តើឪពុកម្តាយប្អូនមានលែងលះដែររឺទេ? 
+                        %label.small-gray{:for => "full_name"} តើឪពុកម្តាយប្អូនមានលែងលះដែររឺទេ?
                         .big-content-data
                           %b
                             = " : " + @user.is_divorce.to_s
                       .form-group.meddium-margin-bottom
-                        %label.small-gray{:for => "address"} តើមានសមាជិកណាម្នាក់មានពិការភាពដែររឺទេ? 
+                        %label.small-gray{:for => "address"} តើមានសមាជិកណាម្នាក់មានពិការភាពដែររឺទេ?
                         .big-content-data
                           %b
                             = " : " + @user.is_disable.to_s
@@ -161,13 +163,13 @@
                   %tr
                     %td
                       = game.id
-                    %td 
+                    %td
                       = link_to "តេស្តលើកទី #{game.id.to_s}", user_game_path(:user_id =>  @user.id, :id => game.id)
-                    %td 
+                    %td
                       = game.created_at
                     %td
-                      - if game.personal_understandings.first 
+                      - if game.personal_understandings.first
                         = game.personal_understandings.first.score
                       - else
                         = ""
-                
+
