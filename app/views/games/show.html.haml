@@ -15,7 +15,8 @@
             .profile-photo.col-md-3
               %br
               %center
-                = image_tag @user.photo ,:class=> "img-circular-profile"
+                - url = @user.photo.url || 'default_profile.png'
+                = image_tag url ,:class=> "img-circular-profile"
             .col-md-9
               %br
               .shadow-box
@@ -232,6 +233,11 @@
                     %form{:role => "form"}
                       .form-group.meddium-margin-bottom
                         = @game.reason
+
+                - if game.audio.url.present?
+                  %div
+                    %audio{controls: true, class: 'embed-responsive-item'}
+                      %source{src: @game.audio.url}
               %br
               %br
 

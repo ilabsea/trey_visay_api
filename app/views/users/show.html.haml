@@ -15,7 +15,8 @@
             .profile-photo.col-md-3
               %br
               %center
-                = image_tag @user.photo.url ,:class=> "img-circular-profile" if @user.photo.url.present?
+                - url = @user.photo.url || 'default_profile.png'
+                = image_tag url ,:class=> "img-circular-profile"
             .col-md-9
               %br
               .shadow-box

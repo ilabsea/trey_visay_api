@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: games
@@ -11,6 +10,8 @@
 #  audio             :string(255)
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
+#  created_date      :datetime
+#  goal              :string(255)
 #
 
 class Game < ApplicationRecord
