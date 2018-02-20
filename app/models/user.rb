@@ -52,31 +52,35 @@ class User < ApplicationRecord
   validates :grade, inclusion: { in: GRADES }
   validates :house_type, inclusion: { in: HOUSE_TYPES }
 
-  def self.get_all_schools
+  def self.filter(params)
+    relation = all
+    relation = relation.where(school_name: params[:school_name]) if params[:school_name].present?
+    relation = relation.where(grade: params[:grade]) if params[:grade].present?
+    relation
+  end
+
+  def self.all_schools
     file = File.join(Rails.root, 'public', 'school.csv')
     csv_text = File.read(file)
-    csv = CSV.parse(csv_text, :headers => true)
+    csv = CSV.parse(csv_text, headers: true)
     schools = []
     csv.each do |row|
-      schools.push({:id => row[0], :name => row[1]})
+      schools.push(id: row[0], name: row[1])
     end
-    return schools
+    schools
   end
 
-  def self.get_school_name id
-    get_all_schools.each do |school|
-      if school[:id].to_s == id.to_s
-        return school[:name]
-      end
+  def self.get_school_name(id)
+    all_schools.each do |school|
+      return school[:name] if school[:id].to_s == id.to_s
     end
   end
 
-  def self.get_all_schools_name
-    name = []
-    get_all_schools.each do |school|
-      name.push school[:name]
+  def self.all_schools_name
+    names = []
+    all_schools.each do |school|
+      names.push school[:name]
     end
-    return name
+    names
   end
-
 end

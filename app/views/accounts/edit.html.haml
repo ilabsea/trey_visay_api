@@ -27,7 +27,7 @@
         %label.col-md-4.control-label{:for => "Citta"} សាលា
         .col-md-4
           %select.col-md-4.form-control{:title => "សាលា", :name => "account[schools]"}
-            - User.get_all_schools.each do |school|
+            - User.all_schools.each do |school|
               -if school == @account.schools[0]
                 %option{selected: "selected"}
                   = school[:name]
@@ -41,4 +41,4 @@
           %button#Invio.btn.btn-primary{:name => "Invio"} រក្សាទុក
           %a.btn.btn{:href => "/accounts"}
             ចាកចេញ
-      
+

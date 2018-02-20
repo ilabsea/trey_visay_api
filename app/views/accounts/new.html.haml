@@ -33,7 +33,7 @@
         %label.col-md-4.control-label{:for => "Citta"} សាលា
         .col-md-4
           %select.col-md-4.form-control{:title => "សាលា", :name => "account[schools]"}
-            - User.get_all_schools.each do |school|
+            - User.all_schools.each do |school|
               %option
                 = school[:name]
       / Button
@@ -51,4 +51,4 @@
   function closeNav() {
     $("#main-row").hide();
   }
-      
+

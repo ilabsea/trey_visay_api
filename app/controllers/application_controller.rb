@@ -4,8 +4,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   expose(:user)
-  expose(:games) { user.games}
-  expose(:users){
+  expose(:games) { user.games }
+  expose(:users) do
     if current_account
       # public collections are accesible by all users
       # here we only need the ones in which current_user is a member
@@ -13,23 +13,21 @@ class ApplicationController < ActionController::Base
     else
       User.all
     end
-  }
+  end
 
   def authenticate_admin_user!
-  	head :forbidden unless current_account.role == Account::ROLE[0]
+    head :forbidden unless current_account.role == Account::ROLE[0]
   end
 
   def authenticate_api_user!
     params.delete :auth_token if current_account
-    unless current_account
-      basic_authentication_check
-    end
+    basic_authentication_check unless current_account
   end
 
   def basic_authentication_check
     account = Account.find_by_authentication_token(params[:auth_token])
     params.delete :auth_token
-    
+
     # sign_in account
     http_basic_authentication unless account
   end
@@ -37,7 +35,7 @@ class ApplicationController < ActionController::Base
   def http_basic_authentication
     authenticate_or_request_with_http_basic do |email, password|
       resource = Account.find_by_email(email)
-      if resource && resource.valid_password?(password)
+      if resource&.valid_password?(password)
         sign_in resource
         true
       else
@@ -54,5 +52,4 @@ class ApplicationController < ActionController::Base
     options = options.merge(text: object.to_json_oj, content_type: 'application/json')
     render options
   end
-
 end

@@ -37,17 +37,17 @@ class Account < ApplicationRecord
   before_save :ensure_authentication_token
   before_create :ensure_authentication_token
 
-  ROLE = ["អ្នកគ្រប់គ្រង","អ្នកប្រឹក្សាយោបល់"]
+  ROLE = %w[អ្នកគ្រប់គ្រង អ្នកប្រឹក្សាយោបល់].freeze
 
   def role
-  	return is_admin ? Account::ROLE[0] : Account::ROLE[1]
+    is_admin ? Account::ROLE[0] : Account::ROLE[1]
   end
 
   def users
     if is_admin
       User.all
     else
-      User.where("school_name = ?", schools[0])
+      User.where('school_name = ?', schools[0])
     end
   end
 
@@ -55,16 +55,16 @@ class Account < ApplicationRecord
 
   def reset_authentication_token
     self.authentication_token = nil
-    self.token_expired_date = DateTime.now()
+    self.token_expired_date = Time.now
   end
 
   def ensure_authentication_token
     self.authentication_token = Devise.friendly_token
-    self.token_expired_date = DateTime.now() + 2.week
+    self.token_expired_date = Time.now + 2.week
   end
 
   def refresh_authentication_token
     ensure_authentication_token
-    self.save!
+    save!
   end
 end

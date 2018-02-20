@@ -1,35 +1,29 @@
-class Api::V1::UsersController < ApiController
-  def index
-    @careers = Career.all
-    render json: @careers.to_json
-  end
+# frozen_string_literal: true
 
+class Api::V1::UsersController < ApiController
   def create
-    params["data"] = JSON.parse(params["data"])
-    @user = User.find_by_uuid(params["data"]["uuid"])
+    params['data'] = JSON.parse(params['data'])
+    @user = User.find_by_uuid(params['data']['uuid'])
     user_params = filter_params
     if user_params[:high_school_id]
       user_params[:school_name] = User.get_school_name(user_params[:high_school_id])
       user_params.delete :high_school_id
     end
-    unless @user
-      @user = User.new(user_params)
-      @user.save!
-      render json: @user, status: :created
-    else
+    if @user
       @user.update_attributes(user_params)
       @user.photo = params[:photo]
       @user.save!
       render json: @user, status: :ok
+    else
+      @user = User.new(user_params)
+      @user.save!
+      render json: @user, status: :created
     end
-    
   end
 
   def high_schools
-    render json: User.get_all_schools
+    render json: User.all_schools
   end
-
-
 
   private
 
@@ -44,6 +38,3 @@ class Api::V1::UsersController < ApiController
     )
   end
 end
-
-
-

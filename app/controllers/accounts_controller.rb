@@ -8,7 +8,7 @@ class AccountsController < ApplicationController
   end
 
   def show
-  	@account = Account.find(params[:id])
+    @account = Account.find(params[:id])
   end
 
   def new
@@ -22,8 +22,8 @@ class AccountsController < ApplicationController
   def update
     params = convert_role_params
     @account = Account.find(params[:id])
-    if(@account.update_attributes!(filter_params))
-      redirect_to  accounts_path, notice: 'Account has been updated successfully'
+    if @account.update_attributes!(filter_params)
+      redirect_to accounts_path, notice: 'Account has been updated successfully'
     else
       flash.now[:alert] = 'Failed to update user'
       render :new
@@ -35,35 +35,36 @@ class AccountsController < ApplicationController
     @account = Account.new(filter_params)
     @account.password = params[:account][:password]
     @account.password_confirmation = params[:account][:password_confirmation]
-    if(@account.valid?)
-      if(@account.save!)
-        redirect_to  accounts_path, notice: 'Account has been created successfully'
+    if @account.valid?
+      if @account.save!
+        redirect_to accounts_path, notice: 'Account has been created successfully'
       else
         flash.now[:alert] = 'Failed to save user'
         render :new
       end
     else
       flash.now[:alert] = 'Failed to save user'
-      render :new, :errors => @account.errors
+      render :new, errors: @account.errors
     end
   end
 
   def destroy
     @account = Account.find(params[:id])
     if @account.destroy!
-      redirect_to accounts_path(), notice: 'Account has been deleted'
+      redirect_to accounts_path, notice: 'Account has been deleted'
     else
-      redirect_to accounts_path(), notice: 'Could not delete account user'
+      redirect_to accounts_path, notice: 'Could not delete account user'
     end
   end
 
   private
+
   def filter_params
-    params.require(:account).permit(:email, :password, :password_confirmation, :is_admin, :is_counsellor, :schools => [])
+    params.require(:account).permit(:email, :password, :password_confirmation, :is_admin, :is_counsellor, schools: [])
   end
 
   def convert_role_params
-    if(params[:account][:role] == Account::ROLE[0])
+    if params[:account][:role] == Account::ROLE[0]
       params[:account][:is_admin] = true
       params[:account][:schools] = nil
     else
@@ -73,6 +74,4 @@ class AccountsController < ApplicationController
     params[:account].delete(:role)
     params
   end
-
 end
-

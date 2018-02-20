@@ -1,13 +1,14 @@
-class ApiController < ApplicationController
+# frozen_string_literal: true
 
+class ApiController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :authenticate_api_user!, :except => [:show]
+  before_action :authenticate_api_user!, except: [:show]
 
   around_action :rescue_with_check_api_docs
 
   def rescue_with_check_api_docs
     yield
-  rescue => ex
+  rescue StandardError => ex
     Rails.logger.info ex.message
     Rails.logger.info ex.backtrace.join("\n")
 
@@ -20,20 +21,20 @@ class ApiController < ApplicationController
     end
   end
 
-  def render_generic_error_response(message = "", error_code = 1)
-    render_json({message: api_error_message(message), error_code: error_code}, status: 400)
+  def render_generic_error_response(message = '', error_code = 1)
+    render_json({ message: api_error_message(message), error_code: error_code }, status: 400)
   end
 
-  def render_error_response_422(message = "Unprocessable Entity")
-    render_json({message: api_error_message(message), error_code: 2, error_object: message}, status: 422)
+  def render_error_response_422(message = 'Unprocessable Entity')
+    render_json({ message: api_error_message(message), error_code: 2, error_object: message }, status: 422)
   end
 
-  def render_error_response_403(message = "Forbidden")
-    render_json({message: api_error_message(message), error_code: 3}, status: 403)
+  def render_error_response_403(message = 'Forbidden')
+    render_json({ message: api_error_message(message), error_code: 3 }, status: 403)
   end
 
-  def render_error_response_409(message = "Conflict")
-    render_json({message: api_error_message(message), error_code: 4}, status: 409)
+  def render_error_response_409(message = 'Conflict')
+    render_json({ message: api_error_message(message), error_code: 4 }, status: 409)
   end
 
   def forbidden_response

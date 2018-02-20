@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :accounts, path: '/'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root 'home#index'
+  root 'users#index'
 
   resources :users do
   	resources :games
@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       match 'high_schools' => 'users#high_schools', :via => :get
-      resources :users, only: [:index, :create]
+      resources :users, only: [:create]
       resources :schools, :only => [:index, :create]
       resources :games, only: [:index, :create]
       devise_scope :account do
