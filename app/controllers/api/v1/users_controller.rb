@@ -6,7 +6,7 @@ class Api::V1::UsersController < ApiController
     @user = User.find_by_uuid(params['data']['uuid'])
     user_params = filter_params
     if user_params[:high_school_id]
-      user_params[:school_name] = User.get_school_name(user_params[:high_school_id])
+      user_params[:school_name] = User.school_name(user_params[:high_school_id])
       user_params.delete :high_school_id
     end
     if @user
