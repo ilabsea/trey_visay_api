@@ -41,6 +41,8 @@
           %td
             = user.grade
 :javascript
+
+  $("select").selectpicker();
   $('#select-school').on('change', function() {
     window.location.href = getBaseURL() + "?school=" + this.value + "&grade=" + $('#select-grade')[0].value ;
   })
