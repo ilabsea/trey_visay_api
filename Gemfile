@@ -35,9 +35,6 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
 gem 'cancancan', '~> 2.0'
 gem 'devise', '~>4.4.1'
 gem 'haml', '~>5.0.4'
@@ -74,6 +71,12 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'annotate', '~> 2.7.2'
+  # Use Capistrano for deployment
+  gem 'capistrano',             '~> 3.10.1', require: false
+  gem 'capistrano-rails',       '~> 1.3.1', require: false
+  gem 'capistrano-rbenv',       '~> 2.1.3'
+  gem 'capistrano-bundler',     '~> 1.3.0'
+  gem 'capistrano-passenger',   '~> 0.2.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
