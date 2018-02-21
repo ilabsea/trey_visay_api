@@ -7,11 +7,11 @@
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
 
-# server_address = "54.169.137.147"
+server_address = "54.169.137.147"
 
 # role :app, "ubuntu@#{server_address}"
 # role :web, "ubuntu@#{server_address}"
-# role :db,  "ubuntu@#{server_address}"
+role :db,  "root@#{server_address}"
 
 
 # server server_address, user: 'ubuntu', roles: %w{web app}, my_property: :my_value
