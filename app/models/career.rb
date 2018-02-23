@@ -10,6 +10,7 @@
 #  places_for_work    :string(255)
 #  categorizable_type :string(255)
 #  categorizable_id   :integer
+#  unknown_schools    :text(65535)
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #

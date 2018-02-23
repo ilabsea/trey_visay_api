@@ -66,6 +66,7 @@ class CareerSample
             name: career.name,
             description: career.description,
             places_for_work: career.places_for_work,
+            unknown_schools: career.unknown_schools,
             schools: career.schools.pluck(:id)
           })
       end
@@ -97,6 +98,7 @@ class CareerSample
           name: career.name,
           description: career.description,
           places_for_work: career.places_for_work,
+          unknown_schools: career.unknown_schools,
           schools: career.schools.pluck(:id)
         })
     end
@@ -134,9 +136,14 @@ class CareerSample
     id = row['school_name'].split('.').first
     school = School.where(id: id).first
 
-    return if school.nil?
-
-    @career.schools << school
+    if school.present?
+      @career.schools << school
+    else
+      arr = @career.unknown_schools.to_s.split(';')
+      arr.push(row['school_name'].strip)
+      @career.unknown_schools = arr.join('; ')
+      @career.save
+    end
   end
 
   def self.csv_path
