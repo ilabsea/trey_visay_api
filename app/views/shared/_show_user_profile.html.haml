@@ -67,10 +67,20 @@
               %b
                 = " : " + @user.father_name
           .form-group.meddium-margin-bottom
+            %label.small-gray{:for => "address"} មុខរបរ
+            .content-data
+              %b
+                = " : " + @user.father_occupation
+          .form-group.meddium-margin-bottom
             %label.small-gray{:for => "address"} ម្តាយឈ្មោះ
             .content-data
               %b
                 = " : " + @user.mother_name
+          .form-group.meddium-margin-bottom
+            %label.small-gray{:for => "address"} មុខរបរ
+            .content-data
+              %b
+                = " : " + @user.mother_occupation
           .form-group.meddium-margin-bottom
             %label.small-gray{:for => "email"} អាណាព្យាបាល
             .content-data
@@ -82,6 +92,16 @@
               .content-data
                 %b
                   = " : " + @user.parent_contact_number
+          .form-group.meddium-margin-bottom
+            %label.small-gray{:for => "name"} ចំនួនបងប្អូនប្រុស
+            .content-data
+              %b
+                = " : " + @user.number_of_brothers.to_s
+          .form-group.meddium-margin-bottom
+            %label.small-gray{:for => "name"} ចំនួនបងប្អូនស្រី
+            .content-data
+              %b
+                = " : " + @user.number_of_sisters.to_s
           .form-group.meddium-margin-bottom
             %label.small-gray{:for => "name"} ចំនួនសមាជិកគ្រួសារ
             .content-data
