@@ -1,11 +1,23 @@
 Rails.application.routes.draw do
   devise_for :accounts, path: '/'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root 'home#index'
+  root 'users#index'
 
+  resources :users do
+  	resources :games
+  end
+  resources :accounts
   namespace :api do
     namespace :v1 do
-      resources :users, only: [:index, :create]
+      match 'high_schools' => 'users#high_schools', :via => :get
+      resources :users, only: [:create]
+      resources :schools, :only => [:index, :create]
+      resources :games, only: [:index, :create]
+      devise_scope :account do
+        post '/accounts/sign_in' => 'sessions#create'
+        post '/accounts/sign_out' => 'sessions#destroy'
+      end
     end
+
   end
 end

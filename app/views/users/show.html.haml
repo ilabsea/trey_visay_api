@@ -1,0 +1,39 @@
+= render 'shared/side_nav'
+.container
+  .row
+    .col-md-10
+      .tab{:role => "tabpanel"}
+        / Nav tabs
+        %ul.nav.nav-tabs{:role => "tablist"}
+          %li.active{:role => "presentation"}
+            %a{"aria-controls" => "home", "data-toggle" => "tab", :href => "#Section1", :role => "tab"} ប្រវត្តិរូបសង្ខេប
+          %li{:role => "presentation"}
+            %a{"aria-controls" => "profile", "data-toggle" => "tab", :href => "#Section2", :role => "tab"} លទ្ធផលធ្វើតេស្ត
+        / Tab panes
+        .tab-content.tabs
+          #Section1.tab-pane.fade.in.active{:role => "tabpanel"}
+            = render 'shared/show_user_profile', {:active => true}
+          #Section2.tab-pane.fade{:role => "tabpanel"}
+            %br
+            %table.table-bordered.table.central{style: "width:80%;", align: "center"}
+              %thead
+                %tr
+                  %th{width: 60} #
+                  %th តេស្ត
+                  %th កាលបរិច្ឆេទ
+                  %th ពិន្ទុ
+              %tbody
+                - @user.games.each do |game|
+                  %tr
+                    %td
+                      = game.id
+                    %td
+                      = link_to "តេស្តលើកទី #{game.id.to_s}", user_game_path(:user_id =>  @user.id, :id => game.id)
+                    %td
+                      = game.created_at
+                    %td
+                      - if game.personal_understandings.first
+                        = game.personal_understandings.first.score
+                      - else
+                        = ""
+

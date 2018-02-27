@@ -21,7 +21,7 @@ gem 'simple_form', '~> 3.5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
+gem 'therubyracer', platforms: :ruby
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
@@ -35,15 +35,14 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
 gem 'cancancan', '~> 2.0'
-gem 'devise', '~>4.3.0'
+gem 'devise', '~>4.4.1'
 gem 'haml', '~>5.0.4'
 gem 'carrierwave', '~> 1.0'
 gem 'active_model_serializers', '~> 0.10.7'
 gem 'strip_attributes', '~> 1.8.0'
+gem 'decent_exposure'
+gem 'oj'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -72,6 +71,12 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'annotate', '~> 2.7.2'
+  # Use Capistrano for deployment
+  gem 'capistrano',             '~> 3.10.1', require: false
+  gem 'capistrano-rails',       '~> 1.3.1', require: false
+  gem 'capistrano-rbenv',       '~> 2.1.3'
+  gem 'capistrano-bundler',     '~> 1.3.0'
+  gem 'capistrano-passenger',   '~> 0.2.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

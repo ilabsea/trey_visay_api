@@ -287,10 +287,10 @@ tips = [
 
 tips.each do |tip|
   tip[:medium_tips].each do |mt|
-    SubjectTip.create(subject_code: tip[:code], tip: mt, tip_type: 'medium')
+    SubjectTip.create(subject_code: tip[:code], tip: mt, tip_type: 'មធ្យម')
   end
 
   tip[:poor_tips].each do |pt|
-    SubjectTip.create(subject_code: tip[:code], tip: pt, tip_type: 'poor')
+    SubjectTip.create(subject_code: tip[:code], tip: pt, tip_type: 'ខ្សោយ')
   end
 end

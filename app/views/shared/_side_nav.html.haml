@@ -1,0 +1,59 @@
+#main-row.row{style: "display:none;z-index:10000;"}
+  / uncomment code for absolute positioning tweek see top comment in css
+  / <div class="absolute-wrapper"> </div>
+  / Menu
+  #mySidenav.side-menu
+    %nav#nav-bar.navbar.navbar-default{:role => "navigation"}
+      / Brand and toggle get grouped for better mobile display
+      .navbar-header
+        .brand-wrapper
+          / Hamburger
+          %button.navbar-toggle{:type => "button"}
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          / Brand
+          .brand-name-wrapper
+            %a.navbar-brand{:href => "javascript:void(0)", :onclick => "closeNav()"}
+              ☰  ត្រីវិស័យ
+      / Main Menu
+      .side-menu-container
+        %ul.nav.navbar-nav
+          - if params[:controller] == "accounts"
+            %li.active
+              %a{:href => "/accounts"}
+                %span.glyphicon.glyphicon-user
+                គណនេយ្យ
+          -else
+            %li
+              %a{:href => "/accounts"}
+                %span.glyphicon.glyphicon-user
+                គណនេយ្យ
+          - if params[:controller] == "users"
+            %li.active
+              %a{:href => "/"}
+                %span.glyphicon.glyphicon-folder-open
+                អ្នកប្រើប្រាស់
+          - else
+            %li
+              %a{:href => "/"}
+                %span.glyphicon.glyphicon-folder-open
+                អ្នកប្រើប្រាស់
+          %li
+            %a{:href => "#{destroy_account_session_path}", "data-method" => "delete", :rel => "nofollow"}
+              %span.glyphicon.glyphicon-log-out
+              ចាកចេញ
+
+
+.toolbar
+  %span{:onclick => "openNav()", :style => "font-size:20px;cursor:pointer"} ☰ 
+
+:javascript
+  function openNav() {
+    $("#main-row").show();
+  }
+
+  function closeNav() {
+    $("#main-row").hide();
+  }

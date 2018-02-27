@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180123095513) do
+ActiveRecord::Schema.define(version: 20180212115357) do
 
   create_table "accounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
@@ -25,6 +25,11 @@ ActiveRecord::Schema.define(version: 20180123095513) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_admin", default: false
+    t.boolean "is_counsellor", default: false
+    t.text "schools"
+    t.string "authentication_token"
+    t.datetime "token_expired_date"
     t.index ["email"], name: "index_accounts_on_email", unique: true
     t.index ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true
   end
@@ -35,6 +40,7 @@ ActiveRecord::Schema.define(version: 20180123095513) do
     t.string "places_for_work"
     t.string "categorizable_type"
     t.bigint "categorizable_id"
+    t.text "unknown_schools"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["categorizable_type", "categorizable_id"], name: "index_careers_on_categorizable_type_and_categorizable_id"
@@ -60,6 +66,7 @@ ActiveRecord::Schema.define(version: 20180123095513) do
     t.text "description", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "concern_subjects"
   end
 
   create_table "characteristics_entries", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -94,6 +101,8 @@ ActiveRecord::Schema.define(version: 20180123095513) do
     t.string "audio"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "created_date"
+    t.string "goal"
   end
 
   create_table "majors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -168,7 +177,7 @@ ActiveRecord::Schema.define(version: 20180123095513) do
     t.string "username", null: false
     t.string "sex", null: false
     t.date "date_of_birth", null: false
-    t.string "phone_number", null: false
+    t.string "phone_number"
     t.string "nationality", null: false
     t.string "school_name", null: false
     t.string "grade", null: false

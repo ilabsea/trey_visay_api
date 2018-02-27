@@ -13,8 +13,9 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
-  password: dev c0der
+  username: <%= ENV['TREY-VISAY-API_DATABASE_USERNAME'] %>
+  password: <%= ENV['TREY-VISAY-API_DATABASE_PASSWORD'] %>
+  host: localhost
   socket: /var/run/mysqld/mysqld.sock
 
 development:
@@ -50,5 +51,3 @@ test:
 production:
   <<: *default
   database: trey-visay-api_production
-  username: trey-visay-api
-  password: <%= ENV['TREY-VISAY-API_DATABASE_PASSWORD'] %>

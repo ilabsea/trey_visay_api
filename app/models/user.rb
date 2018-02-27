@@ -11,7 +11,7 @@
 #  username                :string(255)      not null
 #  sex                     :string(255)      not null
 #  date_of_birth           :date             not null
-#  phone_number            :string(255)      not null
+#  phone_number            :string(255)
 #  nationality             :string(255)      not null
 #  school_name             :string(255)      not null
 #  grade                   :string(255)      not null
@@ -38,19 +38,10 @@
 #  photo                   :string(255)
 #
 
+require 'csv'
+
 class User < ApplicationRecord
   mount_uploader :photo, ::PhotoUploader
-
-  SCHOOLS = [
-    'សាលាជំនាន់ថ្មីវិទ្យាល័យព្រះស៊ីសុវត្ថិ', 'វិទ្យាល័យជាស៊ីមព្រែកអញ្ចាញ',
-    'វិទ្យាល័យព្រែកលៀប', 'វិទ្យាល័យហ៊ុនសែនកំពង់ចាម',
-    'អនុវិទ្យាល័យគោកព្រីង', 'វិទ្យាល័យសម្តេចតេជោហ៊ុនសែនសណ្តែក',
-    'វិទ្យាល័យហោណាំហុងព្រៃញា', 'វិទ្យាល័យល្វា',
-    'វិទ្យាល័យហ.សពាមជីកង', 'អនុវិទ្យាល័យហ.សទួលសុភី',
-    'វិទ្យាល័យហ.សក្រូចឆ្មារ', 'វិទ្យាល័យសម្តេចហ៊ុនសែនប៉ើសពីរ',
-    'វិទ្យាល័យប៊ុនរ៉ានីហ៊ុនសែនអម្ពវ័នជំនីក', 'វិទ្យាល័យជីហែ',
-    'វិទ្យាល័យក្រុមព្រះមហាលាភ', 'ផ្សេងៗ'
-  ].freeze
 
   GRADES = %w[9 10 11 12 ផ្សេងៗ].freeze
 
@@ -58,7 +49,38 @@ class User < ApplicationRecord
 
   has_many :games
 
-  validates :school_name, inclusion: { in: SCHOOLS }
   validates :grade, inclusion: { in: GRADES }
   validates :house_type, inclusion: { in: HOUSE_TYPES }
+
+  def self.filter(params)
+    relation = all
+    relation = relation.where(school_name: school_name(params[:school_id])) if params[:school_id].present?
+    relation = relation.where(grade: params[:grade]) if params[:grade].present?
+    relation
+  end
+
+  def self.all_schools
+    file = File.join(Rails.root, 'public', 'school.csv')
+    csv_text = File.read(file)
+    csv = CSV.parse(csv_text, headers: true)
+    schools = []
+    csv.each do |row|
+      schools.push(id: row[0], name: row[1])
+    end
+    schools
+  end
+
+  def self.school_name(id)
+    all_schools.each do |school|
+      return school[:name] if school[:id].to_s == id.to_s
+    end
+  end
+
+  def self.all_schools_name
+    names = []
+    all_schools.each do |school|
+      names.push school[:name]
+    end
+    names
+  end
 end

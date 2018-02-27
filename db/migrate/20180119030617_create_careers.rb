@@ -5,6 +5,7 @@ class CreateCareers < ActiveRecord::Migration[5.1]
       t.text       :description
       t.string     :places_for_work
       t.references :categorizable, polymorphic: true, index: true
+      t.text       :unknown_schools
 
       t.timestamps
     end

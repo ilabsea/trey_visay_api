@@ -1,0 +1,68 @@
+= render 'shared/side_nav'
+.main
+  .filter
+    %select#select-school.noborder.selectpicker
+      %option{:value => ""}
+        ជ្រើសរើសសាលា ...
+      - @schools.each do |school|
+        - if school[:id] == params[:school]
+          %option{:value => school[:id], :selected => "selected"}
+            = school[:name]
+        - else
+          %option{:value => school[:id]}
+            = school[:name]
+    %select#select-grade.noborder.selectpicker
+      %option{:value => ""}
+        ជ្រើសរើសថ្នាក់ ...
+      - @grades.each do |grade|
+        - if grade == params[:grade]
+          %option{:value => grade, :selected => "selected"}
+            = grade
+        - else
+          %option{:value => grade}
+            = grade
+  %br
+  %table.table-bordered.table.central{style: "width:80%;", align: "center"}
+    %thead
+      %tr
+        %th{width: 60} #
+        %th សិស្ស
+        %th ភេទ
+        %th ថ្នាក់ទី
+    %tbody
+      - @datas.each do |user|
+        %tr
+          %td
+            = link_to user.id, user_path(user.id)
+          %td
+            = link_to user.full_name, user_path(user.id)
+          %td
+            = user.sex
+          %td
+            = user.grade
+:javascript
+
+  $("select").selectpicker();
+  $('#select-school').on('change', function() {
+    window.location.href = getBaseURL() + "?school=" + this.value + "&grade=" + $('#select-grade')[0].value ;
+  })
+
+  $('#select-grade').on('change', function() {
+    window.location.href = getBaseURL() + "?school=" + $('#select-school')[0].value + "&grade=" + this.value ;
+  })
+
+  function getBaseURL() {
+    var loc = window.location;
+    var baseURL = loc.protocol + "//" + loc.hostname;
+    if (typeof loc.port !== "undefined" && loc.port !== "") baseURL += ":" + loc.port;
+    // strip leading /
+    var pathname = loc.pathname;
+    if (pathname.length > 0 && pathname.substr(0,1) === "/") pathname = pathname.substr(1, pathname.length - 1);
+    var pathParts = pathname.split("/");
+    if (pathParts.length > 0) {
+        for (var i = 0; i < pathParts.length; i++) {
+            if (pathParts[i] !== "") baseURL += "/" + pathParts[i];
+        }
+    }
+    return baseURL;
+  }

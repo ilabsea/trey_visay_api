@@ -1,0 +1,248 @@
+#secondTestFour.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %h5#exampleModalLabel.modal-title ការផ្តល់អនុសាសន៏
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+      .modal-body
+        .shadow-box
+          .content-box
+            .title
+              ចូលប្អូនអានអនុសាសន៏ខាងក្រោម
+              %br
+              %br
+            .content-display{:style => "margin-top:០rem;"}
+              %p
+                %b
+                  = "#{@user.full_name}"
+                = "អ្នកបានជ្រើសរើសមុខរបរដែលអ្នកចូលចិត្តបំផុតនោះគឺ #{@career.name} ដែលមុខរបរនេះ #{@career.categorizable.title} ។"
+              %p
+                = "#{@career.categorizable.description}"
+              %p
+                បញ្ជាក់: សិស្សានុសិស្សត្រូវប្រឡងជាប់ថ្នាក់ទី ១២ និងរៀនអោយពូកែទើបអាចសម្រេចបានគោលបំណង រឺ គោលដៅ។
+              %p
+                ដូចនេះសូមអ្នកផ្ទៀងផ្ទាត់យ៉ាងលម្អិតរវាង ការវាយតម្លៃលើមុខវិជ្ជាដែលអ្នកបានរៀន​​ និង​​​បុគ្គលិកលក្ខណៈរបស់អ្នកជាមួយនឹងមុខរបរដែលអ្នកពេញចិត្តដូចខាងក្រោម ៖
+              %p
+                %h4{style: "font-weight:bold;"}
+                  មុខវិជ្ជា
+              %p
+                ="ជា#{@career.categorizable.title} អ្នកគួរពូកែលើមុខវិជ្ជាដូចខាងក្រោម ៖"
+                %ul
+                  - @game.characteristic.concern_subjects.each do |subject|
+                    %li
+                      = subject
+              %p
+                %h4{style: "font-weight:bold;"}
+                  ចម្លើយរបស់អ្នក
+              %p
+                %ul
+                  - if @game.characteristic.concern_subjects.include? "ការអានភាសារខ្មែរ"
+                    %li 
+                      = "ការអានភាសារខ្មែរ "
+                      %b  
+                        = "(#{@game.subject.khmer_reading})"
+                  - if @game.characteristic.concern_subjects.include? "ការសរសេរភាសារខ្មែរ"
+                    %li 
+                      = "ការសរសេរភាសារខ្មែរ "
+                      %b  
+                        = "(#{@game.subject.khmer_writing})"
+                  - if @game.characteristic.concern_subjects.include? "គណិតវិទ្យា"
+                    %li 
+                      = "គណិតវិទ្យា "
+                      %b  
+                        = "(#{@game.subject.math})"
+                  - if @game.characteristic.concern_subjects.include? "រូបវិទ្យា"
+                    %li 
+                      = "រូបវិទ្យា "
+                      %b  
+                        = "(#{@game.subject.science_physics})"
+                  - if @game.characteristic.concern_subjects.include? "គីមីវិទ្យា"
+                    %li 
+                      = "គីមីវិទ្យា "
+                      %b  
+                        = "(#{@game.subject.science_chemistry})"
+                  - if @game.characteristic.concern_subjects.include? "ជីវៈវិទ្យា"
+                    %li 
+                      = "ជីវៈវិទ្យា "
+                      %b  
+                        = "(#{@game.subject.science_biology})"
+                  - if @game.characteristic.concern_subjects.include? "ភូមិវិទ្យា"
+                    %li 
+                      = "ភូមិវិទ្យា"
+                      %b  
+                        = "(#{@game.subject.social_study_geography})"
+                  - if @game.characteristic.concern_subjects.include? "ប្រវត្តិវិទ្យា"
+                    %li 
+                      = "ប្រវត្តិវិទ្យា"
+                      %b  
+                        = "(#{@game.subject.social_study_history})"
+                  - if @game.characteristic.concern_subjects.include? "សីលធម៌ និង ពលរដ្ឋ"
+                    %li 
+                      = "សីលធម៌ និង ពលរដ្ឋ "
+                      %b  
+                        = "(#{@game.subject.social_study_ethics_and_citizenship})"
+                  - if @game.characteristic.concern_subjects.include? "ភាសារអង់គ្លេស/ភាសារបារាំង"
+                    %li 
+                      = "ភាសារអង់គ្លេស/ភាសារបារាំង "
+                      %b  
+                        = "(#{@game.subject.english})"
+                  - if @game.characteristic.concern_subjects.include? "ទំនាក់ទំនង"
+                    %li 
+                      = "ទំនាក់ទំនង "
+                      %b  
+                        = "(#{@game.subject.soft_skill_communication})"
+                  - if @game.characteristic.concern_subjects.include? "ក្លាហាន"
+                    %li 
+                      = "ក្លាហាន "
+                      %b  
+                        = "(#{@game.subject.soft_skill_brave})"
+                  - if @game.characteristic.concern_subjects.include? "ការងារក្រុម​​"
+                    %li 
+                      = "ការងារក្រុម​​ "
+                      %b  
+                        = "(#{@game.subject.soft_skill_teamwork})"
+                  - if @game.characteristic.concern_subjects.include? "ដោះស្រាយបញ្ហា"
+                    %li 
+                      = "ដោះស្រាយបញ្ហា "
+                      %b  
+                        = "(#{@game.subject.soft_skill_problemsolving})"
+                  - if @game.characteristic.concern_subjects.include? "ការនិយាយជាសាធារណៈ"
+                    %li 
+                      = "ការនិយាយជាសាធារណៈ "
+                      %b  
+                        = "(#{@game.subject.soft_skill_publicspeaking})"
+              %p
+                %h4{style: "font-weight:bold;"}
+                  អ្នកអាចពង្រឹងបន្ថែមលើមុខវិជ្ជាសំខាន់ៗទាំងនោះតាមរយៈគន្លឹះខាងក្រោម ៖
+              %p
+                %ul
+                  - if @game.subject.khmer_reading != "ខ្លាំង" and @game.characteristic.concern_subjects.include? "ការអានភាសារខ្មែរ"
+                    %li 
+                      = "ការអានភាសារខ្មែរ "
+                      %p  
+                        - show_tip("khmerReading", @game.subject.khmer_reading).each do |l|
+                          = "- #{l.tip}"
+                          %br
+                  - if @game.subject.khmer_writing != "ខ្លាំង" and @game.characteristic.concern_subjects.include? "ការសរសេរភាសារខ្មែរ"
+                    %li 
+                      = "ការសរសេរភាសារខ្មែរ "
+                      %p  
+                        - show_tip("khmerWriting", @game.subject.khmer_writing).each do |l|
+                          = "- #{l.tip}"
+                          %br
+                  - if @game.subject.math != "ខ្លាំង" and @game.characteristic.concern_subjects.include? "គណិតវិទ្យា"
+                    %li 
+                      = "គណិតវិទ្យា "
+                      %p  
+                        - show_tip("math", @game.subject.math).each do |l|
+                          = "- #{l.tip}"
+                          %br
+                  - if @game.subject.science_physics != "ខ្លាំង" and @game.characteristic.concern_subjects.include? "រូបវិទ្យា"
+                    %li 
+                      = "រូបវិទ្យា "
+                      %p  
+                        - show_tip("sciencePhysics", @game.subject.science_physics).each do |l|
+                          = "- #{l.tip}"
+                          %br
+                  - if @game.subject.science_chemistry != "ខ្លាំង" and @game.characteristic.concern_subjects.include? "គីមីវិទ្យា"
+                    %li 
+                      = "គីមីវិទ្យា "
+                      %p  
+                        - show_tip("scienceChemistry", @game.subject.science_chemistry).each do |l|
+                          = "- #{l.tip}"
+                          %br
+                  - if @game.subject.science_biology != "ខ្លាំង" and @game.characteristic.concern_subjects.include? "ជីវៈវិទ្យា"
+                    %li 
+                      = "ជីវៈវិទ្យា "
+                      %p  
+                        - show_tip("scienceBiology", @game.subject.science_biology).each do |l|
+                          = "- #{l.tip}"
+                          %br  
+                  - if @game.subject.social_study_geography != "ខ្លាំង" and @game.characteristic.concern_subjects.include? "ភូមិវិទ្យា"
+                    %li 
+                      = "ភូមិវិទ្យា"
+                      %p  
+                        - show_tip("socialStudyGeography", @game.subject.social_study_geography).each do |l|
+                          = "- #{l.tip}"
+                          %br
+                  - if @game.subject.social_study_history != "ខ្លាំង" and @game.characteristic.concern_subjects.include? "ប្រវត្តិវិទ្យា"
+                    %li 
+                      = "ប្រវត្តិវិទ្យា"
+                      %p  
+                        - show_tip("socialStudyHistory", @game.subject.social_study_history).each do |l|
+                          = "- #{l.tip}"
+                          %br  
+                  - if @game.subject.social_study_ethics_and_citizenship != "ខ្លាំង" and @game.characteristic.concern_subjects.include? "សីលធម៌ និង ពលរដ្ឋ"
+                    %li 
+                      = "សីលធម៌ និង ពលរដ្ឋ "
+                      %p  
+                        - show_tip("socialStudyEthicsAndCitizenship", @game.subject.social_study_ethics_and_citizenship).each do |l|
+                          = "- #{l.tip}"
+                          %br  
+                  - if @game.subject.english != "ខ្លាំង" and @game.characteristic.concern_subjects.include? "ភាសារអង់គ្លេស/ភាសារបារាំង"
+                    %li 
+                      = "ភាសារអង់គ្លេស/ភាសារបារាំង "
+                      %p  
+                        - show_tip("english", @game.subject.english).each do |l|
+                          = "- #{l.tip}"
+                          %br 
+                  - if @game.subject.soft_skill_communication != "ខ្លាំង" and @game.characteristic.concern_subjects.include? "ទំនាក់ទំនង"
+                    %li 
+                      = "ទំនាក់ទំនង "
+                      %p  
+                        - show_tip("softSkillCommunication", @game.subject.soft_skill_communication).each do |l|
+                          = "- #{l.tip}"
+                          %br  
+                  - if @game.subject.soft_skill_brave != "ខ្លាំង" and @game.characteristic.concern_subjects.include? "ក្លាហាន"
+                    %li 
+                      = "ក្លាហាន "
+                      %p  
+                        - show_tip("softSkillBrave", @game.subject.soft_skill_brave).each do |l|
+                          = "- #{l.tip}"
+                          %br 
+                  - if @game.subject.soft_skill_teamwork != "ខ្លាំង" and @game.characteristic.concern_subjects.include? "ការងារក្រុម​​"
+                    %li 
+                      = "ការងារក្រុម​​ "
+                      %p  
+                        - show_tip("softSkillTeamwork", @game.subject.soft_skill_teamwork).each do |l|
+                          = "- #{l.tip}"
+                          %br  
+                  - if @game.subject.soft_skill_problemsolving != "ខ្លាំង" and @game.characteristic.concern_subjects.include? "ដោះស្រាយបញ្ហា"
+                    %li 
+                      = "ដោះស្រាយបញ្ហា "
+                      %p  
+                        - show_tip("softSkillProblemSolving", @game.subject.soft_skill_problemsolving).each do |l|
+                          = "- #{l.tip}"
+                          %br  
+                  - if @game.subject.soft_skill_publicspeaking != "ខ្លាំង" and @game.characteristic.concern_subjects.include? "ការនិយាយជាសាធារណៈ"
+                    %li 
+                      = "ការនិយាយជាសាធារណៈ "
+                      %p  
+                        - show_tip("softSkillPublicSpeaking", @game.subject.soft_skill_publicspeaking).each do |l|
+                          = "- #{l.tip}"
+                          %br  
+              %p
+                %h4{style: "font-weight:bold;"}
+                  បុគ្គលិកលក្ខណៈ
+                = "ជា #{@career.name} អ្នកគួរមានបុគ្គលិកលក្ខណៈជាមនុស្ស ៖"
+              %p
+                %ul
+                  - @game.characteristic.entries.each do |entry|
+                    %li
+                      = entry.name
+              %p
+                %h4{style: "font-weight:bold;"}
+                  ចម្លើយរបស់អ្នក
+              %p
+                %ul
+                  - @game.entries.each do |entry|
+                    %li
+                      = entry.name
+              %p
+                បុគ្គលិកលក្ខណៈឆ្លុះបញ្ចាំង ពីអត្តចរិករបស់មនុស្ស ដូចគ្នានេះដែរការងារនិមួយៗក៏ត្រូវការមនុស្សដែលមានបុគ្គលិកលក្ខណៈអោយស៊ីនឹងវាផងដែរ ទើបយើងបំពេញការងារនោះបានប្រសើរ និង រីកចំរើនចំពោះខ្នួនឯង ដូចនេះសូម អ្នកផ្ទៀងផ្ទាត់ពីបុគ្គលិកលក្ខណៈរបស់ប្អូន ថាតើវាសាកសមសម្រាប់អ្នកហើយរឺនៅ។
+
+
+        %br
+      .modal-footer
+        %button.btn.btn-primary{"data-dismiss" => "modal", :type => "button"} Done

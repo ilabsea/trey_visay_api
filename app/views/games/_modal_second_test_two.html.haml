@@ -1,0 +1,23 @@
+#secondTestTwo.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %h5#exampleModalLabel.modal-title ការបំពេញបុគ្គលិកលក្ខណៈ
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+      .modal-body
+        .shadow-box
+          .content-box
+            .title
+            .content-display{:style => "margin-top:០rem;"}
+              %form{:role => "form"}
+                - entries.each do |entry|
+                  .form-group.meddium-margin-bottom{:style => "margin-top:1rem;"}
+                    %span.fi-circle-check 
+                      = image_tag "/images/check.png" ,:class=> "img-circular-small" 
+                    = entry.name
+                    .clear
+                %hr{:style => "margin-top:0rem;margin-bottom:10px;"}
+        %br
+      .modal-footer
+        %button.btn.btn-primary{"data-dismiss" => "modal", :type => "button"} Done
