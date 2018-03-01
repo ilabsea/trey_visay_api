@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180212115359) do
+ActiveRecord::Schema.define(version: 20180212115360) do
 
   create_table "accounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
@@ -175,13 +175,13 @@ ActiveRecord::Schema.define(version: 20180212115359) do
     t.string "full_name", null: false
     t.string "password", null: false
     t.string "username", null: false
-    t.string "sex", null: false
-    t.date "date_of_birth", null: false
+    t.string "sex"
+    t.date "date_of_birth"
     t.string "phone_number"
-    t.string "nationality", null: false
+    t.string "nationality"
     t.string "school_name", null: false
-    t.string "grade", null: false
-    t.string "address", null: false
+    t.string "grade"
+    t.string "address"
     t.string "father_name"
     t.string "father_occupation"
     t.string "mother_name"
