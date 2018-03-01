@@ -81,7 +81,7 @@ class Api::V1::GamesController < ApiController
        social_study_ethics_and_citizenship social_study_geography
        social_study_history science_physics science_chemistry
        science_biology soft_skill_communication soft_skill_brave
-       soft_skill_teamwork soft_skill_problemsolving soft_skill_publicspeaking].each do |field|
+       soft_skill_teamwork soft_skill_problem_solving soft_skill_public_speaking].each do |field|
       data[field] = p[field]
     end
     data

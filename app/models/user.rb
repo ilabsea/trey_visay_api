@@ -48,6 +48,7 @@ class User < ApplicationRecord
   HOUSE_TYPES = %w[ផ្ទះឈើ ផ្ទះឈើលើថ្មក្រោម ផ្ទះថ្ម ផ្ទះស័ង្កសី ផ្ទះស្លឹក].freeze
 
   has_many :games
+  has_many :personal_understandings, through: :games
 
   validates :grade, inclusion: { in: GRADES }
   validates :house_type, inclusion: { in: HOUSE_TYPES }

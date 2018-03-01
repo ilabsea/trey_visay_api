@@ -29,8 +29,10 @@
         %th សិស្ស
         %th ភេទ
         %th ថ្នាក់ទី
+        %th ការធ្វើតេស្ត
+
     %tbody
-      - @datas.each do |user|
+      - @users.each do |user|
         %tr
           %td
             = link_to user.id, user_path(user.id)
@@ -40,6 +42,17 @@
             = user.sex
           %td
             = user.grade
+          %td
+            - user.games.each_with_index do |game, i|
+              %div
+                = "តេស្តលើកទី #{i + 1}: តេស្តស្វែងយល់អំពីខ្លួនឯង (តេស្ត #{game.personal_understandings.length}ដង, ធ្លាក់ "
+                - fails_len = game.personal_understandings.fails.length
+                %span{ class: ("dangerous" if fails_len > 1)}
+                  = fails_len
+                = "ដង)"
+
+  %div{style: 'text-align: center'}= paginate @users
+
 :javascript
 
   $("select").selectpicker();
