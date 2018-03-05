@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180212115357) do
+ActiveRecord::Schema.define(version: 20180212115360) do
 
   create_table "accounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
@@ -125,7 +125,7 @@ ActiveRecord::Schema.define(version: 20180212115357) do
     t.string "ever_talked_with_anyone_about_career"
     t.string "how_to_reach_job_vacancy"
     t.string "who_to_reach_job_vacancy"
-    t.string "score"
+    t.integer "score"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -166,8 +166,8 @@ ActiveRecord::Schema.define(version: 20180212115357) do
     t.string "soft_skill_communication"
     t.string "soft_skill_brave"
     t.string "soft_skill_teamwork"
-    t.string "soft_skill_problemsolving"
-    t.string "soft_skill_publicspeaking"
+    t.string "soft_skill_problem_solving"
+    t.string "soft_skill_public_speaking"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -175,13 +175,13 @@ ActiveRecord::Schema.define(version: 20180212115357) do
     t.string "full_name", null: false
     t.string "password", null: false
     t.string "username", null: false
-    t.string "sex", null: false
-    t.date "date_of_birth", null: false
+    t.string "sex"
+    t.date "date_of_birth"
     t.string "phone_number"
-    t.string "nationality", null: false
+    t.string "nationality"
     t.string "school_name", null: false
-    t.string "grade", null: false
-    t.string "address", null: false
+    t.string "grade"
+    t.string "address"
     t.string "father_name"
     t.string "father_occupation"
     t.string "mother_name"

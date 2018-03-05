@@ -52,4 +52,12 @@ class ApplicationController < ActionController::Base
     options = options.merge(text: object.to_json_oj, content_type: 'application/json')
     render options
   end
+
+  def page_params
+    params[:page] || 1
+  end
+
+  def perpage_params
+    params[:per_page] || 20
+  end
 end

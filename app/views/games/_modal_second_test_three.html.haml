@@ -1,8 +1,8 @@
 #secondTestThree.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog{:role => "document"}
     .modal-content
-      .modal-header
-        %h5#exampleModalLabel.modal-title ការជ្រើសរើសមុខរបរផ្អែកលើបុគ្គលិលក្ខណៈ
+      .modal-header.header-wrapper
+        %h5#exampleModalLabel.modal-title.header-title ការជ្រើសរើសមុខរបរផ្អែកលើបុគ្គលិលក្ខណៈ
         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
           %span{"aria-hidden" => "true"} ×
       .modal-body
@@ -14,7 +14,7 @@
                 - careers.each do |career|
                   .form-group.meddium-margin-bottom{:style => "margin-top:1rem;"}
                     %span.fi-circle-check
-                      = image_tag "/images/check.png" ,:class=> "img-circular-small" 
+                      = image_tag "/images/check.png" ,:class=> "img-circular-small"
                     = career.name
                     .clear
                 %hr{:style => "margin-top:0rem;margin-bottom:10px;"}

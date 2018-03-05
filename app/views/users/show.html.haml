@@ -12,7 +12,7 @@
         / Tab panes
         .tab-content.tabs
           #Section1.tab-pane.fade.in.active{:role => "tabpanel"}
-            = render 'shared/show_user_profile', {:active => true}
+            = render 'shared/show_user_profile', {:active => false}
           #Section2.tab-pane.fade{:role => "tabpanel"}
             %br
             %table.table-bordered.table.central{style: "width:80%;", align: "center"}
@@ -21,19 +21,18 @@
                   %th{width: 60} #
                   %th តេស្ត
                   %th កាលបរិច្ឆេទ
-                  %th ពិន្ទុ
+                  %th តេស្តស្វែងយល់អំពីខ្លួនឯង
               %tbody
-                - @user.games.each do |game|
+                - @user.games.each_with_index do |game, i|
                   %tr
                     %td
-                      = game.id
+                      = i + 1
                     %td
-                      = link_to "តេស្តលើកទី #{game.id.to_s}", user_game_path(:user_id =>  @user.id, :id => game.id)
+                      = link_to "តេស្តលើកទី #{i + 1}", user_game_path(:user_id =>  @user.id, :id => game.id)
                     %td
                       = game.created_at
                     %td
-                      - if game.personal_understandings.first
-                        = game.personal_understandings.first.score
-                      - else
-                        = ""
-
+                      = "តេស្ត #{game.personal_understandings.size}ដង, ធ្លាក់ "
+                      - fails_len = game.personal_understandings.fails.size
+                      %span{ class: ("dangerous" if fails_len > 1)}
+                        = "#{fails_len}ដង"

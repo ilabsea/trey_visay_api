@@ -1,0 +1,40 @@
+#games-show {
+  .department {
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .major-icon, .com-icon {
+    margin-right: 8px;
+  }
+
+  .major {
+    font-weight: normal;
+    padding-left: 16px;
+  }
+
+  .header-wrapper {
+    display: flex;
+  }
+
+  .header-title {
+    flex-grow: 1;
+    font-weight: bold;
+  }
+
+  .cate {
+    margin-top: 24px;
+  }
+
+  .communications {
+    margin-bottom: 16px;
+  }
+
+  .title {
+    margin-bottom: 16px;
+    font-weight: bold;
+  }
+  .strong-text {
+    font-weight: bold;
+  }
+}

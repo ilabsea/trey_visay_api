@@ -21,7 +21,8 @@
                     #div{style: "width:100%;", align: "left"}
                       %a.btn.icon-btn.btn-primary{:href => "#{user_path(@user.id)}"}
                         %span.glyphicon.btn-glyphicon.glyphicon-arrow-left.img-circle.text-primary>
-                        = "ធ្វើតេស្តលើកទី #{@game.id}"
+                        - num = @user.games.map(&:id).index(@game.id) + 1
+                        = "ធ្វើតេស្តលើកទី #{num}"
 
               %br
               ធ្វើតេស្តតំណាក់កាលទី១
@@ -36,7 +37,7 @@
                         %label.small-gray{:for => "full_name"}
                           = image_tag "/images/book.png" ,:class=> "img-circular"
                         .content-data-long
-                          %a{"href" => "#", "aria-controls" => "profile", "data-toggle" => "modal", "data-target" => "#firstTest" } ការវាយតម្លៃមុខរបរ
+                          %a{"href" => "#", "aria-controls" => "profile", "data-toggle" => "modal", "data-target" => "#firstTest" } ការស្វែងយល់អំពីខ្លួនឯង
               %br
               %br
               ធ្វើតេស្តតំណាក់កាលទី២
@@ -104,32 +105,39 @@
               %br
               %br
 
-              - if schools = @game.schools.presence
+              - if @schools.present? || @game.goal_career.unknown_schools.present?
                 សាលាខាងក្រោមនេះមានបង្រៀនមុខវិជ្ជាដែលអ្នកចង់រៀន
                 %br
                 %br
-                .shadow-box-top
-                  .content-box
-                    .content-display{:style => "margin-top:2rem;"}
-                      %form{:role => "form"}
-                        - schools.each do |school|
-                          .form-group.meddium-margin-bottom
+
+                - if unknown_schools = @game.goal_career.unknown_schools.presence
+                  .shadow-box
+                    .meddium-margin-bottom
+                      %h4.strong-text= unknown_schools
+                  %br
+
+                - if @schools.present?
+                  .shadow-box
+                    .content-box
+                      .content-display
+                        - @schools.each do |school|
+                          - blank_department_majors = school.majors.select { |major| major.department_id == nil }
+                          .meddium-margin-bottom{ 'data-toggle' => 'modal', 'data-target' => '#modal-school', style: 'cursor: pointer', 'data-school' => school.to_json, 'data-departments' => school.departments.to_json(include: :majors), 'data-majors' => blank_department_majors.to_json }
                             %span.fi-circle-check
-                              = image_tag school.logo ,:class=> "img-circular-small"
-                            %b
-                              %h4{style: "font-weight: bold;"}
-                                = school.name
+                              = image_tag school.logo, class: 'img-circular-small'
+                            %h4.strong-text= school.name
                             %span.glyphicon.glyphicon-equalizer.text-primary
-                            =school.category
+                            %span= school.category
                             %br
-                            %span.glyphicon.glyphicon-map-marker.text-danger
-                            =school.address
+                            %span.glyphicon.glyphicon-map-marker.text-primary
+                            %span= school.address
                             .clear
                             %hr
+                  %br
 
-= render 'modal_first_test', :personal_understanding => @game.personal_understandings.first
+= render 'modal_first_test', :personal_understandings => @game.personal_understandings
 = render 'modal_second_test_one', :subject => @game.subject
 = render 'modal_second_test_two', :entries => @game.entries
 = render 'modal_second_test_three', :careers => @game.careers
 = render 'modal_second_test_four', :careers => @game.careers
-
+= render 'modal_school'

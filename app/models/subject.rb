@@ -19,8 +19,8 @@
 #  soft_skill_communication            :string(255)
 #  soft_skill_brave                    :string(255)
 #  soft_skill_teamwork                 :string(255)
-#  soft_skill_problemsolving           :string(255)
-#  soft_skill_publicspeaking           :string(255)
+#  soft_skill_problem_solving          :string(255)
+#  soft_skill_public_speaking          :string(255)
 #
 
 class Subject < ApplicationRecord

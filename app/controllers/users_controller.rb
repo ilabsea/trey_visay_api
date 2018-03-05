@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   expose(:user) { User.find(params[:id]) }
 
   def index
-    @datas = User.filter(school_id: params[:school], grade: params[:grade])
+    @users = User.filter(school_id: params[:school], grade: params[:grade]).includes(:games, :personal_understandings).page(page_params).per(20)
     @grades = User::GRADES
     @schools = User.all_schools
   end

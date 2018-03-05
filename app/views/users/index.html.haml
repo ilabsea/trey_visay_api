@@ -29,40 +29,24 @@
         %th សិស្ស
         %th ភេទ
         %th ថ្នាក់ទី
+        %th ឈ្មោះសាលា
+        %th ការធ្វើតេស្ត
+
     %tbody
-      - @datas.each do |user|
+      - @users.each do |user|
         %tr
+          %td= link_to user.id, user_path(user.id)
+          %td= link_to user.full_name, user_path(user.id)
+          %td= user.sex
+          %td= user.grade
+          %td= user.school_name
           %td
-            = link_to user.id, user_path(user.id)
-          %td
-            = link_to user.full_name, user_path(user.id)
-          %td
-            = user.sex
-          %td
-            = user.grade
-:javascript
+            - user.games.each_with_index do |game, i|
+              %div
+                = "តេស្តលើកទី #{i + 1}: តេស្តស្វែងយល់អំពីខ្លួនឯង (តេស្ត #{game.personal_understandings.length}ដង, ធ្លាក់ "
+                - fails_len = game.personal_understandings.fails.length
+                %span{ class: ("dangerous" if fails_len > 1)}
+                  = fails_len
+                = "ដង)"
 
-  $("select").selectpicker();
-  $('#select-school').on('change', function() {
-    window.location.href = getBaseURL() + "?school=" + this.value + "&grade=" + $('#select-grade')[0].value ;
-  })
-
-  $('#select-grade').on('change', function() {
-    window.location.href = getBaseURL() + "?school=" + $('#select-school')[0].value + "&grade=" + this.value ;
-  })
-
-  function getBaseURL() {
-    var loc = window.location;
-    var baseURL = loc.protocol + "//" + loc.hostname;
-    if (typeof loc.port !== "undefined" && loc.port !== "") baseURL += ":" + loc.port;
-    // strip leading /
-    var pathname = loc.pathname;
-    if (pathname.length > 0 && pathname.substr(0,1) === "/") pathname = pathname.substr(1, pathname.length - 1);
-    var pathParts = pathname.split("/");
-    if (pathParts.length > 0) {
-        for (var i = 0; i < pathParts.length; i++) {
-            if (pathParts[i] !== "") baseURL += "/" + pathParts[i];
-        }
-    }
-    return baseURL;
-  }
+  %div{style: 'text-align: center'}= paginate @users

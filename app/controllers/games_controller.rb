@@ -8,7 +8,7 @@ class GamesController < ApplicationController
   def show
     @user = User.find(params[:user_id])
     @game = Game.find(params[:id])
-    @career = @game.career_games.where('is_goal = true').first.career
+    @schools = @game.goal_career.schools.includes(:departments, :department_majors, :majors)
   end
 
   private

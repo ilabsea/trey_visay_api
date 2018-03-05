@@ -16,7 +16,7 @@
 #  ever_talked_with_anyone_about_career             :string(255)
 #  how_to_reach_job_vacancy                         :string(255)
 #  who_to_reach_job_vacancy                         :string(255)
-#  score                                            :string(255)
+#  score                                            :integer
 #  created_at                                       :datetime         not null
 #  updated_at                                       :datetime         not null
 #
@@ -25,4 +25,5 @@ class PersonalUnderstanding < ApplicationRecord
   YES_NO_ANSWERS = %w[Yes No Don_Know].freeze
 
   belongs_to :game
+  scope :fails, -> { where('score < ?', 12) }
 end
