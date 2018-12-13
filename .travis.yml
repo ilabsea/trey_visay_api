@@ -1,0 +1,31 @@
+language: generic
+sudo: required
+
+services:
+  - docker
+
+env:
+  COMPOSE_VERSION: 1.23.2
+
+before_install:
+  - curl -L https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-`uname
+  -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+
+install:
+  - docker-compose pull
+
+before_script:
+  - bash .dev-setup
+
+script:
+  - docker-compose run --rm web rspec
+
+addons:
+  code_climate:
+    repo_token: bce1c4e679bf03eb5d5864b5fd86562fafe3a5bab4e674deeb482c48d00a3813
+
+notifications:
+  slack:
+    secure: jY5ks4Ih91udcOnzTiPqWHIc8m+IdV6yVJcQ6SOAhCvhyk+aNa9nH2m7HfmtuJ59oaSm3haBRo22N/ffuYSTwNnGRXwqHwv5dx2CEIBoXF35DgGa30Wg0Gv9jkEdF0g3zYBRoCgp25ruccS+nodUJ8mpiWTH+flYuVDWOacynz7MZ1a/lXr8IdqldwfaGwp1yxl+WYpr/yipXZzOCp65zjKNUgKsGbGZZ1IpzG1GRqKsRIVL8OpI3QyF1GER+G2b2rVvv06lmcmtg58CD9xsSqHVuzmmuYY+ImwX+fnrJAiOH/dvZAGbbk5g9SIa1+KKoxgb+kBhWDXK+oafSgAwOjNgbxob6pFGjZA4KleTqwyFoIpghAfwJrk1fmgA913x2CCb5z7Wrwx28nhiA+wryyQoFjkNG29JBU5aWHeRVJmKSM4XRGDF/+T+FD62JIl3cGT/AXmgW9FA2YpuaTdB3xejWP0k/FBdd+aeGHdewmJbmYg3969PtPEbCZD14aIisimk3sgcMw0Xa727gg3IowWOD5IyXKHz1aceEJQiToWT0gHBltN+8u+sfOVFB96uDWykANy+cm408VxSiA5NGlrlf/ibZIl/cc3UZqpaiJfpKraLDo+yKwkB12dkdGEj+LBk6XUJh1k0YHxnacX51QvxYX17meoNcY8RJ37BqTE=
