@@ -98,7 +98,7 @@
                       .form-group.meddium-margin-bottom
                         = @game.reason
 
-                - if game.audio.url.present?
+                - if @game.audio.url.present?
                   %div
                     %audio{controls: true, class: 'embed-responsive-item'}
                       %source{src: @game.audio.url}
