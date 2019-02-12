@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/dwilkie/pumi.git
+  revision: b07bc7c5a536c2e76dca77db88da81d6903732c4
+  specs:
+    pumi (0.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -348,6 +354,7 @@ DEPENDENCIES
   oj
   pry-rails (= 0.3.6)
   puma (~> 3.7)
+  pumi!
   rails (~> 5.1.6, >= 5.1.6.1)
   rspec (= 3.7.0)
   rspec-rails (~> 3.6)
