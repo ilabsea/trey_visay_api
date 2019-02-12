@@ -14,8 +14,8 @@
 #  index_high_schools_on_code  (code) UNIQUE
 #
 
-
 class HighSchool < ApplicationRecord
+  has_many :users, foreign_key: :high_school_code
 
   def location
     Pumi::District.find_by_id(location_code)

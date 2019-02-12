@@ -9,13 +9,13 @@
 #  full_name               :string(255)      not null
 #  password                :string(255)      not null
 #  username                :string(255)      not null
-#  sex                     :string(255)      not null
-#  date_of_birth           :date             not null
+#  sex                     :string(255)
+#  date_of_birth           :date
 #  phone_number            :string(255)
-#  nationality             :string(255)      not null
+#  nationality             :string(255)
 #  school_name             :string(255)      not null
-#  grade                   :string(255)      not null
-#  address                 :string(255)      not null
+#  grade                   :string(255)
+#  address                 :string(255)
 #  father_name             :string(255)
 #  father_occupation       :string(255)
 #  mother_name             :string(255)
@@ -36,6 +36,7 @@
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #  photo                   :string(255)
+#  high_school_code        :string(255)
 #
 
 require 'csv'
@@ -47,6 +48,7 @@ class User < ApplicationRecord
 
   HOUSE_TYPES = %w[ផ្ទះឈើ ផ្ទះឈើលើថ្មក្រោម ផ្ទះថ្ម ផ្ទះស័ង្កសី ផ្ទះស្លឹក].freeze
 
+  belongs_to :high_school, foreign_key: :high_school_code
   has_many :games
   has_many :personal_understandings, through: :games
 
