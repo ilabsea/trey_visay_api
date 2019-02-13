@@ -5,18 +5,19 @@ require_relative 'base'
 module Sample
   class HighSchool < Sample::Base
     def self.load(file, options = {})
-      path = File.expand_path(csv_path + "#{file}.csv")
-      csv = CSV.parse(File.read(path), headers: true)
+      path = File.expand_path(csv_path + "#{file}.xlsx")
+      xlsx = Roo::Spreadsheet.open(path)
 
-      csv.each do |csv_row|
-        row = csv_row.to_hash
+      xlsx.each_with_pagename do |name, sheet|
+        sheet.parse.each_with_index do |row, index|
+          next if index == 0
 
-        ::HighSchool.create(
-          code: row['code'],
-          name_km: row['label'],
-          name_en: row['name_en'],
-          location_code: row['parent_code']
-        )
+          name_km = row[2]
+          location_code = row[3]
+          code = build_school_code(location_code)
+
+          ::HighSchool.create(code: code, name_km: name_km, location_code: location_code)
+        end
       end
 
       puts "Loaded #{file.titleize} samples" if options[:verbose]
@@ -36,6 +37,14 @@ module Sample
       end
 
       write_to_file(schools, 'highSchools')
+    end
+
+    private_class_method
+
+    def self.build_school_code(location_code)
+      code = ::HighSchool.where(location_code: location_code).count + 1
+      code = "#{location_code}#{format('%03d', code)}"
+      code
     end
   end
 end
