@@ -4,6 +4,33 @@ require_relative 'base'
 
 module Sample
   class Career < Sample::Base
+    CHARACTERISTICS = [
+      {
+        id: nil,
+        title: "បុគ្គលិកលក្ខណៈបុគ្គលបែប វិទ្យាសាស្រ្ត",
+        logoName: 'science',
+        career_title: 'មុខរបរ ឬការងារ ក្នុងវិស័យវិទ្យាសាស្ត្រ',
+        concern_subjects: %w[math sciencePhysics scienceChemistry scienceBiology english softSkillBrave softSkillProblemSolving softSkillPublicSpeaking],
+        concern_entries: ['ស្រាវជ្រាវ', 'មានចម្ងល់ជារឿយ', 'គិតស៊ីជំរៅ  និងមានហេតុផល', 'ប្រាកដប្រជា', 'មហិច្ឆតា', 'មានទំនួលខុសត្រូវ', 'មានភាពជាអ្នកដឹកនាំ និងគ្រប់គ្រង'],
+      },
+      {
+        id: nil,
+        title: "បុគ្គលិកលក្ខណៈបុគ្គលបែប បច្ចេកទេស",
+        logoName: 'technical',
+        career_title: 'មុខរបរ ឬការងារ ក្នុងវិស័យបច្ចេកទេស',
+        concern_subjects: %w[math sciencePhysics english softSkillBrave softSkillProblemSolving softSkillPublicSpeaking],
+        concern_entries: ['មានគំនិតច្នៃប្រឌិត', 'មានទំនុកចិត្ត', 'ឆ្លាត', 'មានឆន្ទៈ', 'មានផែនការ និងគៅដៅច្បាស់លាស់'],
+      },
+      {
+        id: nil,
+        title: "បុគ្គលិកលក្ខណៈបុគ្គល បែបសង្គម",
+        logoName: 'social',
+        career_title: 'មុខរបរ ឬការងារ ក្នុងវិស័យសង្គម',
+        concern_subjects: %w[khmerReading khmerWriting socialStudyGeography socialStudyEthicsAndCitizenship english softSkillCommunication softSkillBrave softSkillTeamwork softSkillPublicSpeaking],
+        concern_entries: %w[ចូលចិត្តធ្វើការជាមួយមនុស្ស អត់ធ្មត់ ពូកែសម្របសម្រួល មានទំនួលខុសត្រូវ មានទំនាក់ទំនងល្អជាមួយនឹងក្រុមការងារ],
+      }
+    ]
+
     def self.load(file, options = {})
       path = File.expand_path(csv_path + "#{file}.csv")
       csv = CSV.parse(File.read(path), headers: true)
@@ -28,50 +55,17 @@ module Sample
 
     def self.assign_characteristic
       arr = []
-      characteristics = [
-        {
-          id: nil,
-          title: "បុគ្គលិកលក្ខណៈបុគ្គលបែប វិទ្យាសាស្រ្ត",
-          logoName: 'science',
-          career_title: 'មុខរបរ ឬការងារ ក្នុងវិស័យវិទ្យាសាស្ត្រ',
-          concern_subjects: %w[math sciencePhysics scienceChemistry scienceBiology english softSkillBrave softSkillProblemSolving softSkillPublicSpeaking],
-          concern_entries: ['ស្រាវជ្រាវ', 'មានចម្ងល់ជារឿយ', 'គិតស៊ីជំរៅ  និងមានហេតុផល', 'ប្រាកដប្រជា', 'មហិច្ឆតា', 'មានទំនួលខុសត្រូវ', 'មានភាពជាអ្នកដឹកនាំ និងគ្រប់គ្រង'],
-        },
-        {
-          id: nil,
-          title: "បុគ្គលិកលក្ខណៈបុគ្គលបែប បច្ចេកទេស",
-          logoName: 'technical',
-          career_title: 'មុខរបរ ឬការងារ ក្នុងវិស័យបច្ចេកទេស',
-          concern_subjects: %w[math sciencePhysics english softSkillBrave softSkillProblemSolving softSkillPublicSpeaking],
-          concern_entries: ['មានគំនិតច្នៃប្រឌិត', 'មានទំនុកចិត្ត', 'ឆ្លាត', 'មានឆន្ទៈ', 'មានផែនការ និងគៅដៅច្បាស់លាស់'],
-        },
-        {
-          id: nil,
-          title: "បុគ្គលិកលក្ខណៈបុគ្គល បែបសង្គម",
-          logoName: 'social',
-          career_title: 'មុខរបរ ឬការងារ ក្នុងវិស័យសង្គម',
-          concern_subjects: %w[khmerReading khmerWriting socialStudyGeography socialStudyEthicsAndCitizenship english softSkillCommunication softSkillBrave softSkillTeamwork softSkillPublicSpeaking],
-          concern_entries: %w[ចូលចិត្តធ្វើការជាមួយមនុស្ស អត់ធ្មត់ ពូកែសម្របសម្រួល មានទំនួលខុសត្រូវ មានទំនាក់ទំនងល្អជាមួយនឹងក្រុមការងារ],
-        }
-      ];
 
-      characteristics.each do |char|
+      CHARACTERISTICS.each do |char|
         characteristic = Characteristic.where(title: char[:title]).first
         char[:id] = characteristic.id
         char[:entries] = characteristic.entries.pluck(:name)
         char[:recommendation] = characteristic.description
         char[:careers] = []
         characteristic.careers.each do |career|
-          char[:careers].push(
-            {
-              id: career.id,
-              name: career.name,
-              description: career.description,
-              places_for_work: career.places_for_work,
-              unknown_schools: career.unknown_schools,
-              schools: career.schools.pluck(:id)
-            })
+          char[:careers].push(build_career(career))
         end
+
         arr.push(char)
       end;
 
@@ -94,18 +88,21 @@ module Sample
       }
 
       vocational.careers.each do |career|
-        obj[:careers].push(
-          {
-            id: career.id,
-            name: career.name,
-            description: career.description,
-            places_for_work: career.places_for_work,
-            unknown_schools: career.unknown_schools,
-            schools: career.schools.pluck(:id)
-          })
+        obj[:careers].push(build_career(career))
       end
 
       obj
+    end
+
+    def self.build_career(career)
+      {
+        id: career.id,
+        name: career.name,
+        description: career.description,
+        places_for_work: career.places_for_work,
+        unknown_schools: career.unknown_schools,
+        schools: career.schools.pluck(:id)
+      }
     end
 
     def self.assign_career(row, options)

@@ -37,7 +37,6 @@ module Sample
             { name: department.name.gsub("<U+200B>", ''), majors: department.majors.collect(&:name) }
           }
         }
-
         schools.push(skool)
       end
 

@@ -5,57 +5,28 @@ require_relative 'base'
 module Sample
   class Location < Sample::Base
     def self.export
-      self.export_provinces
-      self.export_districts
-      self.export_communes
+      export_file('provinces', Pumi::Province.all)
+      export_file('districts', Pumi::District.all, 'province_id')
+      export_file('communes', Pumi::Commune.all, 'district_id')
     end
 
-    def self.export_provinces
-      data = []
-      Pumi::Province.all.each do |record|
-        obj = {
-          code: record.id,
-          label: record.name_km,
-          name_en: record.name_en,
-          parent_code: nil
-        }
+    private_class_method
 
-        data.push(obj)
+    def self.export_file(file_name, collection, parent_method=nil)
+      contents = []
+
+      collection.each do |record|
+        contents.push(
+          {
+            code: record.id,
+            label: record.name_km,
+            name_en: record.name_en,
+            parent_code: (record.send(parent_method) if parent_method.present?)
+          }
+        )
       end
 
-      write_to_file(data, 'provinces')
-    end
-
-    def self.export_districts
-      data = []
-      Pumi::District.all.each do |record|
-        obj = {
-          code: record.id,
-          label: record.name_km,
-          name_en: record.name_en,
-          parent_code: record.province_id
-        }
-
-        data.push(obj)
-      end
-
-      write_to_file(data, 'districts')
-    end
-
-    def self.export_communes
-      data = []
-      Pumi::Commune.all.each do |record|
-        obj = {
-          code: record.id,
-          label: record.name_km,
-          name_en: record.name_en,
-          parent_code: record.district_id
-        }
-
-        data.push(obj)
-      end
-
-      write_to_file(data, 'communes')
+      write_to_file(contents, file_name)
     end
   end
 end
