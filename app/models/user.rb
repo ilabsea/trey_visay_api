@@ -19,6 +19,7 @@
 #  high_school_code :string(255)
 #  province_code    :string(255)
 #  district_code    :string(255)
+#  commune_code     :string(255)
 #
 
 require 'csv'
@@ -37,7 +38,11 @@ class User < ApplicationRecord
   def address
     return nil if high_school_code.blank?
     district = high_school.location
-    "#{district.name_km} #{district.province.name_km}"
+    "#{commune.try(:name_km)} #{district.name_km} #{district.province.name_km}"
+  end
+
+  def commune
+    Pumi::Commune.find_by_id(commune_code)
   end
 
   def district
