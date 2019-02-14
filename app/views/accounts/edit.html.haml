@@ -1,4 +1,4 @@
-= render 'shared/side_nav'
+= render partial: 'shared/side_nav', locals: {title: 'កែតម្រូវគណនេយ្យ'}
 .container
   %br
   %form.form-horizontal{"accept-charset" =>"UTF-8", "action" => "/accounts/#{@account.id}", "method" => "POST"}
@@ -23,17 +23,7 @@
               - else
                 %option{}
                   = role
-      .form-group
-        %label.col-md-4.control-label{:for => "Citta"} សាលា
-        .col-md-4
-          %select.col-md-4.form-control{:title => "សាលា", :name => "account[schools]"}
-            - User.all_schools.each do |school|
-              -if school == @account.schools[0]
-                %option{selected: "selected"}
-                  = school[:name]
-              -else
-                %option
-                  = school[:name]
+
       / Button
       .form-group
         %label.col-md-4.control-label{:for => "Invio"}

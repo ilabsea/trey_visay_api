@@ -1,4 +1,4 @@
-= render 'shared/side_nav'
+= render partial: 'shared/side_nav', locals: {title: 'គណនេយ្យ'}
 .main
   %br
   %center
@@ -21,9 +21,9 @@
         %tr
           %td
             = link_to account.id, edit_account_path(account.id)
-          %td 
+          %td
             = link_to account.email, edit_account_path(account.id)
-          %td 
+          %td
             = account.role
           %td
             - if account.is_counsellor and account.schools
