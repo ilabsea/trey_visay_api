@@ -5,10 +5,7 @@ class Api::V1::UsersController < ApiController
     params['data'] = JSON.parse(params['data'])
     @user = User.find_by_uuid(params['data']['uuid'])
     user_params = filter_params
-    if user_params[:high_school_id]
-      user_params[:school_name] = User.school_name(user_params[:high_school_id])
-      user_params.delete :high_school_id
-    end
+
     if @user
       @user.update_attributes(user_params)
       @user.photo = params[:photo]
@@ -34,7 +31,7 @@ class Api::V1::UsersController < ApiController
       :mother_name, :mother_occupation, :guidance, :parent_contact_number,
       :number_of_family_member, :number_of_sisters, :number_of_brothers, :is_divorce,
       :is_disable, :is_domestic_violence, :is_smoking, :is_alcoholic, :is_drug,
-      :house_type, :collective_income, :uuid, :photo, :high_school_id
+      :house_type, :collective_income, :uuid, :photo, :high_school_code
     )
   end
 end

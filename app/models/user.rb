@@ -1,42 +1,22 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: users
 #
-#  id                      :integer          not null, primary key
-#  uuid                    :string(255)
-#  full_name               :string(255)      not null
-#  password                :string(255)      not null
-#  username                :string(255)      not null
-#  sex                     :string(255)
-#  date_of_birth           :date
-#  phone_number            :string(255)
-#  nationality             :string(255)
-#  school_name             :string(255)      not null
-#  grade                   :string(255)
-#  address                 :string(255)
-#  father_name             :string(255)
-#  father_occupation       :string(255)
-#  mother_name             :string(255)
-#  mother_occupation       :string(255)
-#  guidance                :string(255)
-#  parent_contact_number   :string(255)
-#  number_of_family_member :integer
-#  number_of_sisters       :integer
-#  number_of_brothers      :integer
-#  is_divorce              :boolean
-#  is_disable              :boolean
-#  is_domestic_violence    :boolean
-#  is_smoking              :boolean
-#  is_alcoholic            :boolean
-#  is_drug                 :boolean
-#  house_type              :string(255)
-#  collective_income       :string(255)
-#  created_at              :datetime         not null
-#  updated_at              :datetime         not null
-#  photo                   :string(255)
-#  high_school_code        :string(255)
+#  id               :integer          not null, primary key
+#  uuid             :string(255)
+#  full_name        :string(255)      not null
+#  password         :string(255)      not null
+#  username         :string(255)      not null
+#  sex              :string(255)
+#  date_of_birth    :date
+#  phone_number     :string(255)
+#  school_name      :string(255)
+#  grade            :string(255)
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  photo            :string(255)
+#  high_school_code :string(255)
 #
 
 require 'csv'
@@ -46,14 +26,17 @@ class User < ApplicationRecord
 
   GRADES = %w[9 10 11 12 ផ្សេងៗ].freeze
 
-  HOUSE_TYPES = %w[ផ្ទះឈើ ផ្ទះឈើលើថ្មក្រោម ផ្ទះថ្ម ផ្ទះស័ង្កសី ផ្ទះស្លឹក].freeze
-
-  belongs_to :high_school, foreign_key: :high_school_code
+  belongs_to :high_school, foreign_key: :high_school_code, optional: true
   has_many :games
   has_many :personal_understandings, through: :games
 
   validates :grade, inclusion: { in: GRADES }, allow_nil: true
-  validates :house_type, inclusion: { in: HOUSE_TYPES }, allow_nil: true
+
+  def address
+    return nil if high_school_code.blank?
+    district = high_school.location
+    "#{district.name_km} #{district.province.name_km}"
+  end
 
   def self.filter(params)
     relation = all
