@@ -72,4 +72,15 @@ class User < ApplicationRecord
     relation = relation.where(grade: params[:grade]) if params[:grade].present?
     relation
   end
+
+  def self.all_schools
+    file = File.join(Rails.root, 'public', 'school.csv')
+    csv_text = File.read(file)
+    csv = CSV.parse(csv_text, headers: true)
+    schools = []
+    csv.each do |row|
+      schools.push(id: row[0], name: row[1])
+    end
+    schools
+  end
 end

@@ -31,6 +31,14 @@
               %option
                 = role
 
+      .form-group
+        %label.col-md-4.control-label{:for => "Citta"} សាលា
+        .col-md-4
+          %select.col-md-4.form-control{:title => "សាលា", :name => "account[schools]"}
+            - User.all_schools.each do |school|
+              %option
+                = school[:name]
+
       / Button
       .form-group
         %label.col-md-4.control-label{:for => "Invio"}
