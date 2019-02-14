@@ -20,5 +20,7 @@ class ChangeFieldsInUsers < ActiveRecord::Migration[5.1]
     remove_column(:users, :is_drug)
     remove_column(:users, :house_type)
     remove_column(:users, :collective_income)
+    add_column(:users, :province_code, :string, null: true)
+    add_column(:users, :district_code, :string, null: true)
   end
 end

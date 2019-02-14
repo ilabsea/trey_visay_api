@@ -17,6 +17,8 @@
 #  updated_at       :datetime         not null
 #  photo            :string(255)
 #  high_school_code :string(255)
+#  province_code    :string(255)
+#  district_code    :string(255)
 #
 
 require 'csv'
@@ -38,35 +40,36 @@ class User < ApplicationRecord
     "#{district.name_km} #{district.province.name_km}"
   end
 
+  def district
+    Pumi::District.find_by_id(district_code)
+  end
+
+  def province
+    Pumi::Province.find_by_id(province_code)
+  end
+
+  def high_school_label
+    return nil if high_school_code.blank?
+
+    "#{province.name_km} > #{district.name_km} > #{high_school.name_km}"
+  end
+
+  def self.grades
+    [
+      { value: 9, label: 9},
+      { value: 10, label: 10},
+      { value: 11, label: 11},
+      { value: 12, label: 12},
+      { value: 'other', label: 'ផ្សេងៗ'}
+    ]
+  end
+
   def self.filter(params)
     relation = all
-    relation = relation.where(school_name: school_name(params[:school_id])) if params[:school_id].present?
+    relation = relation.where(province_code: params[:province_code]) if params[:province_code].present?
+    relation = relation.where(district_code: params[:district_code]) if params[:district_code].present?
+    relation = relation.where(high_school_code: params[:high_school_code]) if params[:high_school_code].present?
     relation = relation.where(grade: params[:grade]) if params[:grade].present?
     relation
-  end
-
-  def self.all_schools
-    file = File.join(Rails.root, 'public', 'school.csv')
-    csv_text = File.read(file)
-    csv = CSV.parse(csv_text, headers: true)
-    schools = []
-    csv.each do |row|
-      schools.push(id: row[0], name: row[1])
-    end
-    schools
-  end
-
-  def self.school_name(id)
-    all_schools.each do |school|
-      return school[:name] if school[:id].to_s == id.to_s
-    end
-  end
-
-  def self.all_schools_name
-    names = []
-    all_schools.each do |school|
-      names.push school[:name]
-    end
-    names
   end
 end

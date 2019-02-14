@@ -10,10 +10,12 @@ Rails.application.routes.draw do
   resources :accounts
   namespace :api do
     namespace :v1 do
-      match 'high_schools' => 'users#high_schools', :via => :get
       resources :users, only: [:create]
       resources :schools, :only => [:index, :create]
       resources :games, only: [:index, :create]
+      resources :high_schools, only: [:index] do
+        get :grades, on: :collection
+      end
       devise_scope :account do
         post '/accounts/sign_in' => 'sessions#create'
         post '/accounts/sign_out' => 'sessions#destroy'

@@ -191,6 +191,8 @@ ActiveRecord::Schema.define(version: 20190213093837) do
     t.datetime "updated_at", null: false
     t.string "photo"
     t.string "high_school_code"
+    t.string "province_code"
+    t.string "district_code"
   end
 
   create_table "vocationals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

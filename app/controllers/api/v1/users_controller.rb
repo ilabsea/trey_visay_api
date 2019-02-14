@@ -18,10 +18,6 @@ class Api::V1::UsersController < ApiController
     end
   end
 
-  def high_schools
-    render json: User.all_schools
-  end
-
   private
 
   def filter_params
@@ -31,7 +27,7 @@ class Api::V1::UsersController < ApiController
       :mother_name, :mother_occupation, :guidance, :parent_contact_number,
       :number_of_family_member, :number_of_sisters, :number_of_brothers, :is_divorce,
       :is_disable, :is_domestic_violence, :is_smoking, :is_alcoholic, :is_drug,
-      :house_type, :collective_income, :uuid, :photo, :high_school_code
+      :house_type, :collective_income, :uuid, :photo, :high_school_code, :province_code, :district_code
     )
   end
 end
