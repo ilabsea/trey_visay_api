@@ -14,9 +14,10 @@ module Sample
 
           name_km = row[2]
           location_code = row[3]
-          code = build_school_code(location_code)
+          code = row[4]
 
-          ::HighSchool.create(code: code, name_km: name_km, location_code: location_code)
+          school = ::HighSchool.find_or_initialize_by(code: code)
+          school.update_attributes(name_km: name_km, location_code: location_code)
         end
       end
 
@@ -37,14 +38,6 @@ module Sample
       end
 
       write_to_file(schools, 'highSchools')
-    end
-
-    private_class_method
-
-    def self.build_school_code(location_code)
-      code = ::HighSchool.where(location_code: location_code).count + 1
-      code = "#{location_code}#{format('%03d', code)}"
-      code
     end
   end
 end
