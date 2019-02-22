@@ -31,6 +31,12 @@
               %span.glyphicon.glyphicon-folder-open
               អ្នកប្រើប្រាស់
 
+          %li{class: params[:controller] == 'abouts' ? 'active' : ''}
+            %a{:href => "/about"}
+              %span.glyphicon.glyphicon-info-sign
+              អំពីកម្មវិធី
+
+
           %li
             %a{:href => "#{destroy_account_session_path}", "data-method" => "delete", :rel => "nofollow"}
               %span.glyphicon.glyphicon-log-out

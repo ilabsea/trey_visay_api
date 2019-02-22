@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :users do
   	resources :games
   end
+  resource :about, only: [:show]
   resources :accounts
   namespace :api do
     namespace :v1 do
