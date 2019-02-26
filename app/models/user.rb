@@ -65,7 +65,7 @@ class User < ApplicationRecord
       { value: 10, label: 10},
       { value: 11, label: 11},
       { value: 12, label: 12},
-      { value: 'other', label: 'ផ្សេងៗ'}
+      { value: 'ផ្សេងៗ', label: 'ផ្សេងៗ'}
     ]
   end
 
