@@ -97,6 +97,7 @@ module Sample
     def self.build_career(career)
       {
         id: career.id,
+        code: career.code,
         name: career.name,
         description: career.description,
         places_for_work: career.places_for_work,
@@ -115,6 +116,7 @@ module Sample
       end
       @career = group.careers.create(
         name: row['name'],
+        code: row['code'],
         description: row['description'],
         places_for_work: row['places_for_work']
       )

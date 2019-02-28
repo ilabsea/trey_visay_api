@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20190411072615) do
     t.text "unknown_schools"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "code"
     t.index ["categorizable_type", "categorizable_id"], name: "index_careers_on_categorizable_type_and_categorizable_id"
   end
 
