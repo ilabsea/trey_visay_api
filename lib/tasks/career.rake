@@ -7,6 +7,15 @@ namespace :career do
     add_value_to_code('career_vocational.csv')
   end
 
+  desc "create or update careers"
+  task :load => :environment do
+    options = {}
+    Sample::Career.load('career_science', options.merge({category: "បុគ្គលិកលក្ខណៈបុគ្គលបែប វិទ្យាសាស្រ្ត"}))
+    Sample::Career.load('career_technical', options.merge({category: "បុគ្គលិកលក្ខណៈបុគ្គលបែប បច្ចេកទេស"}))
+    Sample::Career.load('career_social', options.merge({category: "បុគ្គលិកលក្ខណៈបុគ្គល បែបសង្គម"}))
+    Sample::Career.load('career_vocational', options.merge({group: 'Vocational', category: "វិជ្ជាជីវៈ"}))
+  end
+
   def add_value_to_code file
     csv_path = Pathname.new(File.join(Dir.pwd, 'db', 'csv'));
     path = File.expand_path(csv_path + file)
@@ -23,5 +32,7 @@ namespace :career do
       end
     end
   end
+
+
 
 end

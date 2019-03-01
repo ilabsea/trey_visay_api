@@ -114,12 +114,14 @@ module Sample
       if options[:group] == 'Vocational'
         group = Vocational.where(title: options[:category]).first
       end
-      @career = group.careers.create(
+      @career = group.careers.find_or_initialize_by(code: row['code'].strip);
+
+      @career.update_attributes!(
         name: row['name'],
-        code: row['code'],
         description: row['description'],
         places_for_work: row['places_for_work']
       )
+
     end
 
     def self.assign_school(row)

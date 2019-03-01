@@ -1,3 +1,5 @@
+require 'sample'
+
 namespace :university do
   desc "add value code to university"
   task :migrate_code => :environment do
@@ -17,5 +19,10 @@ namespace :university do
         end
       end
     end
+  end
+
+  desc "create or update university"
+  task :load => :environment do
+    Sample::University.load('university')
   end
 end
