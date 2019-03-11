@@ -32,6 +32,7 @@ class User < ApplicationRecord
   belongs_to :high_school, foreign_key: :high_school_code, optional: true
   has_many :games
   has_many :personal_understandings, through: :games
+  has_many :personality_tests
 
   validates :grade, inclusion: { in: GRADES }, allow_nil: true
 
