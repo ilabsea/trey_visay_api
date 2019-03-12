@@ -12,7 +12,7 @@ module Sample
         sheet.parse.each do |row|
           code = row[0]
           name_km = row[1]
-          category = sheet_name
+          category = sheet_name.downcase
 
           personality = ::Personality.find_or_initialize_by(code: code)
           personality.update_attributes(name_km: name_km, category: category)

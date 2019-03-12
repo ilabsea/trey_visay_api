@@ -15,16 +15,16 @@
 #
 
 class Personality < ApplicationRecord
-  CATEGORIES = %w(Realistic Investigative Artistic Social Enterprising Conventional)
+  CATEGORIES = %w(realistic investigative artistic social enterprising conventional)
 
-  has_many :personality_selections, foreign_key: :personality_code
+  has_many :personality_selections, foreign_key: :personality_code, dependent: :destroy
   validates :name_km, presence: true
   validates :category, presence: true, inclusion: { in: CATEGORIES }
 
-  scope :realistics, -> { where(category: 'Realistic') }
-  scope :investigatives, -> { where(category: 'Investigative') }
-  scope :artistics, -> { where(category: 'Artistic') }
-  scope :socials, -> { where(category: 'Social') }
-  scope :enterprisings, -> { where(category: 'Enterprising') }
-  scope :conventionals, -> { where(category: 'Conventional') }
+  scope :realistic, -> { where(category: 'realistic') }
+  scope :investigative, -> { where(category: 'investigative') }
+  scope :artistic, -> { where(category: 'artistic') }
+  scope :social, -> { where(category: 'social') }
+  scope :enterprising, -> { where(category: 'enterprising') }
+  scope :conventional, -> { where(category: 'conventional') }
 end

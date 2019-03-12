@@ -1,0 +1,30 @@
+#personality_tests-show {
+  .header-wrapper {
+    display: flex;
+  }
+
+  .header-title {
+    flex-grow: 1;
+    font-weight: bold;
+  }
+
+  .result-wrapper {
+    display: flex;
+    margin-top: 20px;
+  }
+
+  .description-wrapper {
+    padding: 0 16px;
+    width: 50%;
+  }
+
+  .test-result {
+    position:relative;
+    width: 50%;
+  }
+
+  .list-wrapper {
+    display: flex;
+    margin-top: 10px;
+  }
+}
