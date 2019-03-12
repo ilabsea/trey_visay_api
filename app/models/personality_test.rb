@@ -9,6 +9,7 @@
 #
 
 class PersonalityTest < ApplicationRecord
-  has_many :personality_selections
   belongs_to :user
+  has_many :personality_selections
+  has_many :personalities, through: :personality_selections
 end

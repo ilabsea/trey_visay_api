@@ -10,6 +10,6 @@
 #
 
 class PersonalitySelection < ApplicationRecord
-  belongs_to :personality
+  belongs_to :personality, foreign_key: :personality_code
   belongs_to :personality_test
 end

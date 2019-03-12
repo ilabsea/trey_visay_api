@@ -4,8 +4,10 @@ Rails.application.routes.draw do
   root 'users#index'
 
   resources :users do
-  	resources :games
+  	resources :games, only: [:index, :show]
+    resources :personality_tests, only: [:index, :show]
   end
+
   resource :about, only: [:show]
   resources :accounts
   namespace :api do
@@ -14,6 +16,7 @@ Rails.application.routes.draw do
       resources :users, only: [:create]
       resources :schools, :only => [:index, :create]
       resources :games, only: [:index, :create]
+      resources :personality_tests, only: [:create]
       resources :high_schools, only: [:index] do
         get :grades, on: :collection
       end
