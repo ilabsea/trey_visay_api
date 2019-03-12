@@ -23,5 +23,7 @@ class Sample::TreyVisay
     Sample::Career.load('career_vocational', options.merge({group: 'Vocational', category: "វិជ្ជាជីវៈ"}))
 
     Sample::HighSchool.load('high_school', options)
+
+    Sample::Personality.load('personality', options)
   end
 end
