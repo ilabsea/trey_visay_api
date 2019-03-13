@@ -2,16 +2,10 @@
 
 const initChart = () => {
   let category = $('.test-result').data('category');
-  let labels = [];
-  let data = [];
-
-  for (var key in category) {
-    labels.push(key);
-    data.push(category[key]);
-  }
-
-  var ctx = document.getElementById("myChart").getContext('2d');
-  var myChart = new Chart(ctx, {
+  let labels = category.map(a => a.name);
+  let data = category.map(a => a.count);
+  let ctx = document.getElementById("myChart").getContext('2d');
+  let myChart = new Chart(ctx, {
     type: 'bar',
     data: {
       labels: labels,
