@@ -5,7 +5,7 @@ namespace :university do
   task :migrate_code => :environment do
     csv_path = Pathname.new(File.join(Dir.pwd, 'db', 'csv'));
 
-    path = File.expand_path(csv_path + "university.xlsx")
+    path = File.expand_path(csv_path + "id_to_code_university.xlsx")
     xlsx = Roo::Spreadsheet.open(path)
 
     xlsx.each_with_pagename do |name, sheet|

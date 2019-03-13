@@ -102,7 +102,7 @@ module Sample
         description: career.description,
         places_for_work: career.places_for_work,
         unknown_schools: career.unknown_schools,
-        schools: career.schools.pluck(:id)
+        schools: career.schools.pluck(:code)
       }
     end
 
@@ -125,15 +125,15 @@ module Sample
     end
 
     def self.assign_school(row)
-      return if row['school_name'].blank?
-      id = row['school_name'].split('.').first
-      school = School.where(id: id).first
+      return if row['school_code'].blank?
+      school_code = row['school_code'].strip
+      school = School.where(code: school_code).first
 
       if school.present?
         @career.schools << school
       else
         arr = @career.unknown_schools.to_s.split(';')
-        arr.push(row['school_name'].strip)
+        arr.push(school_code)
         @career.unknown_schools = arr.join('; ')
         @career.save
       end

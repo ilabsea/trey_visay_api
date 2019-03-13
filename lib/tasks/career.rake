@@ -24,7 +24,7 @@ namespace :career do
     csv.each do |csv_row|
       row = csv_row.to_hash
       unless row['name'].nil?
-        code = row['code']
+        code = row['code'].strip
         name = row['name'].strip
         career = Career.find_by(name: name)
         career.code = code
