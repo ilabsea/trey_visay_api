@@ -1,8 +1,12 @@
 "use strict";
 
+function toTitleCase(str) {
+  return str.replace(/^[a-z]/, function (x) {return x.toUpperCase()})
+}
+
 const initChart = () => {
   let category = $('.test-result').data('category');
-  let labels = category.map(a => a.name);
+  let labels = category.map(a => toTitleCase(a.name));
   let data = category.map(a => a.count);
   let ctx = document.getElementById("myChart").getContext('2d');
   let myChart = new Chart(ctx, {
