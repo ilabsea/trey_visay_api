@@ -5,8 +5,11 @@ class Api::V1::UsersController < ApiController
     params['data'] = JSON.parse(params['data'])
     @user = User.find_by_uuid(params['data']['uuid'])
     user_params = filter_params
-
-    if @user
+    if user_params[:high_school_id]
+      user_params[:school_name] = User.school_name(user_params[:high_school_id])
+      user_params.delete :high_school_id
+    end
+    if @users
       @user.update_attributes(user_params)
       @user.photo = params[:photo]
       @user.save!
@@ -16,6 +19,18 @@ class Api::V1::UsersController < ApiController
       @user.save!
       render json: @user, status: :created
     end
+  end
+
+  def me
+    authenticate_or_request_with_http_basic do |username, password|
+      if username == ENV['HTTP_BASIC_USER'] && password == ENV['HTTP_BASIC_PASSWORD']
+        render json: { success: true }
+      end
+    end
+  end
+
+  def high_schools
+    render json: User.all_schools
   end
 
   private

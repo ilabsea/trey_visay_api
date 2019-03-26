@@ -2,7 +2,7 @@
 
 class ApiController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :authenticate_api_user!, except: [:show]
+  before_action :http_basic_authentication, except: [:show]
 
   around_action :rescue_with_check_api_docs
 

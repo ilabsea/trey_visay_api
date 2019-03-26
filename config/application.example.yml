@@ -1,3 +1,7 @@
+default: &default
+  HTTP_BASIC_USER: 'localhost'
+  HTTP_BASIC_PASSWORD: '123'
+
 development:
   TREY-VISAY-API_DATABASE_USERNAME: 'localhost'
   TREY-VISAY-API_DATABASE_PASSWORD: '123'
