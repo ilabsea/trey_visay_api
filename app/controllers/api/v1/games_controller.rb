@@ -14,8 +14,8 @@ class Api::V1::GamesController < ApiController
     game_params[:user_id] = user.id
     @game = Game.new(game_params)
     @game.audio = params[:audio]
-    if @game.save!
-
+    begin
+      @game.save!
       params['data']['personal_understandings'].each do |personal_understandings|
         ps = PersonalUnderstanding.new(generate_personal_understanding_params(personal_understandings))
         ps['game_id'] = @game.id
@@ -38,8 +38,11 @@ class Api::V1::GamesController < ApiController
         @game.entries << Entry.find_by(name: entry)
         @game.save!
       end
+      render json: @game, status: :created
+    rescue
+      log = Log.new(game: params['data'])
+      log.save!
     end
-    render json: @game, status: :created
   end
 
   private

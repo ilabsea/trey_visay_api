@@ -3,21 +3,21 @@
 class Api::V1::UsersController < ApiController
   def create
     params['data'] = JSON.parse(params['data'])
-    @user = User.find_by_uuid(params['data']['uuid'])
+    @user = User.find_or_initialize_by(uuid: params['data']['uuid'])
     user_params = filter_params
     if user_params[:high_school_id]
       user_params[:school_name] = User.school_name(user_params[:high_school_id])
       user_params.delete :high_school_id
     end
-    if @users
-      @user.update_attributes(user_params)
-      @user.photo = params[:photo]
-      @user.save!
-      render json: @user, status: :ok
+
+    @user.photo = params[:photo] if params[:photo].present?
+
+    if @user.update_attributes(user_params)
+      render json: { success: true }
     else
-      @user = User.new(user_params)
-      @user.save!
-      render json: @user, status: :created
+      log = Log.new(user: params['data'])
+      log.save!
+      render json: { error: @user.errors }
     end
   end
 
