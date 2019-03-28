@@ -38,5 +38,10 @@ if Rails.env.development? || Rails.env.test?
     task export_locations: :environment do
       Sample::Location.export
     end
+
+    desc 'Export personalities to json'
+    task export_personality: :environment do
+      Sample::Personality.export
+    end
   end
 end
