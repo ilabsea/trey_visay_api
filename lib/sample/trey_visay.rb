@@ -25,5 +25,7 @@ class Sample::TreyVisay
     Sample::HighSchool.load('high_school', options)
 
     Sample::Personality.load('personality', options)
+    Sample::PersonalityCategory.load('personality_category', options)
+    Sample::PersonalityMajor.load('personality_major', options)
   end
 end

@@ -43,5 +43,15 @@ if Rails.env.development? || Rails.env.test?
     task export_personality: :environment do
       Sample::Personality.export
     end
+
+    desc 'Export personality categories to json'
+    task export_personality_category: :environment do
+      Sample::PersonalityCategory.export
+    end
+
+    desc 'Export personality majors to json'
+    task export_personality_major: :environment do
+      Sample::PersonalityMajor.export
+    end
   end
 end

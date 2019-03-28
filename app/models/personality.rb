@@ -20,11 +20,4 @@ class Personality < ApplicationRecord
   has_many :personality_selections, foreign_key: :personality_code, dependent: :destroy
   validates :name_km, presence: true
   validates :category, presence: true, inclusion: { in: CATEGORIES }
-
-  scope :realistic, -> { where(category: 'realistic') }
-  scope :investigative, -> { where(category: 'investigative') }
-  scope :artistic, -> { where(category: 'artistic') }
-  scope :social, -> { where(category: 'social') }
-  scope :enterprising, -> { where(category: 'enterprising') }
-  scope :conventional, -> { where(category: 'conventional') }
 end
