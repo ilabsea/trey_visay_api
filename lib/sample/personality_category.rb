@@ -13,8 +13,8 @@ module Sample
           code = row[0]
           name_en = row[1]
           name_km = row[2]
-          group = row[3]
-          description = row[4]
+          description = row[3].to_s.strip.split(';').map{ |condition| condition.strip }.join(';')
+          group = row[4].downcase
 
           category = ::PersonalityCategory.find_or_initialize_by(code: code)
           category.update_attributes(name_en: name_en, name_km: name_km, group: group, description: description)

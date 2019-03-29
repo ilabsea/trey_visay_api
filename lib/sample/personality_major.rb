@@ -11,13 +11,19 @@ module Sample
       xlsx.each_with_pagename do |sheet_name, sheet|
         sheet.parse.each do |row|
           code = row[0]
-          name_km = row[1]
-          group = sheet_name.downcase
-          description = row[2]
-          conditions = row[3]
+          name_en = row[1]
+          name_km = row[2]
+          description = row[3]
+          conditions = row[4].to_s.strip.split(';').map{ |condition| condition.strip }.join(';')
+          group = row[5].downcase
 
           major = ::PersonalityMajor.find_or_initialize_by(code: code)
-          major.update_attributes(name_km: name_km, group: group, description: description, conditions: conditions)
+          major.update_attributes(
+            name_en: name_en,
+            name_km: name_km,
+            group: group,
+            description: description,
+            conditions: conditions)
         end
       end
 
@@ -29,10 +35,11 @@ module Sample
       ::PersonalityMajor.find_each do |record|
         obj = {
           code: record.code,
+          name_en: record.name_en,
           name_km: record.name_km,
-          group: record.group,
           description: record.description,
-          conditions: record.conditions
+          conditions: record.conditions,
+          group: record.group
         }
 
         data.push(obj)

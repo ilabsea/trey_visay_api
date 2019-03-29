@@ -172,6 +172,7 @@ ActiveRecord::Schema.define(version: 20190328031528) do
   create_table "personality_majors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "code", limit: 36
     t.string "string", limit: 36
+    t.string "name_en"
     t.string "name_km"
     t.string "group"
     t.text "description"
