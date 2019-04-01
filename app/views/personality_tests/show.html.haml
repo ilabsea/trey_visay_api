@@ -43,5 +43,3 @@
 - @categories.each do |category|
   - unless category[:count].zero?
     = render partial: 'modal', locals: {css_id: category[:name], title: t(category[:name]), entries: @test.personalities.select { |personality| personality.category ==  category[:name]}}
-
-

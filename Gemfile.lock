@@ -366,6 +366,7 @@ DEPENDENCIES
   rspec (= 3.7.0)
   rspec-rails (~> 3.6)
   rubocop (~> 0.52.1)
+  rubyzip (~> 1.2.2)
   sass-rails (~> 5.0)
   selenium-webdriver
   shoulda-matchers (~> 3.1.2)
