@@ -10,7 +10,7 @@ module Sample
 
       xlsx.each_with_pagename do |_name, sheet|
         sheet.parse.each_with_index do |row, index|
-          next if index == 0
+          next if index.zero?
 
           name_km = row[2]
           location_code = row[3]

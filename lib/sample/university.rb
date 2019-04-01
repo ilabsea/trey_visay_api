@@ -46,8 +46,8 @@ module Sample
 
       ids = Major.where(department_id: nil).pluck(:school_id).uniq
       School.where(id: ids).includes(:majors).each do |school|
-        sk = schools.find { |sk| sk[:id] == school.id }
-        sk[:departments].push(name: '', majors: school.majors.pluck(:name))
+        skool = schools.find { |obj| obj[:id] == school.id }
+        skool[:departments].push(name: '', majors: school.majors.pluck(:name))
       end
 
       write_to_file(schools, 'universities')
@@ -95,13 +95,10 @@ module Sample
     # https://github.com/carrierwaveuploader/carrierwave/wiki/How-to:-%22Upload%22-from-a-local-file
     def self.assign_logo(row)
       return if row['logo_name'].blank?
-
       logo_image = images.select { |image| image.split('/').last.split('.').first == row['logo_name'] }.first
-
-      if logo_image.present?
-        @school.logo = Pathname.new(logo_image).open
-        @school.save
-      end
+      return if logo_image.nil?
+      @school.logo = Pathname.new(logo_image).open
+      @school.save
     end
 
     def self.images
