@@ -17,6 +17,6 @@ class Api::V1::PersonalityTestsController < ApiController
     user = User.find_by(uuid: params['data']['user_uuid'])
     params.require(:data).permit(
       personality_selections_attributes: [:personality_code]
-    ).merge({user_id: user.id})
+    ).merge(user_id: user.id)
   end
 end

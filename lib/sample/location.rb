@@ -12,17 +12,15 @@ module Sample
 
     private_class_method
 
-    def self.export_file(file_name, collection, parent_method=nil)
+    def self.export_file(file_name, collection, parent_method = nil)
       contents = []
 
       collection.each do |record|
         contents.push(
-          {
-            code: record.id,
-            label: record.name_km,
-            name_en: record.name_en,
-            parent_code: (record.send(parent_method) if parent_method.present?)
-          }
+          code: record.id,
+          label: record.name_km,
+          name_en: record.name_en,
+          parent_code: (record.send(parent_method) if parent_method.present?)
         )
       end
 

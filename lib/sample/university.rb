@@ -28,18 +28,18 @@ module Sample
           id: school.id,
           code: school.code,
           universityName: school.name,
-          logoName: school.logo.file && school.logo.file.filename.split('.').first || '',
-          address: school.address.to_s.gsub("<U+200B>", ''),
+          logoName: school.logo.file&.filename&.split('.')&.first || '',
+          address: school.address.to_s.gsub('<U+200B>', ''),
           province: school.province,
-          phoneNumbers: school.phone_numbers.to_s.gsub("<U+200B>", '').split(';'),
-          faxes: school.faxes.to_s.gsub("<U+200B>", '').split(';'),
-          emails: school.emails.to_s.gsub("<U+200B>", '').split(';'),
-          websiteOrFacebook: school.website_or_facebook.to_s.gsub("<U+200B>", '').split(';'),
+          phoneNumbers: school.phone_numbers.to_s.gsub('<U+200B>', '').split(';'),
+          faxes: school.faxes.to_s.gsub('<U+200B>', '').split(';'),
+          emails: school.emails.to_s.gsub('<U+200B>', '').split(';'),
+          websiteOrFacebook: school.website_or_facebook.to_s.gsub('<U+200B>', '').split(';'),
           mailbox: school.mailbox,
           category: school.category,
-          departments: school.departments.map { |department|
-            { name: department.name.gsub("<U+200B>", ''), majors: department.majors.collect(&:name) }
-          }
+          departments: school.departments.map do |department|
+            { name: department.name.gsub('<U+200B>', ''), majors: department.majors.collect(&:name) }
+          end
         }
         schools.push(skool)
       end
@@ -47,7 +47,7 @@ module Sample
       ids = Major.where(department_id: nil).pluck(:school_id).uniq
       School.where(id: ids).includes(:majors).each do |school|
         sk = schools.find { |sk| sk[:id] == school.id }
-        sk[:departments].push({ name: '', majors: school.majors.pluck(:name)})
+        sk[:departments].push(name: '', majors: school.majors.pluck(:name))
       end
 
       write_to_file(schools, 'universities')
@@ -96,16 +96,16 @@ module Sample
     def self.assign_logo(row)
       return if row['logo_name'].blank?
 
-      logo_image = images.select {|image| image.split('/').last.split('.').first == row['logo_name']}.first
+      logo_image = images.select { |image| image.split('/').last.split('.').first == row['logo_name'] }.first
 
       if logo_image.present?
-        @school.logo = Pathname.new(logo_image).open;
+        @school.logo = Pathname.new(logo_image).open
         @school.save
       end
     end
 
     def self.images
-      @images ||= Dir.glob(Rails.root.join('lib', 'assets', 'school_logos', "*"))
+      @images ||= Dir.glob(Rails.root.join('lib', 'assets', 'school_logos', '*'))
     end
 
     def self.strip_att(val)

@@ -11,7 +11,7 @@ module Sample
     end
 
     def self.write_to_file(data, filename)
-      Dir.mkdir('public/db') unless File.exists?('public/db')
+      Dir.mkdir('public/db') unless File.exist?('public/db')
       file_path = Rails.root.join('public', 'db', "#{filename}.json")
       content = JSON.pretty_generate(data)
 

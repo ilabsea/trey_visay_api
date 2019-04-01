@@ -7,29 +7,29 @@ module Sample
     CHARACTERISTICS = [
       {
         id: nil,
-        title: "បុគ្គលិកលក្ខណៈបុគ្គលបែប វិទ្យាសាស្រ្ត",
+        title: 'បុគ្គលិកលក្ខណៈបុគ្គលបែប វិទ្យាសាស្រ្ត',
         logoName: 'science',
         career_title: 'មុខរបរ ឬការងារ ក្នុងវិស័យវិទ្យាសាស្ត្រ',
         concern_subjects: %w[math sciencePhysics scienceChemistry scienceBiology english softSkillBrave softSkillProblemSolving softSkillPublicSpeaking],
-        concern_entries: ['ស្រាវជ្រាវ', 'មានចម្ងល់ជារឿយ', 'គិតស៊ីជំរៅ  និងមានហេតុផល', 'ប្រាកដប្រជា', 'មហិច្ឆតា', 'មានទំនួលខុសត្រូវ', 'មានភាពជាអ្នកដឹកនាំ និងគ្រប់គ្រង'],
+        concern_entries: ['ស្រាវជ្រាវ', 'មានចម្ងល់ជារឿយ', 'គិតស៊ីជំរៅ  និងមានហេតុផល', 'ប្រាកដប្រជា', 'មហិច្ឆតា', 'មានទំនួលខុសត្រូវ', 'មានភាពជាអ្នកដឹកនាំ និងគ្រប់គ្រង']
       },
       {
         id: nil,
-        title: "បុគ្គលិកលក្ខណៈបុគ្គលបែប បច្ចេកទេស",
+        title: 'បុគ្គលិកលក្ខណៈបុគ្គលបែប បច្ចេកទេស',
         logoName: 'technical',
         career_title: 'មុខរបរ ឬការងារ ក្នុងវិស័យបច្ចេកទេស',
         concern_subjects: %w[math sciencePhysics english softSkillBrave softSkillProblemSolving softSkillPublicSpeaking],
-        concern_entries: ['មានគំនិតច្នៃប្រឌិត', 'មានទំនុកចិត្ត', 'ឆ្លាត', 'មានឆន្ទៈ', 'មានផែនការ និងគៅដៅច្បាស់លាស់'],
+        concern_entries: ['មានគំនិតច្នៃប្រឌិត', 'មានទំនុកចិត្ត', 'ឆ្លាត', 'មានឆន្ទៈ', 'មានផែនការ និងគៅដៅច្បាស់លាស់']
       },
       {
         id: nil,
-        title: "បុគ្គលិកលក្ខណៈបុគ្គល បែបសង្គម",
+        title: 'បុគ្គលិកលក្ខណៈបុគ្គល បែបសង្គម',
         logoName: 'social',
         career_title: 'មុខរបរ ឬការងារ ក្នុងវិស័យសង្គម',
         concern_subjects: %w[khmerReading khmerWriting socialStudyGeography socialStudyEthicsAndCitizenship english softSkillCommunication softSkillBrave softSkillTeamwork softSkillPublicSpeaking],
-        concern_entries: %w[ចូលចិត្តធ្វើការជាមួយមនុស្ស អត់ធ្មត់ ពូកែសម្របសម្រួល មានទំនួលខុសត្រូវ មានទំនាក់ទំនងល្អជាមួយនឹងក្រុមការងារ],
+        concern_entries: %w[ចូលចិត្តធ្វើការជាមួយមនុស្ស អត់ធ្មត់ ពូកែសម្របសម្រួល មានទំនួលខុសត្រូវ មានទំនាក់ទំនងល្អជាមួយនឹងក្រុមការងារ]
       }
-    ]
+    ].freeze
 
     def self.load(file, options = {})
       path = File.expand_path(csv_path + "#{file}.csv")
@@ -67,14 +67,14 @@ module Sample
         end
 
         arr.push(char)
-      end;
+      end
 
       arr[0][:careers].concat(arr[1][:careers])
       arr
     end
 
     def self.assing_vocational
-      vocational = Vocational.where(title: "វិជ្ជាជីវៈ").first
+      vocational = Vocational.where(title: 'វិជ្ជាជីវៈ').first
       obj = {
         id: 4,
         title: 'វិជ្ជាជីវៈ',

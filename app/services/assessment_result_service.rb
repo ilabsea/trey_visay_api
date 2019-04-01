@@ -1,21 +1,23 @@
+# frozen_string_literal: true
+
 require 'csv'
 require 'zip_file_generator'
 
 class AssessmentResultService
   @@user_info_columns = [
     { code: 'id', name: 'លេខរៀង' },
-    { code: 'username', name: 'ឈ្មោះអ្នកប្រើប្រាស់' },
+    { code: 'username', name: 'ឈ្មោះអ្នកប្រើប្រាស់' }
   ]
 
   @@personal_understanding_columns = [
     { code: 'are_you_going_to_study_till_grade12', name: 'តើអ្នកនឹងបន្តការសិក្សារហូតដល់ថ្នាក់ទី១២ដែរឬទេ?' },
     { code: 'are_your_parents_allow_you_to_study_till_grade12', name: 'តើឪពុកម្តាយរបស់ប្អូននឹងអនុញ្ញាតឲ្យប្អូនបន្តការសិក្សរហូតដល់ថ្នាក់ទី១២ដែរឬទេ?' },
     { code: 'have_you_ever_thought_of_career', name: 'តើប្អូនធ្លាប់គិតពីការងារមួយណាដែលប្អូនចង់ធ្វើក្រោយពេលបញ្ចប់ការសិក្សាដែរឬទេ?' },
-    { code: 'career_name', name: 'តើការងារនោះជាការងារអ្វី'},
-    { code: 'how_to_reach_career_goal', name: 'តើប្អូនអាចស្វែងរកការងារបានដោយវិធីណាខ្លះ?'},
-    { code: 'does_parents_agree_with', name: 'តើឪពុកម្តាយប្អូនយល់ស្របជាមួយគំនិតរបស់ប្អូនដែរឬទេ?'},
+    { code: 'career_name', name: 'តើការងារនោះជាការងារអ្វី' },
+    { code: 'how_to_reach_career_goal', name: 'តើប្អូនអាចស្វែងរកការងារបានដោយវិធីណាខ្លះ?' },
+    { code: 'does_parents_agree_with', name: 'តើឪពុកម្តាយប្អូនយល់ស្របជាមួយគំនិតរបស់ប្អូនដែរឬទេ?' },
     { code: 'ever_talked_with_anyone_about_career', name: 'តើអ្នកធ្លាប់និយាយជាមួយនរណាម្នាក់ពីការងារអនាគត់របស់អ្នកដែរឬទេ?' },
-    { code: 'how_to_reach_job_vacancy', name: 'តើអ្នកអាចស្វែងរកការងារឬស្រាវជ្រាវរកមុខរបរតាមរយះអ្វីខ្លះ?' },
+    { code: 'how_to_reach_job_vacancy', name: 'តើអ្នកអាចស្វែងរកការងារឬស្រាវជ្រាវរកមុខរបរតាមរយះអ្វីខ្លះ?' }
   ]
 
   @@subject_columns = [
@@ -33,7 +35,7 @@ class AssessmentResultService
     { code: 'soft_skill_problem_solving', name: 'ដោះស្រាយបញ្ហា' },
     { code: 'soft_skill_brave', name: 'ក្លាហាន' },
     { code: 'soft_skill_public_speaking', name: 'ការនិយាយសាធារណៈ' },
-    { code: 'soft_skill_teamwork', name: 'ការងារក្រុម' },
+    { code: 'soft_skill_teamwork', name: 'ការងារក្រុម' }
   ]
 
   @@other_columns = [
@@ -42,7 +44,7 @@ class AssessmentResultService
     { code: 'goal_career', name: 'មុខរបរដែលអ្នកប្រើប្រាស់ជ្រើសយក' },
     { code: 'reason', name: 'ដាក់គោលដៅនិងមូលហេតុជាអក្សរ' },
     { code: 'audio', name: 'ដាក់គោលដៅនិងមូលហេតុជាសម្លេង' },
-    { code: 'created_at', name: 'ថ្ងៃធ្វើតេស្ត' },
+    { code: 'created_at', name: 'ថ្ងៃធ្វើតេស្ត' }
   ]
 
   @@personality_assessment_colums = [
@@ -51,7 +53,7 @@ class AssessmentResultService
     { code: 'artistic', name: 'សិល្បៈនិយម' },
     { code: 'social', name: 'សង្គម' },
     { code: 'enterprising', name: 'ត្រិះរិះពិចារណា' },
-    { code: 'conventional', name: 'សណ្ដាប់ធ្នាប់' },
+    { code: 'conventional', name: 'សណ្ដាប់ធ្នាប់' }
   ]
 
   def initialize(users)
@@ -66,7 +68,7 @@ class AssessmentResultService
     directoryToZip = "#{Rails.root}/tmp/assessment_result"
     outputFile = "#{Rails.root}/tmp/assessment_result.zip"
     zf = ZipFileGenerator.new(directoryToZip, outputFile)
-    zf.write()
+    zf.write
 
     File.read(outputFile)
   end
@@ -74,32 +76,28 @@ class AssessmentResultService
   private
 
   def write_file_career_assessment
-    unless File.directory?(@folder)
-      FileUtils.mkdir_p(@folder)
-    end
+    FileUtils.mkdir_p(@folder) unless File.directory?(@folder)
 
-    CSV.open("#{@folder}/career_assessment.csv", "wb") do |csv|
+    CSV.open("#{@folder}/career_assessment.csv", 'wb') do |csv|
       csv << build_columns
 
       @users.each do |user|
         user.games.each do |game|
-         csv << build_csv_record(user, game)
+          csv << build_csv_record(user, game)
         end
       end
     end
   end
 
   def write_file_personality_assessment
-    unless File.directory?(@folder)
-      FileUtils.mkdir_p(@folder)
-    end
+    FileUtils.mkdir_p(@folder) unless File.directory?(@folder)
 
-    CSV.open("#{@folder}/personality_assessment.csv", "wb") do |csv|
+    CSV.open("#{@folder}/personality_assessment.csv", 'wb') do |csv|
       csv << build_personality_test_columns
 
       @users.each do |user|
         user.personality_tests.each do |test|
-         csv << build_personality_test_csv_record(user, test)
+          csv << build_personality_test_csv_record(user, test)
         end
       end
     end

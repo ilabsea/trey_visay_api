@@ -17,10 +17,10 @@ class Sample::TreyVisay
 
     Sample::University.load('university', options)
 
-    Sample::Career.load('career_science', options.merge({category: "បុគ្គលិកលក្ខណៈបុគ្គលបែប វិទ្យាសាស្រ្ត"}))
-    Sample::Career.load('career_technical', options.merge({category: "បុគ្គលិកលក្ខណៈបុគ្គលបែប បច្ចេកទេស"}))
-    Sample::Career.load('career_social', options.merge({category: "បុគ្គលិកលក្ខណៈបុគ្គល បែបសង្គម"}))
-    Sample::Career.load('career_vocational', options.merge({group: 'Vocational', category: "វិជ្ជាជីវៈ"}))
+    Sample::Career.load('career_science', options.merge(category: 'បុគ្គលិកលក្ខណៈបុគ្គលបែប វិទ្យាសាស្រ្ត'))
+    Sample::Career.load('career_technical', options.merge(category: 'បុគ្គលិកលក្ខណៈបុគ្គលបែប បច្ចេកទេស'))
+    Sample::Career.load('career_social', options.merge(category: 'បុគ្គលិកលក្ខណៈបុគ្គល បែបសង្គម'))
+    Sample::Career.load('career_vocational', options.merge(group: 'Vocational', category: 'វិជ្ជាជីវៈ'))
 
     Sample::HighSchool.load('high_school', options)
 

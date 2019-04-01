@@ -8,13 +8,13 @@ module Sample
       path = File.expand_path(csv_path + "#{file}.xlsx")
       xlsx = Roo::Spreadsheet.open(path)
 
-      xlsx.each_with_pagename do |sheet_name, sheet|
+      xlsx.each_with_pagename do |_sheet_name, sheet|
         sheet.parse.each do |row|
           code = row[0]
           name_en = row[1]
           name_km = row[2]
           description = row[3]
-          conditions = row[4].to_s.strip.split(';').map{ |condition| condition.strip }.join(';')
+          conditions = row[4].to_s.strip.split(';').map(&:strip).join(';')
           group = row[5].downcase
 
           major = ::PersonalityMajor.find_or_initialize_by(code: code)
@@ -23,7 +23,8 @@ module Sample
             name_km: name_km,
             group: group,
             description: description,
-            conditions: conditions)
+            conditions: conditions
+          )
         end
       end
 

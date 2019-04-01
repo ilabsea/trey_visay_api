@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: personalities
@@ -15,7 +17,7 @@
 #
 
 class Personality < ApplicationRecord
-  CATEGORIES = %w(realistic investigative artistic social enterprising conventional)
+  CATEGORIES = %w[realistic investigative artistic social enterprising conventional].freeze
 
   has_many :personality_selections, foreign_key: :personality_code, dependent: :destroy
   validates :name_km, presence: true

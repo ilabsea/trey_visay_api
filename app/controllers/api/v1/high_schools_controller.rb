@@ -10,6 +10,6 @@ class Api::V1::HighSchoolsController < ApiController
   end
 
   def grades
-    render json: User::grades, status: :ok
+    render json: User.grades, status: :ok
   end
 end
