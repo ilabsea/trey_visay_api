@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       match 'me' => 'users#me', :via => :get
       resources :users, only: [:create]
       resources :schools, :only => [:index, :create]
-      resources :games, only: [:index, :create]
+      resources :games, only: [:create]
       resources :personality_tests, only: [:create]
       resources :high_schools, only: [:index] do
         get :grades, on: :collection
@@ -25,7 +25,6 @@ Rails.application.routes.draw do
         post '/accounts/sign_out' => 'sessions#destroy'
       end
     end
-
   end
 
   mount Pumi::Engine => '/pumi'

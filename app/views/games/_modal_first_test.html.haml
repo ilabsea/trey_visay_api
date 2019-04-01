@@ -65,15 +65,17 @@
                     %label.small-gray{:for => "full_name"}
                       %b
                         តើអ្នកធ្លាប់និយាយជាមួយនរណាម្នាក់ពីការងារអនាគត់របស់អ្នក ដែរឬទេ?
-                  - if personal_understanding.ever_talked_with_anyone_about_career == '[]'
-                    = render 'no_data'
-                  - else
-                    - personal_understanding.ever_talked_with_anyone_about_career.split(";").each do |name|
+                  - ever_talked_people = personal_understanding.ever_talked_with_anyone_about_career.to_s
+                  - if ever_talked_people.present?
+                    - ever_talked_people.split(";").each do |name|
                       .form-group.meddium-margin-bottom{:style => "margin-top:1rem;"}
                         %span.fi-circle-check
                           = image_tag "/images/check.png" ,:class=> "img-circular-small"
                         = name
                         .clear
+                  - else
+                    = render 'no_data'
+
           %br
           .shadow-box
             .content-box
@@ -91,22 +93,6 @@
                     - else
                       = render 'no_data'
 
-          %br
-          .shadow-box
-            .content-box
-              .title
-              .content-display{:style => "margin-top:2rem;"}
-                %form{:role => "form"}
-                  .form-group.meddium-margin-bottom
-                    %label.small-gray{:for => "full_name"}
-                      %b
-                        តើអ្នកអាចស្វែងរកការងារឬស្រាវជ្រាវរកមុខរបរតាមរយៈអ្នកណា?
-                  .form-group.meddium-margin-bottom
-                    - if answer = personal_understanding.who_to_reach_job_vacancy.presence
-                      = answer
-                      .clear
-                    - else
-                      = render 'no_data'
         %br
       .modal-footer
         %button.btn.btn-primary{"data-dismiss" => "modal", :type => "button"} Done
