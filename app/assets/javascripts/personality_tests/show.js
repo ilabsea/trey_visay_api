@@ -6,6 +6,7 @@ function toTitleCase(str) {
 
 const initChart = () => {
   let category = $('.test-result').data('category');
+  if (!category) {return}
   let labels = category.map(a => toTitleCase(a.name));
   let data = category.map(a => a.count);
   let ctx = document.getElementById("myChart").getContext('2d');
