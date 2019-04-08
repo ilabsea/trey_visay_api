@@ -46,7 +46,7 @@ module Sample
 
     def self.export
       contents = assign_characteristic
-      contents.push(assing_vocational)
+      contents.push(assign_vocational)
 
       write_to_file(contents, 'characteristic_jobs')
     end
@@ -73,7 +73,7 @@ module Sample
       arr
     end
 
-    def self.assing_vocational
+    def self.assign_vocational
       vocational = Vocational.where(title: 'វិជ្ជាជីវៈ').first
       obj = {
         id: 4,
