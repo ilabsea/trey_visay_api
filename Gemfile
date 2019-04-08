@@ -44,6 +44,8 @@ gem 'strip_attributes', '~> 1.8.0'
 gem 'decent_exposure'
 gem 'oj'
 gem 'kaminari', '~> 1.1.1'
+gem 'roo', '~> 2.8.2'
+gem 'pumi', github: 'dwilkie/pumi', require: 'pumi/rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

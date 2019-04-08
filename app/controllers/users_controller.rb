@@ -4,9 +4,11 @@ class UsersController < ApplicationController
   before_action :authenticate_account!
 
   def index
-    @users = User.filter(school_id: params[:school], grade: params[:grade]).includes(:games, :personal_understandings).page(page_params).per(20)
-    @grades = User::GRADES
-    @schools = User.all_schools
+    @users = User.filter(params).includes(:games, :personal_understandings).page(page_params).per(20)
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show

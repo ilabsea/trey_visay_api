@@ -1,4 +1,4 @@
-= render 'shared/side_nav'
+= render partial: 'shared/side_nav', locals: {title: "ការធ្វើតេស្តរបស់ #{@user.full_name}"}
 .container
   .row
     .col-md-10

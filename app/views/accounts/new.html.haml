@@ -1,4 +1,5 @@
-= render 'shared/side_nav'
+= render partial: 'shared/side_nav', locals: {title: 'បង្កើតគណនេយ្យ'}
+
 .container
   %br
   %form.form-horizontal{"accept-charset" =>"UTF-8", "action" => "/accounts", "method" => "post"}
@@ -29,6 +30,7 @@
             - Account::ROLE.each do |role|
               %option
                 = role
+
       .form-group
         %label.col-md-4.control-label{:for => "Citta"} សាលា
         .col-md-4
@@ -36,6 +38,7 @@
             - User.all_schools.each do |school|
               %option
                 = school[:name]
+
       / Button
       .form-group
         %label.col-md-4.control-label{:for => "Invio"}
