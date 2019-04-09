@@ -46,7 +46,7 @@ class Career < ApplicationRecord
       career = Career.find_by(name: row[search_field].strip)
 
       next if career.nil?
-      
+
       career.update_attributes!(append_field => row[append_field].strip)
     end
   end

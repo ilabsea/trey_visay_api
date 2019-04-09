@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: personality_majors
@@ -7,6 +6,7 @@
 #  id          :integer          not null, primary key
 #  code        :string(36)
 #  string      :string(36)
+#  name_en     :string(255)
 #  name_km     :string(255)
 #  group       :string(255)
 #  description :text(65535)

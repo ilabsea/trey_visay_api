@@ -1,5 +1,6 @@
 require 'sample/university'
 require 'sample/career'
+require 'sample/higher_career'
 require 'sample/high_school'
 require 'sample/location'
 require 'sample/personality'
