@@ -27,7 +27,7 @@ require 'csv'
 class User < ApplicationRecord
   mount_uploader :photo, ::PhotoUploader
 
-  GRADES = %w[9 10 11 12 ផ្សេងៗ].freeze
+  GRADES = %w[9 10 11 12 other].freeze
 
   belongs_to :high_school, foreign_key: :high_school_code, optional: true
   has_many :games
@@ -65,7 +65,7 @@ class User < ApplicationRecord
       { value: 10, label: 10},
       { value: 11, label: 11},
       { value: 12, label: 12},
-      { value: 'ផ្សេងៗ', label: 'ផ្សេងៗ'}
+      { value: 'other', label: 'ផ្សេងៗ'}
     ]
   end
 
