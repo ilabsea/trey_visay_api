@@ -8,13 +8,13 @@ git_source(:github) do |repo_name|
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.6', '>= 5.1.6.1'
+gem 'rails', '~> 5.1.6.2'
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.3.18', '< 0.5'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
-gem 'bootstrap-sass', '~> 3.3.7'
+gem 'bootstrap-sass', '~> 3.4.1'
 gem 'sass-rails', '~> 5.0'
 gem 'sprockets-rails', :require => 'sprockets/railtie'
 gem 'simple_form', '~> 3.5.0'
@@ -36,7 +36,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'cancancan', '~> 2.0'
-gem 'devise', '~>4.4.1'
+gem 'devise', '~>4.6.0'
 gem 'haml', '~>5.0.4'
 gem 'carrierwave', '~> 1.0'
 gem 'active_model_serializers', '~> 0.10.7'
