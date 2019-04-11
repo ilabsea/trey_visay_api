@@ -9,6 +9,8 @@
 #
 
 class Entry < ApplicationRecord
-  has_and_belongs_to_many :characteristics
+  has_many :characteristics_entries
+  has_many :characteristics, through: :characteristics_entries
+
   has_and_belongs_to_many :games
 end

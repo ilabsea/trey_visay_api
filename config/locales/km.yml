@@ -30,3 +30,18 @@ km:
   does_parents_agree_with: 'តើឪពុកម្តាយប្អូនយល់ស្របជាមួយគំនិតរបស់ប្អូនដែរឬទេ?'
   ever_talked_with_anyone_about_career: 'តើប្អូនធ្លាប់និយាយជាមួយនរណាម្នាក់ពីការងារអនាគតរបស់ប្អូនដែរឬទេ?'
   how_to_reach_job_vacancy: 'តើប្អូនអាចស្វែងរកការងារបានដោយវិធីណាខ្លះ?'
+  khmerReading: "ការអានភាសាខ្មែរ"
+  khmerWriting: "ការសរសេរភាសាខ្មែរ"
+  english: "ភាសាអង់គ្លេស/ភាសាបារាំង"
+  math: "គណិតវិទ្យា"
+  socialStudyEthicsAndCitizenship: "សីលធម៌ និង ពលរដ្ឋ"
+  socialStudyGeography: "ភូមិវិទ្យា"
+  socialStudyHistory: "ប្រវត្តិវិទ្យា"
+  sciencePhysics: "រូបវិទ្យា"
+  scienceChemistry: "គីមីវិទ្យា"
+  scienceBiology: "ជីវៈវិទ្យា"
+  softSkillCommunication: "ទំនាក់ទំនង"
+  softSkillBrave: "ក្លាហាន"
+  softSkillTeamwork: "ក្រុមការងារ"
+  softSkillProblemSolving: "ដោះស្រាយបញ្ហា"
+  softSkillPublicSpeaking: "ការនិយាយជាសាធារណៈ"

@@ -6,28 +6,22 @@ module Sample
   class Career < Sample::Base
     CHARACTERISTICS = [
       {
-        id: nil,
+        id: 1,
         title: 'បុគ្គលិកលក្ខណៈបុគ្គលបែប វិទ្យាសាស្រ្ត',
         logoName: 'science',
         career_title: 'មុខរបរ ឬការងារ ក្នុងវិស័យវិទ្យាសាស្ត្រ',
-        concern_subjects: %w[math sciencePhysics scienceChemistry scienceBiology english softSkillBrave softSkillProblemSolving softSkillPublicSpeaking],
-        concern_entries: ['ស្រាវជ្រាវ', 'មានចម្ងល់ជារឿយ', 'គិតស៊ីជំរៅ  និងមានហេតុផល', 'ប្រាកដប្រជា', 'មហិច្ឆតា', 'មានទំនួលខុសត្រូវ', 'មានភាពជាអ្នកដឹកនាំ និងគ្រប់គ្រង']
       },
       {
-        id: nil,
+        id: 2,
         title: 'បុគ្គលិកលក្ខណៈបុគ្គលបែប បច្ចេកទេស',
         logoName: 'technical',
         career_title: 'មុខរបរ ឬការងារ ក្នុងវិស័យបច្ចេកទេស',
-        concern_subjects: %w[math sciencePhysics english softSkillBrave softSkillProblemSolving softSkillPublicSpeaking],
-        concern_entries: ['មានគំនិតច្នៃប្រឌិត', 'មានទំនុកចិត្ត', 'ឆ្លាត', 'មានឆន្ទៈ', 'មានផែនការ និងគៅដៅច្បាស់លាស់']
       },
       {
-        id: nil,
+        id: 3,
         title: 'បុគ្គលិកលក្ខណៈបុគ្គល បែបសង្គម',
         logoName: 'social',
         career_title: 'មុខរបរ ឬការងារ ក្នុងវិស័យសង្គម',
-        concern_subjects: %w[khmerReading khmerWriting socialStudyGeography socialStudyEthicsAndCitizenship english softSkillCommunication softSkillBrave softSkillTeamwork softSkillPublicSpeaking],
-        concern_entries: %w[ចូលចិត្តធ្វើការជាមួយមនុស្ស អត់ធ្មត់ ពូកែសម្របសម្រួល មានទំនួលខុសត្រូវ មានទំនាក់ទំនងល្អជាមួយនឹងក្រុមការងារ]
       }
     ].freeze
 
@@ -57,9 +51,10 @@ module Sample
       arr = []
 
       CHARACTERISTICS.each do |char|
-        characteristic = Characteristic.where(title: char[:title]).first
-        char[:id] = characteristic.id
+        characteristic = Characteristic.where(id: char[:id]).first
         char[:entries] = characteristic.entries.pluck(:name)
+        char[:concern_subjects] = characteristic.concern_subjects
+        char[:concern_entries] = characteristic.concerned_entries.pluck(:name)
         char[:recommendation] = characteristic.description
         char[:careers] = []
         characteristic.careers.each do |career|
