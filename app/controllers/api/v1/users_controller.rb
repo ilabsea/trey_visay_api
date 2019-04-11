@@ -15,7 +15,7 @@ class Api::V1::UsersController < ApiController
     if @user.update_attributes(user_params)
       render json: { success: true }
     else
-      log = Log.new(user: params['data'])
+      log = Log.new(user: params['data'], version: params['data']['version'])
       log.save!
       render json: { error: @user.errors }
     end
@@ -38,11 +38,7 @@ class Api::V1::UsersController < ApiController
   def filter_params
     params.require(:data).permit(
       :id, :full_name, :password, :username, :sex, :date_of_birth, :phone_number,
-      :nationality, :school_name, :grade, :address, :father_name, :father_occupation,
-      :mother_name, :mother_occupation, :guidance, :parent_contact_number,
-      :number_of_family_member, :number_of_sisters, :number_of_brothers, :is_divorce,
-      :is_disable, :is_domestic_violence, :is_smoking, :is_alcoholic, :is_drug,
-      :house_type, :collective_income, :uuid, :photo, :high_school_code, :province_code,
+      :grade, :uuid, :photo, :high_school_code, :province_code,
       :district_code, :commune_code
     )
   end

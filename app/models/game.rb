@@ -24,6 +24,10 @@ class Game < ApplicationRecord
   has_and_belongs_to_many :entries
   has_one :subject
 
+  accepts_nested_attributes_for :personal_understandings
+  accepts_nested_attributes_for :career_games
+  accepts_nested_attributes_for :subject
+
   mount_uploader :audio, ::AudioUploader
 
   def schools
