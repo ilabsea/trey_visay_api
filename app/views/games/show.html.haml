@@ -116,7 +116,7 @@
                       .content-display
                         - @schools.each do |school|
                           - blank_department_majors = school.majors.select { |major| major.department_id == nil }
-                          .meddium-margin-bottom{ 'data-toggle' => 'modal', 'data-target' => '#modal-school', style: 'cursor: pointer', 'data-school' => school.to_json, 'data-departments' => school.departments.to_json(include: :majors), 'data-majors' => blank_department_majors.to_json }
+                          .meddium-margin-bottom{ 'data-toggle' => 'modal', 'data-target' => '#modal-school', 'data-school' => school.to_json, 'data-departments' => school.departments.to_json(include: :majors), 'data-majors' => blank_department_majors.to_json }
                             %span.fi-circle-check
                               = image_tag school.logo, class: 'img-circular-small'
                             %h4.strong-text= school.name
@@ -134,4 +134,4 @@
 = render 'modal_second_test_two', :entries => @game.entries
 = render 'modal_second_test_three', :careers => @game.careers
 = render 'modal_second_test_four'
-= render 'modal_school'
+/ = render 'modal_school'
