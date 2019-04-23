@@ -119,7 +119,9 @@ module Sample
       @career.update_attributes!(
         name: row['name'],
         description: row['description'],
-        places_for_work: row['places_for_work']
+        places_for_work: row['places_for_work'],
+        schools: [],
+        unknown_schools: ''
       )
 
     end

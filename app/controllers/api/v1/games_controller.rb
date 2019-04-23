@@ -44,7 +44,7 @@ class Api::V1::GamesController < ApiController
         :science_biology, :soft_skill_communication, :soft_skill_brave,
         :soft_skill_teamwork, :soft_skill_problem_solving, :soft_skill_public_speaking
       ],
-      career_games_attributes: [:career_id, :is_goal]
+      career_games_attributes: [:career_code, :is_goal]
     )
   end
 end
