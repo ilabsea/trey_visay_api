@@ -63,11 +63,11 @@ class User < ApplicationRecord
 
   def self.grades
     [
-      { value: 9, label: 9},
-      { value: 10, label: 10},
-      { value: 11, label: 11},
-      { value: 12, label: 12},
-      { value: 'other', label: 'ផ្សេងៗ'}
+      { value: 9, label: 9 },
+      { value: 10, label: 10 },
+      { value: 11, label: 11 },
+      { value: 12, label: 12 },
+      { value: 'other', label: 'ផ្សេងៗ' }
     ]
   end
 

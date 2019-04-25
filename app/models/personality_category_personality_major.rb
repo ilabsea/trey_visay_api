@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: personality_category_personality_majors
@@ -6,7 +8,6 @@
 #  personality_category_code :string(255)
 #  personality_major_code    :string(255)
 #
-
 
 class PersonalityCategoryPersonalityMajor < ApplicationRecord
   belongs_to :personality_category, foreign_key: :personality_category_code

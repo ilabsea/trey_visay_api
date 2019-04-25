@@ -9,7 +9,7 @@ module Sample
       xlsx = Roo::Spreadsheet.open(path)
 
       xlsx.each_with_pagename do |_name, sheet|
-        sheet.parse.each_with_index do |row, index|
+        sheet.parse.each_with_index do |row, _index|
           code = row[0]
           name = row[1]
           short_description = row[3]
