@@ -1,12 +1,9 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: personality_categories
 #
-#  id          :integer          not null, primary key
-#  code        :string(36)
-#  string      :string(36)
+#  code        :string(36)       not null, primary key
 #  name_en     :string(255)
 #  name_km     :string(255)
 #  group       :string(255)
@@ -16,4 +13,6 @@
 #
 
 class PersonalityCategory < ApplicationRecord
+  has_many :personality_category_personality_majors, foreign_key: :personality_category_code, dependent: :destroy
+  has_many :personality_majors, through: :personality_category_personality_majors
 end

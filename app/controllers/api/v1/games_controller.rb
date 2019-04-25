@@ -1,34 +1,22 @@
 # frozen_string_literal: true
 
 class Api::V1::GamesController < ApiController
-
-  def index
-    @games = Game.all
-    render json: @games.to_json
-  end
-
   def create
     params['data'] = JSON.parse(params['data'])
     user = User.find_by(uuid: params['data']['user_uuid'])
 
-    if user.nil?
-      render json: { error: "Invalid user uuid: #{params['data']['user_uuid']}" }
-      return
-    end
+    return head :forbidden if user.nil?
 
     game = user.games.build(game_params)
     game.audio = params[:audio]
 
     begin
       game.save!
-
-      entries = Entry.where(name: params['data']['characteristic_entries'])
-      game.entries = entries
-
-      render json: { success: true , game: game }
+      game.entries = Entry.where(name: params['data']['characteristic_entries'])
+      render json: { success: true , game: game }, status: :created
     rescue ActiveRecord::RecordInvalid => e
       Log.create(game: params['data'], version: params['data']['version'])
-      render json: { error: game.errors }
+      render json: { error: game.errors }, status: :unprocessable_entity
     end
   end
 
@@ -55,5 +43,4 @@ class Api::V1::GamesController < ApiController
       career_games_attributes: [:career_code, :is_goal]
     )
   end
-
 end

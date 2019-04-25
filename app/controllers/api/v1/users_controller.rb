@@ -5,6 +5,7 @@ class Api::V1::UsersController < ApiController
     params['data'] = JSON.parse(params['data'])
     @user = User.find_or_initialize_by(uuid: params['data']['uuid'])
     user_params = filter_params
+
     if user_params[:high_school_id]
       user_params[:school_name] = User.school_name(user_params[:high_school_id])
       user_params.delete :high_school_id
@@ -15,8 +16,7 @@ class Api::V1::UsersController < ApiController
     if @user.update_attributes(user_params)
       render json: { success: true }
     else
-      log = Log.new(user: params['data'], version: params['data']['version'])
-      log.save!
+      Log.create(user: params['data'], version: params['data']['version'])
       render json: { error: @user.errors }
     end
   end

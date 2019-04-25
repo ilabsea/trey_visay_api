@@ -4,6 +4,9 @@ require_relative 'execute'
 require_relative 'university'
 require_relative 'career'
 require_relative 'high_school'
+require_relative 'personality'
+require_relative 'personality_category'
+require_relative 'personality_major'
 
 module Sample
   class TreyVisay
@@ -27,8 +30,20 @@ module Sample
       Sample::HighSchool.load('high_school', options)
 
       Sample::Personality.load('personality', options)
-      Sample::PersonalityCategory.load('personality_category', options)
+
+      # Major must loaded before category in order to assign dependency
       Sample::PersonalityMajor.load('major_options_for_higher_education', options)
+      Sample::PersonalityCategory.load('personality_category_majors_and_careers', options)
+    end
+
+    def self.export_samples
+      Sample::University.export
+      Sample::Career.export
+      Sample::HighSchool.export
+      Sample::Location.export
+      Sample::Personality.export
+      Sample::PersonalityCategory.export
+      Sample::PersonalityMajor.export
     end
   end
 end

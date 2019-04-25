@@ -13,17 +13,21 @@ module Sample
           code = row[0]
           name_en = row[1]
           name_km = row[2]
-          description = row[3]
-          conditions = row[4].to_s.strip.split(';').map(&:strip).join(';')
-          group = row[5].downcase
+          basic_knowledge = row[3]
+          study_credit = row[4]
+          recieved_knowledge = strip_str(row[5])
+          possible_workplaces = strip_str(row[6])
+
+          next if name_km.blank?
 
           major = ::PersonalityMajor.find_or_initialize_by(code: code)
           major.update_attributes(
             name_en: name_en,
             name_km: name_km,
-            group: group,
-            description: description,
-            conditions: conditions
+            basic_knowledge: basic_knowledge,
+            study_credit: study_credit,
+            recieved_knowledge: recieved_knowledge,
+            possible_workplaces: possible_workplaces
           )
         end
       end
@@ -38,9 +42,10 @@ module Sample
           code: record.code,
           name_en: record.name_en,
           name_km: record.name_km,
-          description: record.description,
-          conditions: record.conditions,
-          group: record.group
+          basic_knowledge: record.basic_knowledge,
+          study_credit: record.study_credit,
+          recieved_knowledge: record.recieved_knowledge,
+          possible_workplaces: record.possible_workplaces
         }
 
         data.push(obj)

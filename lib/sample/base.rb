@@ -19,5 +19,9 @@ module Sample
         f.puts(content)
       end
     end
+
+    def self.strip_str(str)
+      str.to_s.strip.split(';').map(&:strip).join(';')
+    end
   end
 end

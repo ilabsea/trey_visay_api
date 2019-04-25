@@ -97,7 +97,12 @@ module Sample
         description: career.description,
         places_for_work: career.places_for_work,
         unknown_schools: career.unknown_schools,
-        schools: career.schools.pluck(:code)
+        schools: career.schools.pluck(:code),
+        short_description: career.short_description,
+        duty: career.duty,
+        working_environment: career.working_environment,
+        training_level: career.training_level,
+        salary: career.salary
       }
     end
 
