@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: schools
@@ -17,6 +16,7 @@
 #  category            :string(255)
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
+#  code                :string(255)
 #
 
 class School < ApplicationRecord

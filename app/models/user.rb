@@ -34,7 +34,6 @@ class User < ApplicationRecord
   has_many :personal_understandings, through: :games
 
   validates :grade, inclusion: { in: GRADES }, allow_nil: true
-  validates :phone_number, presence: true
 
   def address
     return nil if high_school_code.blank?

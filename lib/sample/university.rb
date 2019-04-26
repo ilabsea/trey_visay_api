@@ -5,14 +5,17 @@ require_relative 'base'
 module Sample
   class University < Sample::Base
     def self.load(file, options = {})
-      path = File.expand_path(csv_path + "#{file}.csv")
-      csv = CSV.parse(File.read(path), headers: true)
+      path = File.expand_path(csv_path + "#{file}.xlsx")
+      xlsx = Roo::Spreadsheet.open(path)
 
-      csv.each do |csv_row|
-        row = csv_row.to_hash
-        assign_school(row, options)
-        assign_department(row)
-        assign_major(row)
+      xlsx.each_with_pagename do |name, sheet|
+        sheet = sheet.parse(headers: true)
+        sheet.each_with_index do |row, index|
+          next if index == 0
+          assign_school(row, name)
+          assign_department(row)
+          assign_major(row)
+        end
       end
 
       puts "Loaded #{file.titleize} samples" if options[:verbose]
@@ -23,6 +26,7 @@ module Sample
       School.all.includes(:departments, :department_majors).each do |school|
         skool = {
           id: school.id,
+          code: school.code,
           universityName: school.name,
           logoName: school.logo.file && school.logo.file.filename.split('.').first || '',
           address: school.address.to_s.gsub("<U+200B>", ''),
@@ -67,11 +71,12 @@ module Sample
       )
     end
 
-    def self.assign_school(row, options)
+    def self.assign_school(row, category_name)
       return if row['name'].blank?
 
       @department = nil
-      @school = School.create(
+      @school = ::School.find_or_initialize_by(code: row['code'].strip);
+      @school.update_attributes!(
         name: row['name'],
         address: row['address'],
         province: row['province'],
@@ -80,8 +85,8 @@ module Sample
         emails: strip_att(row['emails']),
         website_or_facebook: strip_att(row['website_or_facebook']),
         mailbox: row['mailbox'],
-        category: options[:category] || 'សាលារដ្ឋ'
-      )
+        category: category_name
+      );
 
       assign_logo(row)
     end

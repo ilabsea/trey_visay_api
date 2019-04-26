@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: logs
+#
+#  id         :integer          not null, primary key
+#  user       :text(65535)
+#  game       :text(65535)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  version    :string(255)
+#
+
 FactoryBot.define do
   factory :log do
     user "MyText"

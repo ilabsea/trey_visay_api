@@ -97,11 +97,12 @@ module Sample
     def self.build_career(career)
       {
         id: career.id,
+        code: career.code,
         name: career.name,
         description: career.description,
         places_for_work: career.places_for_work,
         unknown_schools: career.unknown_schools,
-        schools: career.schools.pluck(:id)
+        schools: career.schools.pluck(:code)
       }
     end
 
@@ -113,23 +114,28 @@ module Sample
       if options[:group] == 'Vocational'
         group = Vocational.where(title: options[:category]).first
       end
-      @career = group.careers.create(
+      @career = group.careers.find_or_initialize_by(code: row['code'].strip);
+
+      @career.update_attributes!(
         name: row['name'],
         description: row['description'],
-        places_for_work: row['places_for_work']
+        places_for_work: row['places_for_work'],
+        schools: [],
+        unknown_schools: ''
       )
+
     end
 
     def self.assign_school(row)
-      return if row['school_name'].blank?
-      id = row['school_name'].split('.').first
-      school = School.where(id: id).first
+      return if row['school_code'].blank?
+      school_code = row['school_code'].strip
+      school = School.where(code: school_code).first
 
       if school.present?
         @career.schools << school
       else
         arr = @career.unknown_schools.to_s.split(';')
-        arr.push(row['school_name'].strip)
+        arr.push(school_code)
         @career.unknown_schools = arr.join('; ')
         @career.save
       end
