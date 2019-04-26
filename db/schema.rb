@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190411072615) do
+ActiveRecord::Schema.define(version: 20190426043438) do
 
   create_table "accounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
@@ -45,12 +45,15 @@ ActiveRecord::Schema.define(version: 20190411072615) do
     t.datetime "updated_at", null: false
     t.string "code"
     t.index ["categorizable_type", "categorizable_id"], name: "index_careers_on_categorizable_type_and_categorizable_id"
+    t.index ["code"], name: "index_careers_on_code", unique: true
   end
 
   create_table "careers_games", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "career_id"
     t.bigint "game_id"
     t.boolean "is_goal", default: false
+    t.string "career_code"
+    t.index ["career_code"], name: "index_careers_games_on_career_code"
     t.index ["career_id"], name: "index_careers_games_on_career_id"
     t.index ["game_id"], name: "index_careers_games_on_game_id"
   end

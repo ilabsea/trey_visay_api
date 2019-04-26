@@ -19,12 +19,11 @@
 #  index_careers_on_code                                     (code) UNIQUE
 #
 
-require 'rails_helper'
-
-RSpec.describe Career, type: :model do
-  it { is_expected.to have_and_belong_to_many(:schools) }
-  it { is_expected.to validate_presence_of(:name) }
-  it { is_expected.to have_many(:career_games) }
-  it { is_expected.to have_many(:games).through(:career_games) }
-  it { is_expected.to belong_to(:categorizable) }
+FactoryBot.define do
+  factory :career do
+    name          { FFaker::Name.name }
+    description   { FFaker::Lorem.paragraphs(1 + Kernel.rand(5)).join("\n") }
+    association :categorizable, :characteristic
+    code { FFaker::Name.name }
+  end
 end

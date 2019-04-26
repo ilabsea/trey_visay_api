@@ -10,16 +10,24 @@ class Api::V1::GamesController < ApiController
   def create
     params['data'] = JSON.parse(params['data'])
     user = User.find_by(uuid: params['data']['user_uuid'])
-    game = user.games.new(game_params)
+
+    if user.nil?
+      render json: { error: "Invalid user uuid: #{params['data']['user_uuid']}" }
+      return
+    end
+
+    game = user.games.build(game_params)
     game.audio = params[:audio]
 
-    if game.save!
+    begin
+      game.save!
+
       entries = Entry.where(name: params['data']['characteristic_entries'])
       game.entries = entries
-      render json: { success: true , game: game}
-    else
-      log = Log.new(game: params['data'], version: params['data']['version'])
-      log.save
+
+      render json: { success: true , game: game }
+    rescue ActiveRecord::RecordInvalid => e
+      Log.create(game: params['data'], version: params['data']['version'])
       render json: { error: game.errors }
     end
   end
@@ -47,4 +55,5 @@ class Api::V1::GamesController < ApiController
       career_games_attributes: [:career_code, :is_goal]
     )
   end
+
 end
