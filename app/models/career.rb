@@ -18,6 +18,7 @@
 #  working_environment :text(65535)
 #  training_level      :string(255)
 #  salary              :string(255)
+#  code                :string(255)
 #
 # Indexes
 #
@@ -34,7 +35,7 @@ class Career < ApplicationRecord
   validates :name, presence: true
   validates :code, uniqueness: true, if: -> { code.present? }
 
-  def self.append_field_with_csv filename, append_field = 'code', search_field = 'name'
+  def self.append_field_with_csv(filename, append_field = 'code', search_field = 'name')
     raise 'Missing filename' unless filename.present?
 
     path = FileUtil.path_of(filename)
@@ -55,5 +56,4 @@ class Career < ApplicationRecord
       career.update_attributes!(append_field => row[append_field].strip)
     end
   end
-
 end

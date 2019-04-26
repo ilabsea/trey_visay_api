@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: schools
@@ -18,7 +19,6 @@
 #  updated_at          :datetime         not null
 #  code                :string(255)
 #
-
 
 class SchoolSerializer < ActiveModel::Serializer
   attributes :id, :name, :logo, :address, :province, :phone_numbers, :faxes, :emails, :website_or_facebook, :mailbox, :category

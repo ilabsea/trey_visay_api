@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class FileUtil
-  def self.path_of filename
+  def self.path_of(filename)
     File.join(csv_dir, filename)
   end
 

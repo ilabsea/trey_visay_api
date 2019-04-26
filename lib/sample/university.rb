@@ -75,7 +75,7 @@ module Sample
       return if row['name'].blank?
 
       @department = nil
-      @school = ::School.find_or_initialize_by(code: row['code'].strip);
+      @school = ::School.find_or_initialize_by(code: row['code'].strip)
       @school.update_attributes!(
         name: row['name'],
         address: row['address'],
@@ -86,7 +86,7 @@ module Sample
         website_or_facebook: strip_att(row['website_or_facebook']),
         mailbox: row['mailbox'],
         category: category_name
-      );
+      )
 
       assign_logo(row)
     end
