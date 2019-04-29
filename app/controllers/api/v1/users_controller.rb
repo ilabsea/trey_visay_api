@@ -29,10 +29,6 @@ class Api::V1::UsersController < ApiController
     end
   end
 
-  def high_schools
-    render json: User.all_schools
-  end
-
   private
 
   def filter_params

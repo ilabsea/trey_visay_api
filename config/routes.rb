@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   resources :accounts
   namespace :api do
     namespace :v1 do
-      match 'high_schools' => 'users#high_schools', :via => :get
       match 'me' => 'users#me', :via => :get
       resources :users, only: [:create]
       resources :schools, :only => [:index, :create]
