@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 20190426043438) do
     t.index ["code"], name: "index_careers_on_code", unique: true
   end
 
-  create_table "careers_games", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "careers_games", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "career_id"
     t.bigint "game_id"
     t.boolean "is_goal", default: false
