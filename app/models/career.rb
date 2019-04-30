@@ -29,8 +29,11 @@
 class Career < ApplicationRecord
   belongs_to :categorizable, polymorphic: true
   has_and_belongs_to_many :schools
-  has_many :career_games, foreign_key: 'career_code', primary_key: 'code'
+  has_many :career_games, foreign_key: :career_code, primary_key: :code
   has_many :games, through: :career_games
+
+  has_many :personality_category_careers, foreign_key: :career_code, primary_key: :code, dependent: :destroy
+  has_many :personality_categories, through: :personality_category_careers
 
   validates :name, presence: true
   validates :code, uniqueness: true, if: -> { code.present? }

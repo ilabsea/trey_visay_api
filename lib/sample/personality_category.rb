@@ -17,10 +17,13 @@ module Sample
           group = row[4].downcase
           major_codes = strip_str(row[5]).split(';')
           majors = ::PersonalityMajor.where(code: major_codes)
+          career_codes = strip_str(row[7]).split(';')
+          careers = ::Career.where(code: career_codes)
 
           category = ::PersonalityCategory.find_or_initialize_by(code: code)
           category.update_attributes(name_en: name_en, name_km: name_km, group: group, description: description)
           category.personality_majors = majors
+          category.careers = careers
         end
       end
 
@@ -36,7 +39,8 @@ module Sample
           name_km: record.name_km,
           group: record.group,
           description: record.description,
-          majors: record.personality_majors.pluck(:code)
+          majors: record.personality_majors.pluck(:code),
+          careers: record.careers.pluck(:code)
         }
 
         data.push(obj)

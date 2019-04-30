@@ -16,4 +16,6 @@
 class PersonalityCategory < ApplicationRecord
   has_many :personality_category_personality_majors, foreign_key: :personality_category_code, dependent: :destroy
   has_many :personality_majors, through: :personality_category_personality_majors
+  has_many :personality_category_careers, foreign_key: :personality_category_code, dependent: :destroy
+  has_many :careers, through: :personality_category_careers
 end
