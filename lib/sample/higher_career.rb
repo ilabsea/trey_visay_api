@@ -18,9 +18,9 @@ module Sample
           training_level = row[6]
           salary = row[7]
 
-          # @Todo: change by by id to find by code
-          career = ::Career.find_or_initialize_by(name: name)
+          career = ::Career.find_or_initialize_by(code: code)
           career.update_attributes(
+            name: name,
             short_description: short_description,
             duty: duty,
             working_environment: working_environment,
