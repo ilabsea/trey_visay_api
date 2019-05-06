@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190426043438) do
+ActiveRecord::Schema.define(version: 20190429100259) do
 
   create_table "accounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
@@ -43,12 +43,17 @@ ActiveRecord::Schema.define(version: 20190426043438) do
     t.text "unknown_schools"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "short_description"
+    t.text "duty"
+    t.text "working_environment"
+    t.string "training_level"
+    t.string "salary"
     t.string "code"
     t.index ["categorizable_type", "categorizable_id"], name: "index_careers_on_categorizable_type_and_categorizable_id"
     t.index ["code"], name: "index_careers_on_code", unique: true
   end
 
-  create_table "careers_games", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "careers_games", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "career_id"
     t.bigint "game_id"
     t.boolean "is_goal", default: false
@@ -73,9 +78,10 @@ ActiveRecord::Schema.define(version: 20190426043438) do
     t.text "concern_subjects"
   end
 
-  create_table "characteristics_entries", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "characteristics_entries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "characteristic_id"
     t.bigint "entry_id"
+    t.boolean "concerned", default: false
     t.index ["characteristic_id"], name: "index_characteristics_entries_on_characteristic_id"
     t.index ["entry_id"], name: "index_characteristics_entries_on_entry_id"
   end
@@ -145,6 +151,56 @@ ActiveRecord::Schema.define(version: 20190426043438) do
     t.string "how_to_reach_job_vacancy"
     t.string "who_to_reach_job_vacancy"
     t.integer "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "personalities", primary_key: "code", id: :string, limit: 36, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name_km"
+    t.string "name_en"
+    t.string "category"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_personalities_on_code", unique: true
+  end
+
+  create_table "personality_categories", primary_key: "code", id: :string, limit: 36, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name_en"
+    t.string "name_km"
+    t.string "group"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "personality_category_careers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "personality_category_code"
+    t.string "career_code"
+  end
+
+  create_table "personality_category_personality_majors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "personality_category_code"
+    t.string "personality_major_code"
+  end
+
+  create_table "personality_majors", primary_key: "code", id: :string, limit: 36, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name_en"
+    t.string "name_km"
+    t.string "basic_knowledge"
+    t.string "study_credit"
+    t.text "recieved_knowledge"
+    t.text "possible_workplaces"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "personality_selections", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "personality_code"
+    t.integer "personality_test_id"
+  end
+
+  create_table "personality_tests", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

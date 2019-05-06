@@ -19,24 +19,9 @@ if Rails.env.development? || Rails.env.test?
       Sample::TreyVisay.load_samples
     end
 
-    desc 'Export universities to json'
-    task export_universities: :environment do
-      Sample::University.export
-    end
-
-    desc 'Export careers to json'
-    task export_careers: :environment do
-      Sample::Career.export
-    end
-
-    desc 'Export high schools to json'
-    task export_high_schools: :environment do
-      Sample::HighSchool.export
-    end
-
-    desc 'Export provinces, districts, and commune to json'
-    task export_locations: :environment do
-      Sample::Location.export
+    desc 'Export sample data to json'
+    task export: :environment do
+      Sample::TreyVisay.export_samples
     end
   end
 end

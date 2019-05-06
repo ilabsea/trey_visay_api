@@ -14,5 +14,6 @@
 //= require rails-ujs
 //= require jquery
 //= require bootstrap-sprockets
+//= require chart.bundle.min
 //= require pumi
 //= require_tree .

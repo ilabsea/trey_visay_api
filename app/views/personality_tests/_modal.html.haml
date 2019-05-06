@@ -1,0 +1,24 @@
+.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1", id: css_id}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header.header-wrapper
+        %h5#exampleModalLabel.modal-title.header-title= title
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+
+      .modal-body
+        .shadow-box
+          .content-box
+            .title
+            .content-display{:style => "margin-top:០rem;"}
+              %form{:role => "form"}
+                - entries.each do |entry|
+                  .form-group.meddium-margin-bottom{:style => "margin-top:1rem;"}
+                    %span.fi-circle-check
+                      = image_tag "/images/check.png" ,:class=> "img-circular-small"
+                    = entry.name_km
+                    .clear
+                %hr{:style => "margin-top:0rem;margin-bottom:10px;"}
+        %br
+      .modal-footer
+        %button.btn.btn-primary{"data-dismiss" => "modal", :type => "button"} Done

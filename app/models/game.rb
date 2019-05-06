@@ -18,11 +18,15 @@
 class Game < ApplicationRecord
   belongs_to :user
   belongs_to :characteristic
-  has_many :personal_understandings
+  has_many :personal_understandings, dependent: :destroy
   has_many :career_games
   has_many :careers, through: :career_games
   has_and_belongs_to_many :entries
-  has_one :subject
+  has_one :subject, dependent: :destroy
+
+  accepts_nested_attributes_for :personal_understandings
+  accepts_nested_attributes_for :career_games
+  accepts_nested_attributes_for :subject
 
   accepts_nested_attributes_for :personal_understandings
   accepts_nested_attributes_for :career_games

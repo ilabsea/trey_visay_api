@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -32,6 +33,7 @@ class User < ApplicationRecord
   belongs_to :high_school, foreign_key: :high_school_code, optional: true
   has_many :games
   has_many :personal_understandings, through: :games
+  has_many :personality_tests
 
   validates :grade, inclusion: { in: GRADES }, allow_nil: true
 
@@ -61,11 +63,11 @@ class User < ApplicationRecord
 
   def self.grades
     [
-      { value: 9, label: 9},
-      { value: 10, label: 10},
-      { value: 11, label: 11},
-      { value: 12, label: 12},
-      { value: 'other', label: 'ផ្សេងៗ'}
+      { value: 9, label: 9 },
+      { value: 10, label: 10 },
+      { value: 11, label: 11 },
+      { value: 12, label: 12 },
+      { value: 'other', label: 'ផ្សេងៗ' }
     ]
   end
 

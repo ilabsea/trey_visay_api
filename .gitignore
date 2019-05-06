@@ -9,6 +9,7 @@ capybara-*.html
 /public/system
 /public/uploads/
 /public/db/
+/public/assets/
 /coverage/
 /spec/tmp
 *.orig

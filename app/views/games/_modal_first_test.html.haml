@@ -1,3 +1,5 @@
+- arr = [[:are_you_going_to_study_till_grade12], [:are_your_parents_allow_you_to_study_till_grade12], [:have_you_ever_thought_of_career, :career_name, :how_to_reach_career_goal, :does_parents_agree_with], [:ever_talked_with_anyone_about_career], [:how_to_reach_job_vacancy]]
+
 #firstTest.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog{:role => "document"}
     .modal-content
@@ -10,103 +12,30 @@
         .modal-header
           %h5#exampleModalLabel.modal-title= "លើកទី #{i+1}"
         .modal-body
-          .shadow-box
-            .content-box
-              .title
-              .content-display{:style => "margin-top:2rem;"}
-                %form{:role => "form"}
-                  .form-group.meddium-margin-bottom
-                    %label.small-gray{:for => "full_name"}
-                      %b
-                        តើអ្នកនឹងបន្តការសិក្សារហូតដល់ថ្នាក់ទី១២ដែរឬទេ?
-                  - if answer = personal_understanding.are_you_going_to_study_till_grade12.presence
-                    = render answer.downcase
-                  - else
-                    = render 'no_data'
+          - arr.each_with_index do |items, index|
+            .shadow-box
+              .content-display
+                - items.each do |item|
+                  .meddium-margin-bottom
+                    %label.small-gray= I18n.t(item.to_s)
 
-          %br
-          .shadow-box
-            .clear
+                  - if answer = personal_understanding[item].presence
+                    - if item == :ever_talked_with_anyone_about_career
+                      - answer.split(';').each do |name|
+                        .meddium-margin-bottom
+                          %span.fi-circle-check
+                            = image_tag "/images/check.png", :class=> "img-circular-small"
+                          = name
 
-            .content-box
-              .title
-              .content-display{:style => "margin-top:2rem;"}
-                %form{:role => "form"}
-                  .form-group.meddium-margin-bottom
-                    %label.small-gray{:for => "full_name"}
-                      %b
-                        តើឪពុកម្តាយរបស់ប្អូននឹងអនុញ្ញាតឲ្យប្អូនបន្តការសិក្សា រហូតដល់ថ្នាក់ទី១២ដែរឬទេ?
-                  - if answer = personal_understanding.are_your_parents_allow_you_to_study_till_grade12.presence
-                    = render answer.downcase
-                  - else
-                    = render 'no_data'
-
-          %br
-          .shadow-box
-            .content-box
-              .title
-              .content-display{:style => "margin-top:2rem;"}
-                %form{:role => "form"}
-                  .form-group.meddium-margin-bottom
-                    %label.small-gray{:for => "full_name"}
-                      %b
-                        តើប្អូនធ្លាប់គិតពីការងារមួយណាដែលប្អូនចង់ធ្វើក្រោយពេលបញ្ចប់ការសិក្សាដែរឬទេ?
-                  - if answer = personal_understanding.have_you_ever_thought_of_career.presence
-                    = render answer.downcase
-                  - else
-                    = render 'no_data'
-          %br
-          .shadow-box
-            .content-box
-              .title
-              .content-display{:style => "margin-top:2rem;"}
-                %form{:role => "form"}
-                  .form-group.meddium-margin-bottom
-                    %label.small-gray{:for => "full_name"}
-                      %b
-                        តើអ្នកធ្លាប់និយាយជាមួយនរណាម្នាក់ពីការងារអនាគត់របស់អ្នក ដែរឬទេ?
-                  - if personal_understanding.ever_talked_with_anyone_about_career == '[]'
-                    = render 'no_data'
-                  - else
-                    - personal_understanding.ever_talked_with_anyone_about_career.split(";").each do |name|
-                      .form-group.meddium-margin-bottom{:style => "margin-top:1rem;"}
-                        %span.fi-circle-check
-                          = image_tag "/images/check.png" ,:class=> "img-circular-small"
-                        = name
-                        .clear
-          %br
-          .shadow-box
-            .content-box
-              .title
-              .content-display{:style => "margin-top:2rem;"}
-                %form{:role => "form"}
-                  .form-group.meddium-margin-bottom
-                    %label.small-gray{:for => "full_name"}
-                      %b
-                        តើអ្នកអាចស្វែងរកការងារឬស្រាវជ្រាវរកមុខរបរតាមរយះអ្វីខ្លះ?
-                  .form-group.meddium-margin-bottom
-                    - if answer = personal_understanding.how_to_reach_job_vacancy.presence
-                      = answer
-                      .clear
                     - else
-                      = render 'no_data'
+                      - if answer.downcase == 'yes' || answer.downcase == 'no'
+                        = render answer.downcase
+                      - else
+                        .meddium-margin-bottom= answer
 
-          %br
-          .shadow-box
-            .content-box
-              .title
-              .content-display{:style => "margin-top:2rem;"}
-                %form{:role => "form"}
-                  .form-group.meddium-margin-bottom
-                    %label.small-gray{:for => "full_name"}
-                      %b
-                        តើអ្នកអាចស្វែងរកការងារឬស្រាវជ្រាវរកមុខរបរតាមរយៈអ្នកណា?
-                  .form-group.meddium-margin-bottom
-                    - if answer = personal_understanding.who_to_reach_job_vacancy.presence
-                      = answer
-                      .clear
-                    - else
-                      = render 'no_data'
-        %br
+                  - else
+                    = render 'no_data'
+            %br
+
       .modal-footer
         %button.btn.btn-primary{"data-dismiss" => "modal", :type => "button"} Done

@@ -1,0 +1,10 @@
+.shadow-box-middle
+  .content-box
+    .title
+    .content-display{:style => "margin-top:2rem;"}
+      %form{:role => "form"}
+        .form-group.meddium-margin-bottom
+          %label.small-gray{:for => "full_name"}
+            = image_tag "/images/book.png" ,:class=> "img-circular"
+          .content-data-long
+            %a{"href" => "#", "aria-controls" => "profile", "data-toggle" => "modal", "data-target" => "##{css_id}" }= title

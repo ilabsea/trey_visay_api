@@ -6,30 +6,24 @@ module Sample
   class Career < Sample::Base
     CHARACTERISTICS = [
       {
-        id: nil,
-        title: "បុគ្គលិកលក្ខណៈបុគ្គលបែប វិទ្យាសាស្រ្ត",
+        id: 1,
+        title: 'បុគ្គលិកលក្ខណៈបុគ្គលបែប វិទ្យាសាស្រ្ត',
         logoName: 'science',
-        career_title: 'មុខរបរ ឬការងារ ក្នុងវិស័យវិទ្យាសាស្ត្រ',
-        concern_subjects: %w[math sciencePhysics scienceChemistry scienceBiology english softSkillBrave softSkillProblemSolving softSkillPublicSpeaking],
-        concern_entries: ['ស្រាវជ្រាវ', 'មានចម្ងល់ជារឿយ', 'គិតស៊ីជំរៅ  និងមានហេតុផល', 'ប្រាកដប្រជា', 'មហិច្ឆតា', 'មានទំនួលខុសត្រូវ', 'មានភាពជាអ្នកដឹកនាំ និងគ្រប់គ្រង'],
+        career_title: 'មុខរបរ ឬការងារ ក្នុងវិស័យវិទ្យាសាស្ត្រ'
       },
       {
-        id: nil,
-        title: "បុគ្គលិកលក្ខណៈបុគ្គលបែប បច្ចេកទេស",
+        id: 2,
+        title: 'បុគ្គលិកលក្ខណៈបុគ្គលបែប បច្ចេកទេស',
         logoName: 'technical',
-        career_title: 'មុខរបរ ឬការងារ ក្នុងវិស័យបច្ចេកទេស',
-        concern_subjects: %w[math sciencePhysics english softSkillBrave softSkillProblemSolving softSkillPublicSpeaking],
-        concern_entries: ['មានគំនិតច្នៃប្រឌិត', 'មានទំនុកចិត្ត', 'ឆ្លាត', 'មានឆន្ទៈ', 'មានផែនការ និងគៅដៅច្បាស់លាស់'],
+        career_title: 'មុខរបរ ឬការងារ ក្នុងវិស័យបច្ចេកទេស'
       },
       {
-        id: nil,
-        title: "បុគ្គលិកលក្ខណៈបុគ្គល បែបសង្គម",
+        id: 3,
+        title: 'បុគ្គលិកលក្ខណៈបុគ្គល បែបសង្គម',
         logoName: 'social',
-        career_title: 'មុខរបរ ឬការងារ ក្នុងវិស័យសង្គម',
-        concern_subjects: %w[khmerReading khmerWriting socialStudyGeography socialStudyEthicsAndCitizenship english softSkillCommunication softSkillBrave softSkillTeamwork softSkillPublicSpeaking],
-        concern_entries: %w[ចូលចិត្តធ្វើការជាមួយមនុស្ស អត់ធ្មត់ ពូកែសម្របសម្រួល មានទំនួលខុសត្រូវ មានទំនាក់ទំនងល្អជាមួយនឹងក្រុមការងារ],
+        career_title: 'មុខរបរ ឬការងារ ក្នុងវិស័យសង្គម'
       }
-    ]
+    ].freeze
 
     def self.load(file, options = {})
       path = File.expand_path(csv_path + "#{file}.csv")
@@ -46,7 +40,7 @@ module Sample
 
     def self.export
       contents = assign_characteristic
-      contents.push(assing_vocational)
+      contents.push(assign_vocational)
 
       write_to_file(contents, 'characteristic_jobs')
     end
@@ -57,9 +51,10 @@ module Sample
       arr = []
 
       CHARACTERISTICS.each do |char|
-        characteristic = Characteristic.where(title: char[:title]).first
-        char[:id] = characteristic.id
+        characteristic = Characteristic.where(id: char[:id]).first
         char[:entries] = characteristic.entries.pluck(:name)
+        char[:concern_subjects] = characteristic.concern_subjects
+        char[:concern_entries] = characteristic.concerned_entries.pluck(:name)
         char[:recommendation] = characteristic.description
         char[:careers] = []
         characteristic.careers.each do |career|
@@ -67,14 +62,14 @@ module Sample
         end
 
         arr.push(char)
-      end;
+      end
 
       arr[0][:careers].concat(arr[1][:careers])
       arr
     end
 
-    def self.assing_vocational
-      vocational = Vocational.where(title: "វិជ្ជាជីវៈ").first
+    def self.assign_vocational
+      vocational = Vocational.where(title: 'វិជ្ជាជីវៈ').first
       obj = {
         id: 4,
         title: 'វិជ្ជាជីវៈ',
@@ -102,7 +97,12 @@ module Sample
         description: career.description,
         places_for_work: career.places_for_work,
         unknown_schools: career.unknown_schools,
-        schools: career.schools.pluck(:code)
+        schools: career.schools.pluck(:code),
+        short_description: career.short_description,
+        duty: career.duty,
+        working_environment: career.working_environment,
+        training_level: career.training_level,
+        salary: career.salary
       }
     end
 
@@ -114,7 +114,7 @@ module Sample
       if options[:group] == 'Vocational'
         group = Vocational.where(title: options[:category]).first
       end
-      @career = group.careers.find_or_initialize_by(code: row['code'].strip);
+      @career = group.careers.find_or_initialize_by(code: row['code'].strip)
 
       @career.update_attributes!(
         name: row['name'],
@@ -123,7 +123,6 @@ module Sample
         schools: [],
         unknown_schools: ''
       )
-
     end
 
     def self.assign_school(row)

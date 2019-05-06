@@ -21,6 +21,9 @@
       %select.form-control.select{"data-pumi-select-collection-label-method" => "label", "data-pumi-select-collection-url" => "/api/v1/high_schools/grades", "data-pumi-select-collection-value-method" => "value", "data-pumi-select-disabled-class" => "my-disabled-class", "data-pumi-select-disabled-target" => "#klass", "data-pumi-select-id" => "klass", name: 'grade'}
         %option{:value => ""} All
 
+    .form-group
+      = link_to 'ទាញយកលទ្ធផល', users_path(format: 'csv'), target: '_blank', id: 'btn-download', class: 'btn btn-primary'
+
   %br
   %table.table-bordered.table.central{style: "width:80%;", align: "center"}
     %thead

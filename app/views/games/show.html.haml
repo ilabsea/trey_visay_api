@@ -3,23 +3,17 @@
   .row
     .col-md-10
       .tab{:role => "tabpanel"}
-        / Nav tabs
-        %ul.nav.nav-tabs{:role => "tablist"}
-          %li{:role => "presentation"}
-            %a{"aria-controls" => "home", "data-toggle" => "tab", :href => "#Section1", :role => "tab"} ប្រវត្តិរូបសង្ខេប
-          %li.active{:role => "presentation"}
-            %a{"aria-controls" => "profile", "data-toggle" => "tab", :href => "#Section2", :role => "tab", :aria-expanded => true} លទ្ធផលធ្វើតេស្ត
+        = render 'shared/tab_header'
+
         / Tab panes
         .tab-content.tabs
-          #Section1.tab-pane.fade.in{:role => "tabpanel"}
-            = render 'shared/show_user_profile', {:active => false}
           #Section2.tab-pane.fade.in.active{:role => "tabpanel"}
             .col-md-12
               %br
                 %b
                   %center
                     #div{style: "width:100%;", align: "left"}
-                      %a.btn.icon-btn.btn-primary{:href => "#{user_path(@user.id)}"}
+                      %a.btn.icon-btn.btn-primary{:href => "#{user_games_path(@user.id)}"}
                         %span.glyphicon.btn-glyphicon.glyphicon-arrow-left.img-circle.text-primary>
                         - num = @user.games.map(&:id).index(@game.id) + 1
                         = "ធ្វើតេស្តលើកទី #{num}"
@@ -122,7 +116,7 @@
                       .content-display
                         - @schools.each do |school|
                           - blank_department_majors = school.majors.select { |major| major.department_id == nil }
-                          .meddium-margin-bottom{ 'data-toggle' => 'modal', 'data-target' => '#modal-school', style: 'cursor: pointer', 'data-school' => school.to_json, 'data-departments' => school.departments.to_json(include: :majors), 'data-majors' => blank_department_majors.to_json }
+                          .meddium-margin-bottom{ 'data-toggle' => 'modal', 'data-target' => '#modal-school', 'data-school' => school.to_json, 'data-departments' => school.departments.to_json(include: :majors), 'data-majors' => blank_department_majors.to_json }
                             %span.fi-circle-check
                               = image_tag school.logo, class: 'img-circular-small'
                             %h4.strong-text= school.name
@@ -139,5 +133,5 @@
 = render 'modal_second_test_one', :subject => @game.subject
 = render 'modal_second_test_two', :entries => @game.entries
 = render 'modal_second_test_three', :careers => @game.careers
-= render 'modal_second_test_four', :careers => @game.careers
-= render 'modal_school'
+= render 'modal_second_test_four'
+/ = render 'modal_school'

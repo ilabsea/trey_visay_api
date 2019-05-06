@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: careers_games
@@ -20,5 +21,4 @@ class CareerGame < ApplicationRecord
 
   belongs_to :career, foreign_key: 'career_code', primary_key: 'code'
   belongs_to :game
-
 end

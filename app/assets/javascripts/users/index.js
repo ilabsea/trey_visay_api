@@ -5,6 +5,7 @@ $(document).on('ready', function() {
 
   function init() {
     onSelectFilter();
+    onClickDownload();
   }
 
   function onSelectFilter() {
@@ -16,6 +17,13 @@ $(document).on('ready', function() {
       }
 
       true
+    })
+  }
+
+  function onClickDownload() {
+    $('#btn-download').on('click', function(event) {
+      event.preventDefault();
+      window.location = $(this).attr("href") + '?' + $('#form-filter').serialize();
     })
   }
 });

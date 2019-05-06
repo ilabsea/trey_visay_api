@@ -8,9 +8,9 @@ module Sample
       path = File.expand_path(csv_path + "#{file}.xlsx")
       xlsx = Roo::Spreadsheet.open(path)
 
-      xlsx.each_with_pagename do |name, sheet|
+      xlsx.each_with_pagename do |_name, sheet|
         sheet.parse.each_with_index do |row, index|
-          next if index == 0
+          next if index.zero?
 
           name_km = row[2]
           location_code = row[3]

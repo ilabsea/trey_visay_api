@@ -8,6 +8,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html
       format.js
+      format.csv { send_data(::AssessmentResultService.new(@users).zip_data, type: 'application/zip', filename: 'assessment_result.zip') }
     end
   end
 

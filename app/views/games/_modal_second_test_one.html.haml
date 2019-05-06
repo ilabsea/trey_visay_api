@@ -1,3 +1,5 @@
+- arr = [{group: 'ភាសារខ្មែរ', subjects: [:khmer_reading, :khmer_writing]}, {group: 'ភាសាបរទេស', subjects: [:english]}, {group: 'សិក្សាសង្គម', subjects: [:social_study_ethics_and_citizenship, :social_study_geography, :social_study_history]}, {group: 'វិទ្យាសាស្ត្រ', subjects: [:math, :science_physics, :science_chemistry, :science_biology]}, {group: 'ជំនាញទន់', subjects: [:soft_skill_communication, :soft_skill_brave, :soft_skill_teamwork, :soft_skill_problem_solving, :soft_skill_public_speaking]}]
+
 #secondTestOne.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog{:role => "document"}
     .modal-content
@@ -5,205 +7,23 @@
         %h5#exampleModalLabel.modal-title.header-title ការបំពេញមុខវិជ្ជា
         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
           %span{"aria-hidden" => "true"} ×
-      .modal-body
-        .shadow-box
-          .content-box
-            .title
-            .content-display{:style => "margin-top:០rem;"}
-              %form{:role => "form"}
-                .form-group.meddium-margin-bottom
-                  %label.small-gray{:for => "full_name"}
-                    %b
-                      ភាសារខ្មែរ
-                %hr{:style => "margin-top:0rem;margin-bottom:10px;"}
-                  ការអាន
-                %br
-                .form-group.meddium-margin-bottom{:style => "margin-top:1rem;"}
-                  %span.fi-circle-check
-                    - if subject.khmer_reading != "ខ្សោយ"
-                      = image_tag "/images/check.png" ,:class=> "img-circular-small"
-                    - else
-                      = image_tag "/images/unchecked.png" ,:class=> "img-circular-small"
-                  = subject.khmer_reading
-                  .clear
-                %hr{:style => "margin-top:0rem;margin-bottom:10px;"}
-                  ការសរសេរ
-                %br
-                .form-group.meddium-margin-bottom{:style => "margin-top:1rem;"}
-                  %span.fi-circle-check
-                    - if subject.khmer_writing != "ខ្សោយ"
-                      = image_tag "/images/check.png" ,:class=> "img-circular-small"
-                    - else
-                      = image_tag "/images/unchecked.png" ,:class=> "img-circular-small"
-                  = subject.khmer_writing
-                  .clear
-                %hr{:style => "margin-top:0rem;margin-bottom:10px;"}
-        %br
-        .shadow-box
-          .content-box
-            .title
-            .content-display{:style => "margin-top:០rem;"}
-              %form{:role => "form"}
-                .form-group.meddium-margin-bottom
-                  %label.small-gray{:for => "full_name"}
-                    %b
-                      គណិតវិទ្យា
-                %hr{:style => "margin-top:0rem;margin-bottom:10px;"}
-                  ពិជគណិត
-                %br
-                .form-group.meddium-margin-bottom{:style => "margin-top:1rem;"}
-                  %span.fi-circle-check
-                    - if subject.math != "ខ្សោយ"
-                      = image_tag "/images/check.png" ,:class=> "img-circular-small"
-                    - else
-                      = image_tag "/images/unchecked.png" ,:class=> "img-circular-small"
-                  = subject.math
-                  .clear
-                %hr{:style => "margin-top:0rem;margin-bottom:10px;"}
-        %br
-        .shadow-box
-          .content-box
-            .title
-            .content-display{:style => "margin-top:០rem;"}
-              %form{:role => "form"}
-                .form-group.meddium-margin-bottom
-                  %label.small-gray{:for => "full_name"}
-                    %b
-                      សិកស្ាសង្គម
-                %hr{:style => "margin-top:0rem;margin-bottom:10px;"}
-                  ភូមិវិទ្យា
-                %br
-                .form-group.meddium-margin-bottom{:style => "margin-top:1rem;"}
-                  %span.fi-circle-check
-                    - if subject.social_study_geography != "ខ្សោយ"
-                      = image_tag "/images/check.png" ,:class=> "img-circular-small"
-                    - else
-                      = image_tag "/images/unchecked.png" ,:class=> "img-circular-small"
-                  = subject.social_study_geography
-                  .clear
-                %hr{:style => "margin-top:0rem;margin-bottom:10px;"}
-                  ប្រវត្តិវិទ្យា
-                %br
-                .form-group.meddium-margin-bottom{:style => "margin-top:1rem;"}
-                  %span.fi-circle-check
-                    - if subject.social_study_history != "ខ្សោយ"
-                      = image_tag "/images/check.png" ,:class=> "img-circular-small"
-                    - else
-                      = image_tag "/images/unchecked.png" ,:class=> "img-circular-small"
-                  = subject.social_study_history
-                  .clear
-                %hr{:style => "margin-top:0rem;margin-bottom:10px;"}
-        %br
-        .shadow-box
-          .content-box
-            .title
-            .content-display{:style => "margin-top:០rem;"}
-              %form{:role => "form"}
-                .form-group.meddium-margin-bottom
-                  %label.small-gray{:for => "full_name"}
-                    %b
-                      វិទ្យាសាស្ត្រ
-                %hr{:style => "margin-top:0rem;margin-bottom:10px;"}
-                  រូបវិទ្យា
-                %br
-                .form-group.meddium-margin-bottom{:style => "margin-top:1rem;"}
-                  %span.fi-circle-check
-                    - if subject.science_physics != "ខ្សោយ"
-                      = image_tag "/images/check.png" ,:class=> "img-circular-small"
-                    - else
-                      = image_tag "/images/unchecked.png" ,:class=> "img-circular-small"
-                  = subject.science_physics
-                  .clear
-                %hr{:style => "margin-top:0rem;margin-bottom:10px;"}
-                  គីមីវិទ្យា
-                %br
-                .form-group.meddium-margin-bottom{:style => "margin-top:1rem;"}
-                  %span.fi-circle-check
-                    - if subject.science_chemistry != "ខ្សោយ"
-                      = image_tag "/images/check.png" ,:class=> "img-circular-small"
-                    - else
-                      = image_tag "/images/unchecked.png" ,:class=> "img-circular-small"
-                  = subject.science_chemistry
-                  .clear
-                %hr{:style => "margin-top:0rem;margin-bottom:10px;"}
-                  ជីវៈវិទ្យា
-                %br
-                .form-group.meddium-margin-bottom{:style => "margin-top:1rem;"}
-                  %span.fi-circle-check
-                    - if subject.science_biology != "ខ្សោយ"
-                      = image_tag "/images/check.png" ,:class=> "img-circular-small"
-                    - else
-                      = image_tag "/images/unchecked.png" ,:class=> "img-circular-small"
-                  = subject.science_biology
-                  .clear
-                %hr{:style => "margin-top:0rem;margin-bottom:10px;"}
 
-        %br
-        .shadow-box
-          .content-box
-            .title
-            .content-display{:style => "margin-top:០rem;"}
-              %form{:role => "form"}
-                .form-group.meddium-margin-bottom
-                  %label.small-gray{:for => "full_name"}
-                    %b
-                      ជំនាញទន់
-                %hr{:style => "margin-top:0rem;margin-bottom:10px;"}
-                  ទំនាក់ទំនង
-                %br
-                .form-group.meddium-margin-bottom{:style => "margin-top:1rem;"}
-                  %span.fi-circle-check
-                    - if subject.soft_skill_communication != "ខ្សោយ"
-                      = image_tag "/images/check.png" ,:class=> "img-circular-small"
-                    - else
-                      = image_tag "/images/unchecked.png" ,:class=> "img-circular-small"
-                  = subject.soft_skill_communication
-                  .clear
-                %hr{:style => "margin-top:0rem;margin-bottom:10px;"}
-                  ដោះស្រាយបញ្ហា
-                %br
-                .form-group.meddium-margin-bottom{:style => "margin-top:1rem;"}
-                  %span.fi-circle-check
-                    - if subject.soft_skill_problem_solving != "ខ្សោយ"
-                      = image_tag "/images/check.png" ,:class=> "img-circular-small"
-                    - else
-                      = image_tag "/images/unchecked.png" ,:class=> "img-circular-small"
-                  = subject.soft_skill_problem_solving
-                  .clear
-                %hr{:style => "margin-top:0rem;margin-bottom:10px;"}
-                  ក្លាហាន
-                %br
-                .form-group.meddium-margin-bottom{:style => "margin-top:1rem;"}
-                  %span.fi-circle-check
-                    - if subject.soft_skill_brave != "ខ្សោយ"
-                      = image_tag "/images/check.png" ,:class=> "img-circular-small"
-                    - else
-                      = image_tag "/images/unchecked.png" ,:class=> "img-circular-small"
-                  = subject.soft_skill_brave
-                  .clear
-                %hr{:style => "margin-top:0rem;margin-bottom:10px;"}
-                  ការនិយាយសាធារណៈ
-                %br
-                .form-group.meddium-margin-bottom{:style => "margin-top:1rem;"}
-                  %span.fi-circle-check
-                    - if subject.soft_skill_public_speaking != "ខ្សោយ"
-                      = image_tag "/images/check.png" ,:class=> "img-circular-small"
-                    - else
-                      = image_tag "/images/unchecked.png" ,:class=> "img-circular-small"
-                  = subject.soft_skill_public_speaking
-                  .clear
-                %hr{:style => "margin-top:0rem;margin-bottom:10px;"}
-                  ការងារក្រុម
-                %br
-                .form-group.meddium-margin-bottom{:style => "margin-top:1rem;"}
-                  %span.fi-circle-check
-                    - if subject.soft_skill_teamwork != "ខ្សោយ"
-                      = image_tag "/images/check.png" ,:class=> "img-circular-small"
-                    - else
-                      = image_tag "/images/unchecked.png" ,:class=> "img-circular-small"
-                  = subject.soft_skill_teamwork
-                  .clear
-                %hr{:style => "margin-top:0rem;margin-bottom:10px;"}
-        %br
+      .modal-body
+        - arr.each do |obj|
+          .shadow-box
+            .meddium-margin-bottom
+              %label.small-gray= obj[:group]
+
+            - obj[:subjects].each do |item|
+              %hr{style: "margin-top: 0; margin-bottom: 10px;"}
+              = I18n.t(item.to_s)
+
+              .meddium-margin-bottom{style: "margin-top: 1rem;"}
+                %span.fi-circle-check
+                  - img_name = subject[item] != "ខ្សោយ" ? 'check.png' : 'unchecked.png'
+                  = image_tag "/images/#{img_name}", :class=> "img-circular-small"
+
+                = subject[item]
+          %br
       .modal-footer
         %button.btn.btn-primary{"data-dismiss" => "modal", :type => "button"} Done
