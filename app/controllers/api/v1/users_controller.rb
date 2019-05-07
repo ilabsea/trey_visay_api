@@ -4,20 +4,15 @@ class Api::V1::UsersController < ApiController
   def create
     params['data'] = JSON.parse(params['data'])
     @user = User.find_or_initialize_by(uuid: params['data']['uuid'])
-    user_params = filter_params
 
-    if user_params[:high_school_id]
-      user_params[:school_name] = User.school_name(user_params[:high_school_id])
-      user_params.delete :high_school_id
-    end
+    if @user.update_attributes(filter_params)
+      @user.remove_photo! if params[:photo].blank?
+      @user.save!
 
-    @user.photo = params[:photo] if params[:photo].present?
-
-    if @user.update_attributes(user_params)
       render json: { success: true }
     else
       Log.create(user: params['data'], version: params['data']['version'])
-      render json: { error: @user.errors }
+      render json: { error: @user.errors }, status: :unprocessable_entity
     end
   end
 
@@ -34,8 +29,7 @@ class Api::V1::UsersController < ApiController
   def filter_params
     params.require(:data).permit(
       :id, :full_name, :password, :username, :sex, :date_of_birth, :phone_number,
-      :grade, :uuid, :photo, :high_school_code, :province_code,
-      :district_code, :commune_code
-    )
+      :grade, :high_school_code, :province_code, :district_code, :commune_code
+    ).merge(photo: params[:photo])
   end
 end
