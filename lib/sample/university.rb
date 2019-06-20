@@ -8,6 +8,7 @@ module Sample
       path = File.expand_path(csv_path + "#{file}.xlsx")
       xlsx = Roo::Spreadsheet.open(path)
 
+      clean_departments_and_major
       xlsx.each_with_pagename do |name, sheet|
         sheet = sheet.parse(headers: true)
         sheet.each_with_index do |row, index|
@@ -55,6 +56,11 @@ module Sample
 
     private_class_method
 
+    def self.clean_departments_and_major
+      Major.destroy_all
+      Department.destroy_all
+    end
+
     def self.assign_major(row)
       return if row['major'].blank?
 
@@ -80,10 +86,10 @@ module Sample
         name: row['name'],
         address: row['address'],
         province: row['province'],
-        phone_numbers: strip_att(row['phone_numbers']),
-        faxes: strip_att(row['faxes']),
-        emails: strip_att(row['emails']),
-        website_or_facebook: strip_att(row['website_or_facebook']),
+        phone_numbers: strip_str(row['phone_numbers']),
+        faxes: strip_str(row['faxes']),
+        emails: strip_str(row['emails']),
+        website_or_facebook: strip_str(row['website_or_facebook']),
         mailbox: row['mailbox'],
         category: category_name
       )
@@ -103,10 +109,6 @@ module Sample
 
     def self.images
       @images ||= Dir.glob(Rails.root.join('lib', 'assets', 'school_logos', '*'))
-    end
-
-    def self.strip_att(val)
-      val.to_s.split(';').each(&:strip!).join(';')
     end
   end
 end
