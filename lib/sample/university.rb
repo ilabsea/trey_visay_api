@@ -57,8 +57,8 @@ module Sample
     private_class_method
 
     def self.clean_departments_and_major
-      Major.delete_all
-      Department.delete_all
+      Major.destroy_all
+      Department.destroy_all
     end
 
     def self.assign_major(row)
