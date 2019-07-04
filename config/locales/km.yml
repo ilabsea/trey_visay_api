@@ -45,3 +45,10 @@ km:
   softSkillTeamwork: "ក្រុមការងារ"
   softSkillProblemSolving: "ដោះស្រាយបញ្ហា"
   softSkillPublicSpeaking: "ការនិយាយជាសាធារណៈ"
+  devise:
+    failure:
+      account:
+        unauthenticated: 'សូមបញ្ចូលគណនី'
+    sessions:
+      account:
+        signed_in: 'គណនីត្រឹមត្រូវ'
