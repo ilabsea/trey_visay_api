@@ -1,30 +1,11 @@
+- content_for :toolbar_right_side do
+  = link_to 'ទាញយកលទ្ធផល', download_users_path, target: '_blank', id: 'btn-download', class: 'btn btn-success'
+
 = render partial: 'shared/side_nav', locals: {title: 'អ្នកប្រើប្រាស់'}
+
 .main
-  %form#form-filter.form-inline.filter
-    .form-group
-      %label ខេត្ត
-      %select.form-control.select{"data-pumi-select-collection-label-method" => "name_km", "data-pumi-select-collection-url" => "/pumi/provinces", "data-pumi-select-collection-value-method" => "id", "data-pumi-select-populate-on-load" => "true", "data-pumi-select-target" => "district", name: 'province_code'}
-        %option{:value => ""} All
+  = render 'filter'
 
-    .form-group
-      %label ស្រុក
-      %select.form-control.select{"data-pumi-select-collection-label-method" => "name_km", "data-pumi-select-collection-url" => "/pumi/districts?province_id=FILTER", "data-pumi-select-collection-url-filter-interpolation-key" => "FILTER", "data-pumi-select-collection-value-method" => "id", "data-pumi-select-disabled-class" => "my-disabled-class", "data-pumi-select-disabled-target" => "#district", "data-pumi-select-id" => "district", "data-pumi-select-target" => "school", name: 'district_code'}
-        %option{:value => ""} All
-
-    .form-group
-      %label សាលា
-      %select.form-control.select{"data-pumi-select-collection-label-method" => "name_km", "data-pumi-select-collection-url" => "/api/v1/high_schools?district_id=FILTER", "data-pumi-select-collection-url-filter-interpolation-key" => "FILTER", "data-pumi-select-collection-value-method" => "code", "data-pumi-select-disabled-class" => "my-disabled-class", "data-pumi-select-disabled-target" => "#school", "data-pumi-select-id" => "school", "data-pumi-select-target" => "klass", name: 'high_school_code'}
-        %option{:value => ""} All
-
-    .form-group
-      %label ថ្នាក់ទី
-      %select.form-control.select{"data-pumi-select-collection-label-method" => "label", "data-pumi-select-collection-url" => "/api/v1/high_schools/grades", "data-pumi-select-collection-value-method" => "value", "data-pumi-select-disabled-class" => "my-disabled-class", "data-pumi-select-disabled-target" => "#klass", "data-pumi-select-id" => "klass", name: 'grade'}
-        %option{:value => ""} All
-
-    .form-group
-      = link_to 'ទាញយកលទ្ធផល', users_path(format: 'csv'), target: '_blank', id: 'btn-download', class: 'btn btn-primary'
-
-  %br
   %table.table-bordered.table.central{style: "width:80%;", align: "center"}
     %thead
       %tr
@@ -38,4 +19,5 @@
     %tbody#body-content
       = render partial: 'users'
 
-  %div{style: 'text-align: center'}= paginate @users
+  .center
+    = paginate @users

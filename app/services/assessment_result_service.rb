@@ -9,7 +9,13 @@ class AssessmentResultService
     @folder = "#{Rails.root}/tmp/assessment_result"
     @user_info_columns = [
       { code: 'id', name: 'លេខរៀង' },
-      { code: 'username', name: 'ឈ្មោះអ្នកប្រើប្រាស់' }
+      { code: 'username', name: 'ឈ្មោះគណនី' },
+      { code: 'full_name', name: 'ឈ្មោះពេញ' },
+      { code: 'sex', name: 'ភេទ' },
+      { code: 'date_of_birth', name: 'ថ្ងៃខែឆ្នាំកំណើត' },
+      { code: 'phone_number', name: 'លេខទូរស័ព្ទ' },
+      { code: 'grade', name: 'ថ្នាក់ទី' },
+      { code: 'high_school_label', name: 'រៀននៅសាលា' }
     ]
 
     @personal_understanding_columns = [
@@ -132,7 +138,10 @@ class AssessmentResultService
 
   def build_user_info(user)
     desired_columns = @user_info_columns.pluck(:code)
-    user.attributes.values_at(*desired_columns)
+    desired_columns = desired_columns.delete_if {|x| x == 'high_school_label' }
+    arr = user.attributes.values_at(*desired_columns)
+    arr.push user.high_school_label
+    arr
   end
 
   def build_personal_understanding(game)
@@ -148,7 +157,7 @@ class AssessmentResultService
   def build_other(game)
     characteristics = game.entries.pluck(:name).join(';')
     careers = game.careers.pluck(:name).join(';')
-    goal_career = game.goal
+    goal_career = game.goal_career.name
     reason = game.reason
     audio = game.audio.url
     created_at = game.created_at

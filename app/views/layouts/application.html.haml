@@ -9,14 +9,6 @@
     = favicon_link_tag asset_path('favicon.png')
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
-
   %body{id: css_id_name}
-    - if notice.present?
-      %p.alert.alert-success
-        %button.close{type: 'button', 'data-dismiss' => 'alert', 'aria-label' => 'Close'}
-        = notice
-    - if alert.present?
-      %p.alert.alert-danger
-        %button.close{type: 'button', 'data-dismiss' => 'alert', 'aria-label' => 'Close'}
-        = alert
+    = render 'shared/notify_message'
     = yield

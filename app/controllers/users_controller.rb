@@ -5,11 +5,12 @@ class UsersController < ApplicationController
 
   def index
     @users = User.filter(params).includes(:games, :personal_understandings).page(page_params).per(20)
-    respond_to do |format|
-      format.html
-      format.js
-      format.csv { send_data(::AssessmentResultService.new(@users).zip_data, type: 'application/zip', filename: 'assessment_result.zip') }
-    end
+  end
+
+  def download
+    @users = User.filter(params).includes(:games, :personal_understandings)
+
+    send_data(::AssessmentResultService.new(@users).zip_data, type: 'application/zip', filename: 'assessment_result.zip')
   end
 
   def show

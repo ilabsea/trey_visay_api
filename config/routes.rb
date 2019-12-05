@@ -4,8 +4,10 @@ Rails.application.routes.draw do
   root 'users#index'
 
   resources :users do
-  	resources :games, only: [:index, :show]
+    resources :games, only: [:index, :show]
     resources :personality_tests, only: [:index, :show]
+
+    get :download, on: :collection
   end
 
   resource :about, only: [:show]
