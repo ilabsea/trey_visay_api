@@ -36,7 +36,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'cancancan', '~> 2.0'
-gem 'devise', '~>4.6.0'
+gem 'devise', '~>4.7.1'
 gem 'haml', '~>5.0.4'
 gem 'carrierwave', '~> 1.0'
 gem 'active_model_serializers', '~> 0.10.7'
