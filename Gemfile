@@ -46,7 +46,7 @@ gem 'oj'
 gem 'kaminari', '~> 1.1.1'
 gem 'roo', '~> 2.8.2'
 gem 'pumi', github: 'dwilkie/pumi', require: 'pumi/rails'
-gem 'rubyzip', '~> 1.2.2'
+gem 'rubyzip', '~> 1.3.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
