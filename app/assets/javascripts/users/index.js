@@ -32,7 +32,7 @@ $(document).on('ready', function() {
   function onClickDownload() {
     $('#btn-download').on('click', function(event) {
       event.preventDefault();
-      window.location = $(this).attr("href") + '?' + getQueryString();
+      window.open($(this).attr("href") + '?' + getQueryString(), '_blank');
     })
   }
 });
