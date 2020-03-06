@@ -5,10 +5,16 @@ class UsersController < ApplicationController
 
   def index
     @users = User.filter(params).includes(:games, :personal_understandings).page(page_params).per(20)
-    respond_to do |format|
-      format.html
-      format.js
-      format.csv { send_data(::AssessmentResultService.new(@users).zip_data, type: 'application/zip', filename: 'assessment_result.zip') }
+  end
+
+  def download
+    @users = User.filter(params).includes(:games, :personal_understandings)
+
+    if @users.length > ENV['MAXIMUM_DOWNLOAD_RECORDS'].to_i then
+      flash[:alert] = 'The file size is too big, please filter it!'
+      redirect_to users_url
+    else
+      send_data(::AssessmentResultService.new(@users).zip_data, type: 'application/zip', filename: 'assessment_result.zip')
     end
   end
 

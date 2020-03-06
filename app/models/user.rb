@@ -37,6 +37,8 @@ class User < ApplicationRecord
 
   validates :grade, inclusion: { in: GRADES }, allow_nil: true
 
+  delegate :name_km, to: :high_school, prefix: :high_school, allow_nil: true
+
   def address
     return nil if high_school_code.blank?
     district = high_school.location
