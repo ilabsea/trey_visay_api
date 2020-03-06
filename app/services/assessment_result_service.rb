@@ -157,7 +157,7 @@ class AssessmentResultService
   def build_other(game)
     characteristics = game.entries.pluck(:name).join(';')
     careers = game.careers.pluck(:name).join(';')
-    goal_career = game.goal_career.name
+    goal_career = game.goal_career.try(:name)
     reason = game.reason
     audio = game.audio.url
     created_at = game.created_at

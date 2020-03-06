@@ -39,6 +39,6 @@ class Game < ApplicationRecord
   end
 
   def goal_career
-    @goal_career ||= career_games.find_by(is_goal: true).career
+    @goal_career ||= career_games.find_by(is_goal: true).try(:career)
   end
 end
