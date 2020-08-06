@@ -25,11 +25,14 @@ module Sample
     def self.export
       schools = []
       School.all.includes(:departments, :department_majors).each do |school|
+        logo = "require('../../assets/images/schools/default.png')"
+        logo = "require('../../assets/images/schools/#{school.logo.file.filename}')" if school.logo.present?
+
         skool = {
           id: school.id,
           code: school.code,
           universityName: school.name,
-          logoName: school.logo.file&.filename&.split('.')&.first || '',
+          logoName: logo,
           address: school.address.to_s.gsub('<U+200B>', ''),
           province: school.province,
           phoneNumbers: school.phone_numbers.to_s.gsub('<U+200B>', '').split(';'),
@@ -101,8 +104,10 @@ module Sample
     # https://github.com/carrierwaveuploader/carrierwave/wiki/How-to:-%22Upload%22-from-a-local-file
     def self.assign_logo(row)
       return if row['logo_name'].blank?
+
       logo_image = images.select { |image| image.split('/').last.split('.').first == row['logo_name'] }.first
-      return if logo_image.nil?
+      return if logo_image.nil? || !File.exist?(logo_image)
+
       @school.logo = Pathname.new(logo_image).open
       @school.save
     end
